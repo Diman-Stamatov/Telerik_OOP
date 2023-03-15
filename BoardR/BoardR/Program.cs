@@ -21,7 +21,8 @@
 
                 item = new BoardItem("Refactor this mess", DateTime.Now.AddDays(2));
                 item.AdvanceStatus();
-                var anotherItem = new BoardItem("Encrypt user data", DateTime.Now.AddDays(10));
+                var anotherItem = new BoardItem("Encrypt user data", DateTime.Now.AddDays(10));                
+                var errorDueDateItem = new BoardItem("Encrypt user data", DateTime.Now.AddDays(0));
 
                 Board.items.Add(item);
                 Board.items.Add(anotherItem);
@@ -40,8 +41,8 @@
                 // 'Refactor this mess', [InProgress|25-01-2020]
                 // 'Encrypt user data', [Todo|02-02-2020]
 
-            }
-            catch (Exception exception)
+            }            
+            catch (ArgumentException exception)
             {
 
                 Console.WriteLine(exception.Message);
