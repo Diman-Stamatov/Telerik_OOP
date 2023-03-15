@@ -8,5 +8,9 @@ namespace BoardR
 {
     internal class BoardItem
     {
+        private string title;
+        private DateTime dueDate;
+        private enum status;
+
     }
 }
