@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Cosmetics.Helpers
 {
-    public class ProductManipulationHelpers
+    public class ClassManipulationHelpers
     {
         public static Product CloneProduct(Product product)
         {
             var newProduct = new Product(product.Name, product.Brand, product.Price, product.Gender);
             return newProduct;
         }
-        public static List<Product> DeepCopyProducts(List<Product> products)
+        public static List<Product> CloneProductsList(List<Product> products)
         {
             var clonedproductsList = new List<Product>();
             int numberOfProducts = products.Count;
@@ -24,6 +24,13 @@ namespace Cosmetics.Helpers
                 clonedproductsList.Add(clonedProduct);
             }
             return clonedproductsList;
+        }
+        public static Category CloneCategory(Category category)
+        {
+            string clonedCategoryName = category.Name;
+            var deepCopyProductList = CloneProductsList(category.Products);
+            var clonedCategory = new Category(clonedCategoryName, deepCopyProductList);
+            return clonedCategory; 
         }
         
 

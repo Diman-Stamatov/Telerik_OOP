@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using static Cosmetics.Helpers.ValidationHelpers;
-using static Cosmetics.Helpers.ProductManipulationHelpers;
+using static Cosmetics.Helpers.ClassManipulationHelpers;
 
 namespace Cosmetics.Models
 {
@@ -19,6 +19,12 @@ namespace Cosmetics.Models
         public Category(string name)
         {
             this.Name = name;
+            Console.WriteLine($"Category with the name {this.Name} was created!");
+        }
+        public Category(string name, List<Product> products) : this (name)
+        {
+            this.products = CloneProductsList(products);
+            Console.WriteLine($"Category with the name {this.Name} was created!");
         }
 
         public string Name
@@ -27,7 +33,7 @@ namespace Cosmetics.Models
             {
                 return this.name;
             }
-            set
+            private set
             {                
                 string errorMessage = $"Please specify a category name that is" +
                     $"between {NameMinLength} and {NameMaxLength}characters long!";
@@ -41,7 +47,7 @@ namespace Cosmetics.Models
         {
             get
             {
-                var productsToReturn = DeepCopyProducts(this.products);               
+                var productsToReturn = CloneProductsList(this.products);               
                     
                 return productsToReturn; 
             }
@@ -51,6 +57,8 @@ namespace Cosmetics.Models
         {
             
             this.products.Add(product);
+            Console.WriteLine($"Product {product.Name} was added to the category {this.Name}!");
+
         }
 
         public void RemoveProduct(Product product)
@@ -58,6 +66,7 @@ namespace Cosmetics.Models
 
             int productToRemoveIndex = FindProductIndex(this.products, product);
             products.RemoveAt(productToRemoveIndex);
+            Console.WriteLine($"Product {product.Name} was removed from the category {this.Name}!");
         }
 
         public string Print()
@@ -69,11 +78,11 @@ namespace Cosmetics.Models
             {
                 var currentProduct = products[product];
                 categoryOutput.Append(currentProduct.Print() + 
-                    "\n===");                
+                    "\n ===");                
             }
             if (products.Count == 0)
             {
-                categoryOutput.Append($"#No products in this category");
+                categoryOutput.Append($" #No products in this category");
             }
             return categoryOutput.ToString();
         }

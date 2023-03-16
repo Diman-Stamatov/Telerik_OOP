@@ -24,6 +24,7 @@ namespace Cosmetics.Core
             get
             {
                 return this.shoppingCart;
+
             }
         }
 

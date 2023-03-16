@@ -27,7 +27,8 @@ namespace Cosmetics.Models
             this.Brand = brand;
             this.Price = price;
             this.Gender = gender;
-            Console.WriteLine($"Product with name {this.Name} was created!");
+
+            Console.WriteLine($"Product with the name {this.Name} was created!");
             
         }
 
@@ -37,7 +38,7 @@ namespace Cosmetics.Models
             {
                 return this.price;
             }
-            set
+            private set
             {
                 string errorMessage = "The product price cannot be negative!";
                 ValidateNumberRange(PriceMinValue, PriceMaxValue, value, errorMessage);
@@ -51,7 +52,7 @@ namespace Cosmetics.Models
             {
                 return this.name;
             }
-            set
+            private set
             {
                 string errorMessage = $"Please specify a product name that is " +
                     $"between {NameMinLength} and {NameMaxLength} characters!";
@@ -66,7 +67,7 @@ namespace Cosmetics.Models
             {
                 return this.brand;
             }
-            set
+            private set
             {
                 string errorMessage = $"Please specify a brand name that is " +
                     $"between {BrandMinLength} and {BrandMaxLength} characters!";
@@ -77,7 +78,7 @@ namespace Cosmetics.Models
 
         public GenderType Gender
         {
-            set
+            private set
             {
                 string errorMessage = "Please input a valid product gender distinction!";
                 this.gender = TryParseGender(value.ToString(), errorMessage);
@@ -90,9 +91,9 @@ namespace Cosmetics.Models
 
         public string Print()
         {            
-            return $"#[{this.Name}] [{this.Brand}]" +
-                $"\n#Price: [{this.Price}]" +
-                $"\n#Gender: [{this.Gender}]";
+            return $" #[{this.Name}] [{this.Brand}]" +
+                $"\n #Price: [{this.Price}]" +
+                $"\n #Gender: [{this.Gender}]";
         }
 
         public override bool Equals(object p)
