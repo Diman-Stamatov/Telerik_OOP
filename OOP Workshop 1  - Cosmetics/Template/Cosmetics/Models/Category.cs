@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using static Cosmetics.Helpers.ValidationHelpers;
+using static Cosmetics.Helpers.ProductManipulationHelpers;
 
 namespace Cosmetics.Models
 {
@@ -40,7 +41,7 @@ namespace Cosmetics.Models
         {
             get
             {
-                var productsToReturn = DeepCopyProducts();               
+                var productsToReturn = DeepCopyProducts(this.products);               
                     
                 return productsToReturn; 
             }
@@ -70,30 +71,14 @@ namespace Cosmetics.Models
                 categoryOutput.Append(currentProduct.Print() + 
                     "\n===");                
             }
+            if (products.Count == 0)
+            {
+                categoryOutput.Append($"#No products in this category");
+            }
             return categoryOutput.ToString();
         }
-        private List<Product> DeepCopyProducts()
-        {
-            var clonedproductsList = new List<Product>();
-            int numberOfProducts = this.products.Count;
-            for (int index = 0; index < numberOfProducts; index++)
-            {
-                var clonedProduct = this.products[index].Clone();
-                clonedproductsList.Add(clonedProduct);
-            }
-            return clonedproductsList;
-        }
-        private int FindProductIndex(List<Product> products, Product productToRemove)
-        {
-            int index = products.FindIndex(product => product.Name == productToRemove.Name
-            && product.Brand == productToRemove.Brand
-            && product.Gender == productToRemove.Gender);
-            if (index < 0)
-            {
-                throw new ArgumentException("The specified product does not exist!");
-            }
-            return index;
-        }
+        
+        
     }
 }
 

@@ -6,9 +6,16 @@ namespace Cosmetics.Helpers
 {
     public class ValidationHelpers
     {
-        public static void ValidateIntRange(int minLength, int maxLength, int actualLength, string errorMessage)
+        public static void ValidateNumberRange(int minValue, int maxValue, int actualValue, string errorMessage)
         {
-            if (actualLength < minLength || actualLength > maxLength)
+            if (actualValue < minValue || actualValue > maxValue)
+            {
+                throw new ArgumentException(errorMessage);
+            }
+        }
+        public static void ValidateNumberRange(double minValue, double maxValue, double actualValue, string errorMessage)
+        {
+            if (actualValue < minValue || actualValue > maxValue)
             {
                 throw new ArgumentException(errorMessage);
             }
@@ -16,7 +23,7 @@ namespace Cosmetics.Helpers
 
         public static void ValidateStringLength(string stringToValidate, int minLength, int maxLength, string errorMessage)
         {
-            ValidateIntRange(minLength, maxLength, stringToValidate.Length, errorMessage);
+            ValidateNumberRange(minLength, maxLength, stringToValidate.Length, errorMessage);
         }
 
         public static void ValidateArgumentsCount(IList<string> list, int expectedNumberOfParameters)

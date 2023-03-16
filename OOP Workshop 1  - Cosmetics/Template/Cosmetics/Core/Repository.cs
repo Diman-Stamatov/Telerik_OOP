@@ -45,6 +45,7 @@ namespace Cosmetics.Core
 
         public Product FindProductByName(string productName)
         {
+            
             /**
              * Hint: You have to go through every product and see if one has name equal to productName.
              *       If not, "throw new ArgumentException("Product {productName} does not exist");"

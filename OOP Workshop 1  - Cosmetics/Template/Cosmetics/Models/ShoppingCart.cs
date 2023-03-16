@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using static Cosmetics.Helpers.ProductManipulationHelpers;
 
 namespace Cosmetics.Models
 {
@@ -9,36 +10,40 @@ namespace Cosmetics.Models
 
         public ShoppingCart()
         {
-            throw new NotImplementedException("Not implemented yet.");
+            this.products = new List<Product>();
         }
 
         public List<Product> Products
         {
             get
             {
-                // List encapsulation is tricky.
-                throw new NotImplementedException("Not implemented yet.");
+                
+                var productsToReturn = DeepCopyProducts(this.products);
+                return productsToReturn;
             }
         }
 
         public void AddProduct(Product product)
         {
-            throw new NotImplementedException("Not implemented yet.");
+            this.products.Add(product);
         }
 
         public void RemoveProduct(Product product)
         {
-            throw new NotImplementedException("Not implemented yet.");
+           int index = FindProductIndex(this.products, product);
+            products.RemoveAt(index);
         }
 
         public bool ContainsProduct(Product product)
         {
-            throw new NotImplementedException("Not implemented yet.");
+            bool productFound = ProductFound(this.products, product);
+            return productFound;
         }
 
         public double TotalPrice()
         {
-            throw new NotImplementedException("Not implemented yet.");
+            double totalProductsPrice = (double)FindTotalProductPrice(this.products);
+            return totalProductsPrice;
         }
     }
 }

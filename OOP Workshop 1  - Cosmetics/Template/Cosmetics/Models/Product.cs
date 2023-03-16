@@ -11,6 +11,9 @@ namespace Cosmetics.Models
         public const int NameMaxLength = 10;
         public const int BrandMinLength = 2;
         public const int BrandMaxLength = 10;
+        public const double PriceMinValue = 0;
+        public const double PriceMaxValue = Double.MaxValue;
+
         private double price;
         private string name;
         private string brand;
@@ -24,6 +27,7 @@ namespace Cosmetics.Models
             this.Brand = brand;
             this.Price = price;
             this.Gender = gender;
+            Console.WriteLine($"Product with name {this.Name} was created!");
             
         }
 
@@ -35,7 +39,9 @@ namespace Cosmetics.Models
             }
             set
             {
-                throw new NotImplementedException("Not implemented yet.");
+                string errorMessage = "The product price cannot be negative!";
+                ValidateNumberRange(PriceMinValue, PriceMaxValue, value, errorMessage);
+                this.price = value;
             }
         }
 
@@ -65,7 +71,7 @@ namespace Cosmetics.Models
                 string errorMessage = $"Please specify a brand name that is " +
                     $"between {BrandMinLength} and {BrandMaxLength} characters!";
                 ValidateStringLength(value, BrandMinLength, BrandMaxLength, errorMessage);
-                this.name = value;
+                this.brand = value;
             }
         }
 
@@ -108,11 +114,8 @@ namespace Cosmetics.Models
                     && this.Brand == otherProduct.Brand
                     && this.Gender == otherProduct.Gender;
         }
-        public Product Clone()
-        {
-            var newProduct = new Product(this.name, this.brand, this.price, this.gender);
-            return newProduct;
-        }
         
+       
+
     }
 }
