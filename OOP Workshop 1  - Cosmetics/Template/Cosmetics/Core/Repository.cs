@@ -46,48 +46,55 @@ namespace Cosmetics.Core
         public Product FindProductByName(string productName)
         {
             
-            /**
-             * Hint: You have to go through every product and see if one has name equal to productName.
-             *       If not, "throw new ArgumentException("Product {productName} does not exist");"
-             */
-            throw new NotImplementedException("Not implemented yet.");
+            var foundProduct = this.Products.Find(product => product.Name == productName);
+            if (foundProduct == null)
+            {
+                throw new ArgumentException($"Product {productName} does not exist!");
+            }
+            return foundProduct;
         }
 
         public Category FindCategoryByName(string categoryName)
         {
-            /**
-             * Hint: You have to go through every category and see if one has name equal to categoryName.
-             *       If not, "throw new ArgumentException("Category {categoryName} does not exist");"
-             */
-            throw new NotImplementedException("Not implemented yet.");
+
+            var foundCategory = this.Categories.Find(category => category.Name == categoryName);
+            if (foundCategory == null)
+            {
+                throw new ArgumentException($"Category {categoryName} does not exist!");
+            }
+            return  foundCategory;
+            
+            
         }
 
         public void CreateCategory(string categoryName)
         {
-            throw new NotImplementedException("Not implemented yet.");
+            var newCategory = new Category(categoryName);
+            this.categories.Add(newCategory);
+            
         }
 
         public void CreateProduct(string name, string brand, double price, GenderType gender)
         {
-            throw new NotImplementedException("Not implemented yet.");
+            
+            var newProduct = new Product(name, brand, price, gender);
+            this.products.Add(newProduct);
         }
 
         public bool CategoryExist(string categoryName)
         {
-            /**
-             * Hint: You have to go through each category and see if one has name equal to categoryName.
-             *       If there is one, return true. If not, return false.
-             */
-            throw new NotImplementedException("Not implemented yet.");
+            
+            bool categoryFound = this.Categories.Exists (category => category.Name == categoryName);
+            return categoryFound;
+            
         }
 
         public bool ProductExist(string productName)
         {
-            /**
-             * Hint: You have to go through each product and see if one has name equal to productName.
-             *       If there is one, return true. If not, return false.
-             */
-            throw new NotImplementedException("Not implemented yet.");
+            
+            bool productFound = this.Products.Exists(product => product.Name == productName);
+            return productFound;
+            
         }
     }
 }
