@@ -28,7 +28,8 @@ namespace Cosmetics.Models
             }
             set
             {                
-                string errorMessage = "Please specify a category name between 2 and 15 characters long!";
+                string errorMessage = $"Please specify a category name that is" +
+                    $"between {NameMinLength} and {NameMaxLength}characters long!";
                 ValidateStringLength(value, NameMinLength, NameMaxLength, errorMessage);
                 this.name = value;
                 products = new List<Product>();

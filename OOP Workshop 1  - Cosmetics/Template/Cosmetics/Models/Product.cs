@@ -1,18 +1,27 @@
 ﻿using System;
+using static Cosmetics.Helpers.ValidationHelpers;
 
 namespace Cosmetics.Models
 {
-    public class Product
+    public class Product 
     {
         public const int NameMinLength = 3;
         public const int NameMaxLength = 10;
         public const int BrandMinLength = 2;
         public const int BrandMaxLength = 10;
+        private double price;
+        private string name;
+        private string brand;
+        private GenderType gender;
 
         // "Each product in the system has name, brand, price and gender."
 
         public Product(string name, string brand, double price, GenderType gender)
         {
+            this.Name = name;
+            this.Brand = brand;
+            this.Price = price;
+            this.Gender = gender;
             throw new NotImplementedException("Not implemented yet.");
         }
 
@@ -20,7 +29,7 @@ namespace Cosmetics.Models
         {
             get
             {
-                throw new NotImplementedException("Not implemented yet.");
+                return this.price;
             }
             set
             {
@@ -32,11 +41,14 @@ namespace Cosmetics.Models
         {
             get
             {
-                throw new NotImplementedException("Not implemented yet.");
+                return this.name;
             }
             set
             {
-                throw new NotImplementedException("Not implemented yet.");
+                string errorMessage = $"Please specify a product name that is " +
+                    $"between {NameMinLength} and {NameMaxLength} characters!";
+                ValidateStringLength(value, NameMinLength, NameMaxLength, errorMessage);
+                this.name = value;
             }
         }
 
@@ -44,16 +56,23 @@ namespace Cosmetics.Models
         {
             get
             {
-                throw new NotImplementedException("Not implemented yet.");
+                return this.brand;
             }
             set
             {
-                throw new NotImplementedException("Not implemented yet.");
+                string errorMessage = $"Please specify a brand name that is " +
+                    $"between {BrandMinLength} and {BrandMaxLength} characters!";
+                ValidateStringLength(value, BrandMinLength, BrandMaxLength, errorMessage);
+                this.name = value;
             }
         }
 
         public GenderType Gender
         {
+            set
+            {
+                throw new NotImplementedException("Not implemented yet.");
+            }
             get
             {
                 throw new NotImplementedException("Not implemented yet.");
@@ -61,12 +80,10 @@ namespace Cosmetics.Models
         }
 
         public string Print()
-        {
-            // Format:
-            // #[Name] [Brand]
-            // #Price: [Price]
-            // #Gender: [Gender]
-            throw new NotImplementedException("Not implemented yet.");
+        {            
+            return $"#[{this.Name}] [{this.Brand}]" +
+                $"\n#Price: [{this.Price}]" +
+                $"\n#Gender: [{this.Gender}]";
         }
 
         public override bool Equals(object p)
@@ -87,6 +104,11 @@ namespace Cosmetics.Models
                     && this.Name == otherProduct.Name
                     && this.Brand == otherProduct.Brand
                     && this.Gender == otherProduct.Gender;
+        }
+        public Product Clone()
+        {
+            var newProduct = new Product(this.name, this.brand, this.price, this.gender);
+            return newProduct;
         }
     }
 }

@@ -31,6 +31,10 @@ namespace Cosmetics.Helpers
             int index = products.FindIndex(product=>product.Name == productToRemove.Name
             && product.Brand == productToRemove.Brand
             && product.Gender == productToRemove.Gender);
+            if (index < 0)
+            {
+                throw new ArgumentException("The specified product does not exist!");
+            }
             return index;
         }
     }
