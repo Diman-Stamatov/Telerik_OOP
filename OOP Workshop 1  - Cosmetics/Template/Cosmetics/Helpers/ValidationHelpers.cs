@@ -26,16 +26,6 @@ namespace Cosmetics.Helpers
                 throw new ArgumentException(string.Format($"Invalid number of arguments. Expected: {expectedNumberOfParameters}; received: {list.Count}."));
             }
         }
-        public static int FindProductIndex (List<Product> products, Product productToRemove)
-        {
-            int index = products.FindIndex(product=>product.Name == productToRemove.Name
-            && product.Brand == productToRemove.Brand
-            && product.Gender == productToRemove.Gender);
-            if (index < 0)
-            {
-                throw new ArgumentException("The specified product does not exist!");
-            }
-            return index;
-        }
+        
     }
 }

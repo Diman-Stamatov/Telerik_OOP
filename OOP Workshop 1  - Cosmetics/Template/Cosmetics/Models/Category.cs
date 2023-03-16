@@ -83,6 +83,17 @@ namespace Cosmetics.Models
             }
             return clonedproductsList;
         }
+        private int FindProductIndex(List<Product> products, Product productToRemove)
+        {
+            int index = products.FindIndex(product => product.Name == productToRemove.Name
+            && product.Brand == productToRemove.Brand
+            && product.Gender == productToRemove.Gender);
+            if (index < 0)
+            {
+                throw new ArgumentException("The specified product does not exist!");
+            }
+            return index;
+        }
     }
 }
 

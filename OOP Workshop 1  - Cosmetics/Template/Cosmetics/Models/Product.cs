@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using static Cosmetics.Helpers.ValidationHelpers;
+using static Cosmetics.Helpers.ParsingHelpers;
 
 namespace Cosmetics.Models
 {
@@ -22,7 +24,7 @@ namespace Cosmetics.Models
             this.Brand = brand;
             this.Price = price;
             this.Gender = gender;
-            throw new NotImplementedException("Not implemented yet.");
+            
         }
 
         public double Price
@@ -71,11 +73,12 @@ namespace Cosmetics.Models
         {
             set
             {
-                throw new NotImplementedException("Not implemented yet.");
+                string errorMessage = "Please input a valid product gender distinction!";
+                this.gender = TryParseGender(value.ToString(), errorMessage);
             }
             get
             {
-                throw new NotImplementedException("Not implemented yet.");
+                return this.gender;
             }
         }
 
@@ -110,5 +113,6 @@ namespace Cosmetics.Models
             var newProduct = new Product(this.name, this.brand, this.price, this.gender);
             return newProduct;
         }
+        
     }
 }
