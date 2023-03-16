@@ -1,4 +1,5 @@
-﻿namespace BoardR
+﻿
+namespace BoardR
 {
     internal class Program
     {
@@ -18,7 +19,7 @@
                 item.RevertStatus();
                 Console.WriteLine(item.Status); // Todo
                 Console.WriteLine(item.ViewInfo()); // 'Refactor this mess', [Open|25-01-2020]
-
+                item.
                 item = new BoardItem("Refactor this mess", DateTime.Now.AddDays(2));
                 item.AdvanceStatus();
                 var anotherItem = new BoardItem("Encrypt user data", DateTime.Now.AddDays(10));                
