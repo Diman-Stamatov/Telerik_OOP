@@ -8,13 +8,11 @@ using static BoardR.ValidationHelpers;
 namespace BoardR
 {
     
-
-    
-    
     internal class EventLog
     {
         private string description;
         private DateTime time;
+        
 
         public string Description
         {
@@ -44,7 +42,7 @@ namespace BoardR
 
         public string ViewInfo()
         {
-            return $"[{this.Time.ToString("yyyyMMdd | HH:mm: ss.ffff")}]{this.Description}";
+            return $"[{this.Time.ToString("yyyyMMdd|HH:mm:ss.ffff")}] {this.Description}";
 
         }
     }

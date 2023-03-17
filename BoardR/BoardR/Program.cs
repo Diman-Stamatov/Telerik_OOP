@@ -7,23 +7,28 @@ namespace BoardR
         static void Main(string[] args)
         {
             try
-            {
-                var log = new EventLog("An important thing happened");
-                Console.WriteLine(log.Description); // An important thing happened
-                Console.WriteLine(log.ViewInfo());  // [20200125|14:02:59.0361]An important thing happened
+            {      
+                var item = new BoardItem("Refactor this mess", DateTime.Now.AddDays(2));
+                item.DueDate = item.DueDate.AddYears(2);
+                item.Title = "Not that important";
+                item.RevertStatus();
+                item.AdvanceStatus();
+                item.RevertStatus();
 
-                // if you uncomment any of the next two lines, compilation error must occur! (e.g. use readonly properties)
-                // log.Description = "new desc";
-                // log.Time = DateTime.Now;
+                Console.WriteLine(item.ViewHistory());
 
-                var log2 = new EventLog(null);
+                Console.WriteLine("\n--------------\n");
 
-
-
+                var anotherItem = new BoardItem("Don't refactor anything", DateTime.Now.AddYears(10));
+                anotherItem.AdvanceStatus();
+                anotherItem.AdvanceStatus();
+                anotherItem.AdvanceStatus();
+                anotherItem.AdvanceStatus();
+                anotherItem.AdvanceStatus();
+                Console.WriteLine(anotherItem.ViewHistory());
             }
             catch (Exception exception)
             {
-
                 Console.WriteLine(exception.Message);
             }
             
