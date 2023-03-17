@@ -8,12 +8,13 @@ namespace BoardR
 {
     internal static class Board
     {
-        public static List<BoardItem> items; 
+        private static List<BoardItem> items; 
 
         static Board()
         {
             items = new List<BoardItem>();
         }
+
 
     }
 }

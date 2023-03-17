@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dumbo\\source\\repos\\oop\\BoardR\\BoardR\\BoardR.csproj": {}
+    "C:\\Users\\ics\\source\\repos\\oop\\BoardR\\BoardR\\BoardR.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dumbo\\source\\repos\\oop\\BoardR\\BoardR\\BoardR.csproj": {
+    "C:\\Users\\ics\\source\\repos\\oop\\BoardR\\BoardR\\BoardR.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dumbo\\source\\repos\\oop\\BoardR\\BoardR\\BoardR.csproj",
+        "projectUniqueName": "C:\\Users\\ics\\source\\repos\\oop\\BoardR\\BoardR\\BoardR.csproj",
         "projectName": "BoardR",
-        "projectPath": "C:\\Users\\Dumbo\\source\\repos\\oop\\BoardR\\BoardR\\BoardR.csproj",
-        "packagesPath": "C:\\Users\\Dumbo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dumbo\\source\\repos\\oop\\BoardR\\BoardR\\obj\\",
+        "projectPath": "C:\\Users\\ics\\source\\repos\\oop\\BoardR\\BoardR\\BoardR.csproj",
+        "packagesPath": "C:\\Users\\ics\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ics\\source\\repos\\oop\\BoardR\\BoardR\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ics\\AppData\\Roaming\\NuGet\\NuGet.Config",

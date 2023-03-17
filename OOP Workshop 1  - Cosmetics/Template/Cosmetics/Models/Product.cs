@@ -28,7 +28,7 @@ namespace Cosmetics.Models
             this.Price = price;
             this.Gender = gender;
 
-            Console.WriteLine($"Product with the name {this.Name} was created!");
+            
             
         }
 
@@ -43,6 +43,7 @@ namespace Cosmetics.Models
                 string errorMessage = "The product price cannot be negative!";
                 ValidateNumberRange(PriceMinValue, PriceMaxValue, value, errorMessage);
                 this.price = value;
+                
             }
         }
 
