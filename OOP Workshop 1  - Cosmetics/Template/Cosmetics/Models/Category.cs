@@ -19,12 +19,12 @@ namespace Cosmetics.Models
         public Category(string name)
         {
             this.Name = name;
-            Console.WriteLine($"Category with the name {this.Name} was created!");
+            
         }
         public Category(string name, List<Product> products) : this (name)
         {
             this.products = CloneProductsList(products);
-            Console.WriteLine($"Category with the name {this.Name} was created!");
+            
         }
 
         public string Name
@@ -57,7 +57,7 @@ namespace Cosmetics.Models
         {
             
             this.products.Add(product);
-            Console.WriteLine($"Product {product.Name} was added to the category {this.Name}!");
+            
 
         }
 
@@ -66,7 +66,7 @@ namespace Cosmetics.Models
 
             int productToRemoveIndex = FindProductIndex(this.products, product);
             products.RemoveAt(productToRemoveIndex);
-            Console.WriteLine($"Product {product.Name} was removed from the category {this.Name}!");
+            
         }
 
         public string Print()

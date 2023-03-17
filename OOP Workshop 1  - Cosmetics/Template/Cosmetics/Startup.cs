@@ -11,19 +11,11 @@ namespace Cosmetics
         public static void Main()
         {
 
-            var myMan = new Product("MyMan", "Nivea", 10.99, GenderType.Men);
-            var shampoos = new Category("Shampoos");
-            shampoos.AddProduct(myMan);
-            var cart = new ShoppingCart();
-            cart.AddProduct(myMan);
-            Console.WriteLine(shampoos.Print());
-            double totalPrice = cart.TotalPrice();
-            Console.WriteLine(cart.PrintPrice(totalPrice));
-            shampoos.RemoveProduct(myMan);
-            Console.WriteLine(shampoos.Print());
-            cart.RemoveProduct(myMan);
-            totalPrice = cart.TotalPrice();
-            Console.WriteLine(cart.PrintPrice(totalPrice));
+            IRepository repository = new Repository();
+            ICommandFactory commandFactory = new CommandFactory(repository);
+            IEngine cosmeticsEngine = new Engine(commandFactory);
+            cosmeticsEngine.Start();
+
 
         }
     }

@@ -28,7 +28,7 @@ namespace Cosmetics.Models
             this.Price = price;
             this.Gender = gender;
 
-            Console.WriteLine($"Product with the name {this.Name} was created!");
+            
             
         }
 
