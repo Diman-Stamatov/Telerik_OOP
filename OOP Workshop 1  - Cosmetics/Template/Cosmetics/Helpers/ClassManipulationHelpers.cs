@@ -28,8 +28,8 @@ namespace Cosmetics.Helpers
         public static Category CloneCategory(Category category)
         {
             string clonedCategoryName = category.Name;
-            var deepCopyProductList = CloneProductsList(category.Products);
-            var clonedCategory = new Category(clonedCategoryName, deepCopyProductList);
+            var clonedProductList = CloneProductsList(category.Products);
+            var clonedCategory = new Category(clonedCategoryName, clonedProductList);
             return clonedCategory; 
         }
         
