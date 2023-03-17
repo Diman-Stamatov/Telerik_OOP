@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BoardR;
+using Microsoft.VisualBasic;
+using static BoardR.ValidationHelpers;
 
 namespace BoardR
 {
 
     internal class BoardItem
     {
+        
         private string title;
         private DateTime dueDate;
         private ItemStatus status;
@@ -22,11 +25,7 @@ namespace BoardR
             }
             private set
             {
-                if (value == null || TitleIsValid(value) == false)
-                {
-                    throw new ArgumentException("Please specify a title that is between 5 and 30 characters long!");
-                }
-
+                ValidateTitle(value);
                 this.title = value;
             }
         }
@@ -38,11 +37,7 @@ namespace BoardR
             }
             private set
             {
-                var creationDate = DateTime.Now;
-                if (creationDate > value)
-                {
-                    throw new ArgumentException("The due date cannot be in the past!");
-                }
+                ValidateDueDate(value);
                 this.dueDate = value;
             }
         }
@@ -60,30 +55,13 @@ namespace BoardR
             this.DueDate = dueDate;
             this.status = 0;
         }
-        private bool TitleIsValid(string value)
-        {
-
-            bool titleIsValid = true;
-            if (value == null)
-            {
-                titleIsValid = false;
-            }
-            int newTitleLength = value.Length;
-            int minimumTitleLength = 5;
-            int maximumTitleLength = 30;
-            if (newTitleLength < minimumTitleLength || newTitleLength > maximumTitleLength)
-            {
-                titleIsValid = false;
-            }
-            return titleIsValid;
-
-
-
-
-        }
+        
+        
         public void RevertStatus()
         {
-            if (this.status !=0)
+            int minStatusIndex = 0;
+            int currentStatusIndex = (int)this.status;
+            if (currentStatusIndex != minStatusIndex)
             {
                 this.status--;
             }
