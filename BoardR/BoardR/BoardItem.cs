@@ -23,7 +23,7 @@ namespace BoardR
             {
                 return this.title;
             }
-            private set
+             private set
             {
                 ValidateTitle(value);
                 this.title = value;

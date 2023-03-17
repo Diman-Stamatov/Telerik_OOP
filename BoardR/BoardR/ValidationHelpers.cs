@@ -21,7 +21,7 @@ namespace BoardR
         {
             const int minimumTitleLength = 5;
             const int maximumTitleLength = 30;
-            string errorMessage = "Please specify a title that is between 5 and 30 characters long!";
+            string errorMessage = $"Please specify a title that is between {minimumTitleLength} and {maximumTitleLength} characters long!";
             if (value == null)
             {
                 throw new ArgumentNullException(null, errorMessage);
@@ -34,5 +34,15 @@ namespace BoardR
                 throw new ArgumentException(errorMessage);
             }
         }
+
+        public static void ValidateEventDescription(string description)
+        {
+            string errorMessage = "Please specify an event description!";
+            if (description == null)
+            {
+                throw new ArgumentNullException(null, errorMessage);
+            }
+        }
+            
     }
 }
