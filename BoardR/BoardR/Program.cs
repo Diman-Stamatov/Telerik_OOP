@@ -18,9 +18,7 @@ namespace BoardR
                 Console.WriteLine(item.Status); // InProgress
                 item.RevertStatus();
                 Console.WriteLine(item.Status); // Todo
-                Console.WriteLine(item.ViewInfo()); // 'Refactor this mess', [Open|25-01-2020]
-                item.
-                item = new BoardItem("Refactor this mess", DateTime.Now.AddDays(2));
+                Console.WriteLine(item.ViewInfo()); // 'Refactor this mess', [Open|25-01-2020]                
                 item.AdvanceStatus();
                 var anotherItem = new BoardItem("Encrypt user data", DateTime.Now.AddDays(10));                
                 var errorDueDateItem = new BoardItem("Encrypt user data", DateTime.Now.AddDays(0));
