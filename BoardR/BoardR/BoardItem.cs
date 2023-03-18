@@ -145,9 +145,29 @@ namespace BoardR
             events.Add(newEvent);
         }        
 
-        public string GetPropertyName([CallerMemberName] string methodname = null)
+        public string GetPropertyName([CallerMemberName] string methodName = null)
         {
-           return methodname;
+           return methodName;
+        }
+
+        public bool Equals(BoardItem item)
+        {
+            bool isEqual = false;
+            if (item == null)
+            {
+                return isEqual;
+            }
+
+            if (this == item)
+            {
+                isEqual = true;
+            }
+            if (this.Title == item.Title 
+                && this.DueDate == item.DueDate)
+            {
+                isEqual = true;
+            }
+            return isEqual;
         }
     }
 }

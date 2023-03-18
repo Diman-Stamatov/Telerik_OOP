@@ -6,8 +6,8 @@ namespace BoardR
         
         static void Main(string[] args)
         {
-            try
-            {      
+            /*try
+            {
                 var item = new BoardItem("Refactor this mess", DateTime.Now.AddDays(2));
                 item.DueDate = item.DueDate.AddYears(2);
                 item.Title = "Not that important";
@@ -30,8 +30,29 @@ namespace BoardR
             catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
+            }*/
+
+            
+            try
+            {
+                var item1 = new BoardItem("Implement login/logout", DateTime.Now.AddDays(3));
+                var item2 = new BoardItem("Secure admin endpoints", DateTime.Now.AddDays(5));
+
+                Board.AddItem(item1); // add item1
+                Board.AddItem(item2); // add item2
+                 // do nothing - item1 already in the list
+                 // do nothing - item2 already in the list
+
+                int count = Board.TotalItems;
+                Console.WriteLine(count);
+            }
+            catch (Exception exception)
+            {
+
+                Console.WriteLine(exception.Message);
             }
             
+
 
 
 
