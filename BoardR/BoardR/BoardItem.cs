@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using BoardR;
@@ -30,8 +31,10 @@ namespace BoardR
                 ValidateTitle(value);
                 if (this.title != null)
                 {
-                    string eventMessage = GenerateEventMessage(nameof(Title), this.Title, value);
-                    CreateEvent(eventMessage);
+
+                    string propertyName = GetMethodName();
+                    string eventMessage = GenerateEventMessage(propertyName, this.Title, value);
+                    CreateItemEvent(eventMessage);
                 }
                 
 
@@ -44,13 +47,15 @@ namespace BoardR
             {
                 return this.dueDate;
             }
-             set
+            
+            set
             {
                 ValidateDueDate(value);
                 if (this.dueDate != DateTime.MinValue)
                 {
-                    string eventMessage = GenerateEventMessage(nameof(DueDate), this.dueDate, value);
-                    CreateEvent(eventMessage);
+                    string propertyName = GetMethodName();
+                    string eventMessage = GenerateEventMessage(propertyName, this.dueDate, value);
+                    CreateItemEvent(eventMessage);
                 }
                 
 
@@ -75,7 +80,7 @@ namespace BoardR
             
 
             string eventMessage = GenerateEventMessage(title, this.Status, dueDate);
-            CreateEvent(eventMessage);
+            CreateItemEvent(eventMessage);
             
             
         }
@@ -90,12 +95,12 @@ namespace BoardR
                 
                 this.status--;
                 string eventMessage = GenerateEventMessage(this.Status, minStatusIndex);
-                CreateEvent(eventMessage);
+                CreateItemEvent(eventMessage);
             }
             else
             {
                 string eventMessage = GenerateEventMessage(minStatusIndex);
-                CreateEvent(eventMessage);
+                CreateItemEvent(eventMessage);
             }
         }
         public void AdvanceStatus()
@@ -106,12 +111,12 @@ namespace BoardR
             {
                 this.status++;
                 string eventMessage = GenerateEventMessage(this.Status, maxStatusIndex);
-                CreateEvent(eventMessage);
+                CreateItemEvent(eventMessage);
             }
             else
             {
                 string eventMessage = GenerateEventMessage(maxStatusIndex);
-                CreateEvent(eventMessage);
+                CreateItemEvent(eventMessage);
             }
         }
 
@@ -135,7 +140,7 @@ namespace BoardR
             return historyLog.ToString();
         }
 
-        private void CreateEvent(string message)
+        private void CreateItemEvent(string message)
         {
             var newEvent = new EventLog(message);
             events.Add(newEvent);
@@ -180,6 +185,11 @@ namespace BoardR
                 creationMessage = $"Unable to advance the status any further!";
             }
             return creationMessage;
+        }
+
+        public string GetMethodName([CallerMemberName] string methodname = null)
+        {
+           return methodname;
         }
     }
 }
