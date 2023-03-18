@@ -4,10 +4,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using BoardR;
 using Microsoft.VisualBasic;
+using static BoardR.EventMessageGenerator;
 using static System.Net.Mime.MediaTypeNames;
-using static BoardR.ValidationHelpers;
+using static BoardR.Helpers.ValidationHelpers;
 
 namespace BoardR
 {
@@ -26,13 +26,13 @@ namespace BoardR
             {
                 return this.title;
             }
-              set
+            set
             {
                 ValidateTitle(value);
                 if (this.title != null)
                 {
 
-                    string propertyName = GetMethodName();
+                    string propertyName = GetPropertyName();
                     string eventMessage = GenerateEventMessage(propertyName, this.Title, value);
                     CreateItemEvent(eventMessage);
                 }
@@ -53,7 +53,7 @@ namespace BoardR
                 ValidateDueDate(value);
                 if (this.dueDate != DateTime.MinValue)
                 {
-                    string propertyName = GetMethodName();
+                    string propertyName = GetPropertyName();
                     string eventMessage = GenerateEventMessage(propertyName, this.dueDate, value);
                     CreateItemEvent(eventMessage);
                 }
@@ -83,8 +83,7 @@ namespace BoardR
             CreateItemEvent(eventMessage);
             
             
-        }
-        
+        }        
         
         public void RevertStatus()
         {
@@ -144,50 +143,9 @@ namespace BoardR
         {
             var newEvent = new EventLog(message);
             events.Add(newEvent);
-        }
-        private string GenerateEventMessage(string propertyName, string oldValue, string newValue)
-        {
-            string creationMessage = $"{propertyName} changed from '{oldValue}' to '{newValue}'";
-            return creationMessage;
-        }
-        private string GenerateEventMessage(string propertyName, DateTime oldValue, DateTime newValue)
-        {
-            string creationMessage = $"{propertyName} changed from '{oldValue.ToString("dd-MM-yyyy")}' to '{newValue.ToString("dd-MM-yyyy")}'";
-            return creationMessage;
-        }
-        private string GenerateEventMessage(string title, ItemStatus status, DateTime dueDate)
-        {
-            string creationMessage = $"Item created: '{title}', [{status}|{dueDate.ToString("dd-MM-yyyy")}]";
-            return creationMessage;
-        }
-        private string GenerateEventMessage(ItemStatus status, int IndexConstraint)
-        {
-            string creationMessage = "";
-            if (IndexConstraint == 0)
-            {
-                creationMessage = $"Status changed from {this.Status + 1} to {this.Status}";
-            }
-            else
-            {
-                creationMessage = $"Status changed from {this.Status-1} to {this.Status}";
-            }            
-            return creationMessage;
-        }
-        private string GenerateEventMessage(int IndexConstraint)
-        {
-            string creationMessage = "";
-            if (IndexConstraint == 0)
-            {
-                creationMessage = $"Unable to revert the status any further!";
-            }
-            else
-            {
-                creationMessage = $"Unable to advance the status any further!";
-            }
-            return creationMessage;
-        }
+        }        
 
-        public string GetMethodName([CallerMemberName] string methodname = null)
+        public string GetPropertyName([CallerMemberName] string methodname = null)
         {
            return methodname;
         }

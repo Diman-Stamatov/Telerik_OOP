@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoardR
+namespace BoardR.Helpers
 {
     internal static class ValidationHelpers
     {
@@ -43,6 +43,6 @@ namespace BoardR
                 throw new ArgumentNullException(null, errorMessage);
             }
         }
-            
+
     }
 }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static BoardR.ValidationHelpers;
+using static BoardR.Helpers.ValidationHelpers;
 
 namespace BoardR
 {
-    
+
     internal class EventLog
     {
         private string description;
