@@ -8,12 +8,10 @@ namespace BoardR
 {
     public enum ItemStatus
     {
-
         Open,
-        Todo,
+        ToDo,
         InProgress,
         Done,
         Verified
-
     }
 }

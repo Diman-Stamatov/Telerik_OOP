@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace BoardR.Helpers
+using BoardR;
+namespace BoardR
 {
     internal static class ValidationHelpers
     {
@@ -17,23 +17,22 @@ namespace BoardR.Helpers
                 throw new ArgumentException(errorMessage);
             }
         }
-        public static void ValidateTitle(string value)
+        public static void ValidateStringProperty(string value, string propertyName, int minimumLength, int maximumLength)
         {
-            const int minimumTitleLength = 5;
-            const int maximumTitleLength = 30;
-            string errorMessage = $"Please specify a title that is between {minimumTitleLength} and {maximumTitleLength} characters long!";
-            if (value == null)
+             
+            string errorMessage = $"Please specify a {propertyName} that is between {minimumLength} and {maximumLength} characters long!";
+            if (value == null || value == string.Empty)
             {
                 throw new ArgumentNullException(null, errorMessage);
             }
 
-            int newTitleLength = value.Length;
-
-            if (newTitleLength < minimumTitleLength || newTitleLength > maximumTitleLength)
+            int newProeprtyLength = value.Length;
+            if (newProeprtyLength < minimumLength || newProeprtyLength > maximumLength)
             {
                 throw new ArgumentException(errorMessage);
             }
         }
+        
 
         public static void ValidateEventDescription(string description)
         {

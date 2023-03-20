@@ -31,27 +31,17 @@ namespace BoardR
             {
                 Console.WriteLine(exception.Message);
             }*/
+            var task = new Task("Test the application flow", "Peter", DateTime.Now.AddDays(1));
+            task.AdvanceStatus();
+            task.AdvanceStatus();
+            task.Assignee = "George";
+            Console.WriteLine(task.ViewHistory());
 
-            
-            try
-            {
-                var item1 = new BoardItem("Implement login/logout", DateTime.Now.AddDays(3));
-                var item2 = new BoardItem("Secure admin endpoints", DateTime.Now.AddDays(5));
 
-                Board.AddItem(item1); // add item1
-                Board.AddItem(item2); // add item2
-                 // do nothing - item1 already in the list
-                 // do nothing - item2 already in the list
 
-                int count = Board.TotalItems;
-                Console.WriteLine(count);
-            }
-            catch (Exception exception)
-            {
 
-                Console.WriteLine(exception.Message);
-            }
-            
+
+
 
 
 

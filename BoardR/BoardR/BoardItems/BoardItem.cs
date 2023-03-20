@@ -1,99 +1,94 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualBasic;
 using static BoardR.EventMessageGenerator;
+using static BoardR.ValidationHelpers;
 using static System.Net.Mime.MediaTypeNames;
-using static BoardR.Helpers.ValidationHelpers;
 
 namespace BoardR
 {
 
     internal class BoardItem
     {
-        
+        private const int TitleMinLength = 5;
+        private const int TitleMaxLength = 30;
+
         private string title;
         private DateTime dueDate;
-        private ItemStatus status;
-        private List<EventLog> events = new List<EventLog>();
+        private protected ItemStatus status;
+        private protected List<EventLog> events;
 
+       
         public string Title
         {
             get
             {
-                return this.title;
+                return title;
             }
             set
             {
-                ValidateTitle(value);
-                if (this.title != null)
-                {
-
-                    string propertyName = GetPropertyName();
-                    string eventMessage = GenerateEventMessage(propertyName, this.Title, value);
+                string propertyName = GetPropertyName();
+                ValidateStringProperty(value, propertyName, TitleMinLength, TitleMaxLength);
+                if (title != null)
+                {       
+                    string eventMessage = GenerateEventMessage(propertyName, Title, value);
                     CreateItemEvent(eventMessage);
                 }
                 
-
-                this.title = value;
+                title = value;
             }
-        }        
+        }
         public DateTime DueDate
         {
             get
             {
-                return this.dueDate;
+                return dueDate;
             }
-            
+
             set
             {
                 ValidateDueDate(value);
-                if (this.dueDate != DateTime.MinValue)
-                {
+                if (DueDate != DateTime.MinValue)
+                {       
                     string propertyName = GetPropertyName();
-                    string eventMessage = GenerateEventMessage(propertyName, this.dueDate, value);
+                    string eventMessage = GenerateEventMessage(propertyName, dueDate, value);
                     CreateItemEvent(eventMessage);
                 }
                 
-
-                this.dueDate = value;
-                               
-                
+                dueDate = value;
             }
         }
         public ItemStatus Status
+        {
+            get
             {
-                 get 
-                 { 
-                     return this.status;
-                 }
+                return status;
             }
+        }
 
         public BoardItem(string title, DateTime dueDate)
         {
+            this.events = new List<EventLog>();
             this.Title = title;
             this.DueDate = dueDate;
             this.status = 0;
             
-
-            string eventMessage = GenerateEventMessage(title, this.Status, dueDate);
+            string eventMessage = GenerateEventMessage(title, Status, dueDate);
             CreateItemEvent(eventMessage);
-            
-            
-        }        
-        
+        }
+
         public void RevertStatus()
         {
             int minStatusIndex = 0;
-            int currentStatusIndex = (int)this.status;
+            int currentStatusIndex = (int)status;
             if (currentStatusIndex != minStatusIndex)
             {
-                
-                this.status--;
-                string eventMessage = GenerateEventMessage(this.Status, minStatusIndex);
+                status--;
+                string eventMessage = GenerateEventMessage(Status, minStatusIndex);
                 CreateItemEvent(eventMessage);
             }
             else
@@ -104,12 +99,13 @@ namespace BoardR
         }
         public void AdvanceStatus()
         {
-            int maxStatusIndex = Enum.GetNames(typeof(ItemStatus)).Length -1;
-            int currentStatusIndex = (int)this.status;
+            int maxStatusIndex = Enum.GetNames(typeof(ItemStatus)).Length - 1;
+            int currentStatusIndex = (int)status;
+
             if (currentStatusIndex < maxStatusIndex)
             {
-                this.status++;
-                string eventMessage = GenerateEventMessage(this.Status, maxStatusIndex);
+                status++;
+                string eventMessage = GenerateEventMessage(Status, maxStatusIndex);
                 CreateItemEvent(eventMessage);
             }
             else
@@ -117,6 +113,7 @@ namespace BoardR
                 string eventMessage = GenerateEventMessage(maxStatusIndex);
                 CreateItemEvent(eventMessage);
             }
+            
         }
 
         public string ViewInfo()
@@ -126,12 +123,12 @@ namespace BoardR
         public string ViewHistory()
         {
             var historyLog = new StringBuilder();
-            int numberOfEvents = events.Count;
+            int numberOfEvents = this.events.Count;
             for (int loggedEvent = 0; loggedEvent < numberOfEvents; loggedEvent++)
             {
-                var currentEvent = events[loggedEvent];
+                var currentEvent = this.events[loggedEvent];
                 historyLog.Append(currentEvent.ViewInfo());
-                if (loggedEvent !=numberOfEvents -1)
+                if (loggedEvent != numberOfEvents - 1)
                 {
                     historyLog.Append("\n");
                 }
@@ -139,15 +136,15 @@ namespace BoardR
             return historyLog.ToString();
         }
 
-        private void CreateItemEvent(string message)
+        private protected void CreateItemEvent(string message)
         {
             var newEvent = new EventLog(message);
             events.Add(newEvent);
-        }        
+        }
 
         public string GetPropertyName([CallerMemberName] string methodName = null)
         {
-           return methodName;
+            return methodName;
         }
 
         public bool Equals(BoardItem item)
@@ -162,8 +159,8 @@ namespace BoardR
             {
                 isEqual = true;
             }
-            if (this.Title == item.Title 
-                && this.DueDate == item.DueDate)
+            if (Title == item.Title
+                && DueDate == item.DueDate)
             {
                 isEqual = true;
             }
