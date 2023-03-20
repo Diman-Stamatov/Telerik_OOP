@@ -36,7 +36,7 @@ namespace BoardR
                 if (title != null)
                 {       
                     string eventMessage = GenerateEventMessage(propertyName, Title, value);
-                    CreateItemEvent(eventMessage);
+                    LogEvent(eventMessage);
                 }
                 
                 title = value;
@@ -56,7 +56,7 @@ namespace BoardR
                 {       
                     string propertyName = GetPropertyName();
                     string eventMessage = GenerateEventMessage(propertyName, dueDate, value);
-                    CreateItemEvent(eventMessage);
+                    LogEvent(eventMessage);
                 }
                 
                 dueDate = value;
@@ -77,8 +77,9 @@ namespace BoardR
             this.DueDate = dueDate;
             this.status = 0;
             
-            string eventMessage = GenerateEventMessage(title, Status, dueDate);
-            CreateItemEvent(eventMessage);
+            string itemName = this.GetType().Name;
+            string eventMessage = GenerateEventMessage(itemName, title, Status, dueDate);
+            LogEvent(eventMessage);
         }
 
         public void RevertStatus()
@@ -89,12 +90,12 @@ namespace BoardR
             {
                 status--;
                 string eventMessage = GenerateEventMessage(Status, minStatusIndex);
-                CreateItemEvent(eventMessage);
+                LogEvent(eventMessage);
             }
             else
             {
                 string eventMessage = GenerateEventMessage(minStatusIndex);
-                CreateItemEvent(eventMessage);
+                LogEvent(eventMessage);
             }
         }
         public void AdvanceStatus()
@@ -106,17 +107,17 @@ namespace BoardR
             {
                 status++;
                 string eventMessage = GenerateEventMessage(Status, maxStatusIndex);
-                CreateItemEvent(eventMessage);
+                LogEvent(eventMessage);
             }
             else
             {
                 string eventMessage = GenerateEventMessage(maxStatusIndex);
-                CreateItemEvent(eventMessage);
+                LogEvent(eventMessage);
             }
             
         }
 
-        public string ViewInfo()
+        public virtual string ViewInfo()
         {
             return $"'{title}', [{status}|{dueDate.ToString("dd-MM-yyyy")}]";
         }
@@ -136,11 +137,12 @@ namespace BoardR
             return historyLog.ToString();
         }
 
-        private protected void CreateItemEvent(string message)
+        private protected void LogEvent(string message)
         {
             var newEvent = new EventLog(message);
             events.Add(newEvent);
         }
+
 
         public string GetPropertyName([CallerMemberName] string methodName = null)
         {

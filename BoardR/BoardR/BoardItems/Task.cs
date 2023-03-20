@@ -28,8 +28,8 @@ namespace BoardR
                 ValidateStringProperty(value, propertyName, AssigneeMinLength, AssigneeMaxLength);
                 if (assignee != null)
                 {
-                    string eventMessage = GenerateEventMessage(propertyName, Title, value);
-                    CreateItemEvent(eventMessage);
+                    string eventMessage = GenerateEventMessage(propertyName, Assignee, value);
+                    LogEvent(eventMessage);
                 }
                 this.assignee = value; 
 
@@ -39,7 +39,9 @@ namespace BoardR
         public Task (string title, string assignee, DateTime dueDate ) : base (title, dueDate)
         {
             this.Assignee = assignee;
-            this.status = ItemStatus.ToDo;    
+            this.status = ItemStatus.ToDo;
+            
+
         }        
         
     }

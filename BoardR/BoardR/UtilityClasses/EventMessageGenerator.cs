@@ -19,9 +19,14 @@ namespace BoardR
             string creationMessage = $"{propertyName} changed from '{oldValue.ToString("dd-MM-yyyy")}' to '{newValue.ToString("dd-MM-yyyy")}'";
             return creationMessage;
         }
-        public static string GenerateEventMessage(string title, ItemStatus status, DateTime dueDate)
+        public static string GenerateEventMessage(string itemName, string title, ItemStatus status, DateTime dueDate)
         {
-            string creationMessage = $"Item created: '{title}', [{status}|{dueDate.ToString("dd-MM-yyyy")}]";
+            string creationMessage = $"{itemName} created: '{title}', [{status}|{dueDate.ToString("dd-MM-yyyy")}]";
+            return creationMessage;
+        }
+        public static string GenerateEventMessage(string itemName, string title, ItemStatus status, DateTime dueDate, string description)
+        {
+            string creationMessage = $"{itemName} created: '{title}', [{status}|{dueDate.ToString("dd-MM-yyyy")}]. Description: {description}";
             return creationMessage;
         }
         public static string GenerateEventMessage(ItemStatus status, int IndexConstraint)
