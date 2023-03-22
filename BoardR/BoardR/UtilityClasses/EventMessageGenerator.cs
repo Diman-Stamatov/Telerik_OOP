@@ -30,17 +30,34 @@ namespace BoardR
             string eventMessage = $"{itemName} created: '{title}', [{status}|{dueDate.ToString("dd-MM-yyyy")}]. Description: {description}";
             return eventMessage;
         }
-        public static string GenerateEventMessage(ItemStatus status, ItemStatus statusConstraint)
+        public static string GenerateEventMessage(ItemStatus status, ItemStatus statusConstraint, string callerName)
         {
             string eventMessage;
+            ItemStatus newStatus;
+            
             if (statusConstraint == ItemStatus.Verified)
             {
-                eventMessage = $"Status changed from {status - 1} to {status}";
-                
+
+                if (callerName == "Issue")
+                {
+                    eventMessage = $"Status changed from {ItemStatus.Open} to {ItemStatus.Verified}";
+                }
+                else
+                {
+                    eventMessage = $"Status changed from {status - 1} to {status}";
+                }
             }
             else
             {
-                eventMessage = $"Status changed from {status + 1} to {status}";
+                if (callerName == "Issue")
+                {
+                    eventMessage = $"Status changed from {ItemStatus.Verified} to {ItemStatus.Open}";
+                }
+                else
+                {
+                    eventMessage = $"Status changed from {status + 1} to {status}";
+                }
+                
             }
             return eventMessage;
         }

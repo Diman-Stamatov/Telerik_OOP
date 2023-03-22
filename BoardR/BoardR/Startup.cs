@@ -6,27 +6,17 @@ namespace BoardR
         
         static void Main(string[] args)
         {
-            
 
-            var task = new Task("Test the application flow", "Peter", DateTime.Now.AddDays(1));
-            task.RevertStatus();
-            task.AdvanceStatus();
-            task.AdvanceStatus();
-            task.AdvanceStatus();
-            task.AdvanceStatus();
-            task.Assignee = "George";
-            Console.WriteLine(task.ViewHistory());
-            Console.WriteLine();
+            var tomorrow = DateTime.Now.AddDays(1);
+            var issue = new Issue("App flow tests?", "We need to test the App!", tomorrow);
 
-            var issue = new Issue("App flow tests?", "We need to test the App!", DateTime.Now.AddDays(1));
             issue.RevertStatus();
             issue.AdvanceStatus();
             issue.AdvanceStatus();
-            issue.AdvanceStatus();
-            issue.AdvanceStatus();
-            issue.AdvanceStatus();
-            issue.DueDate = issue.DueDate.AddDays(1);
+            issue.RevertStatus();
+
             Console.WriteLine(issue.ViewHistory());
+
 
 
         }

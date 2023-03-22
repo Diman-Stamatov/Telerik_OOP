@@ -55,7 +55,8 @@ namespace BoardR
             if (status <maximumStatus)
             {
                 status++;
-                string eventMessage = GenerateEventMessage(Status, maximumStatus);
+                string callerName = this.GetType().Name;
+                string eventMessage = GenerateEventMessage(Status, maximumStatus, callerName);
                 LogEvent(eventMessage);
             }
             else
@@ -69,7 +70,8 @@ namespace BoardR
             if (status != minimumStatus)
             {
                 status--;
-                string eventMessage = GenerateEventMessage(Status, minimumStatus);
+                string callerName = this.GetType().Name;
+                string eventMessage = GenerateEventMessage(Status, minimumStatus, callerName);
                 LogEvent(eventMessage);
             }
             else
