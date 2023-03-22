@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BoardR.Loggers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BoardR
 {
-    internal static class Board
+    internal static class Board 
     {
         
 
@@ -42,11 +43,17 @@ namespace BoardR
             }
             
             items.Add(item);
-            
-            
-           
+        }
+        public static void LogHistory()
+        {
+            var fullHistory = new StringBuilder();
+            foreach (var boardItem in items)
+            {
+                fullHistory.AppendLine(boardItem.ViewHistory());
+            }
+            Console.WriteLine(fullHistory.ToString());
         }
 
-
+        
     }
 }

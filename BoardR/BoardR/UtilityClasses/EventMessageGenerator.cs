@@ -32,8 +32,7 @@ namespace BoardR
         }
         public static string GenerateEventMessage(ItemStatus status, ItemStatus statusConstraint, string callerName)
         {
-            string eventMessage;
-            ItemStatus newStatus;
+            string eventMessage;            
             
             if (statusConstraint == ItemStatus.Verified)
             {
