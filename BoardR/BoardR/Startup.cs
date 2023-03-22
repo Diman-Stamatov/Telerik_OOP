@@ -8,15 +8,15 @@ namespace BoardR
         {
 
             var tomorrow = DateTime.Now.AddDays(1);
-            var issue = new Issue("App flow tests?", "We need to test the App!", tomorrow);
+            var task = new Task("Write unit tests", "Peter", tomorrow);
+            var issue = new Issue("Review tests", "Someone must review Peter's tests.", tomorrow);
 
-            issue.RevertStatus();
+            Board.AddItem(task);
+            Board.AddItem(issue);
+            task.AdvanceStatus();
             issue.AdvanceStatus();
-            issue.AdvanceStatus();
-            issue.RevertStatus();
 
-            Console.WriteLine(issue.ViewHistory());
-
+            Board.LogHistory();
 
 
         }
