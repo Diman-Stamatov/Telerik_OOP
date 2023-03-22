@@ -13,10 +13,15 @@ using static System.Net.Mime.MediaTypeNames;
 namespace BoardR
 {
 
-    internal class BoardItem
+    internal abstract class BoardItem
     {
         private const int TitleMinLength = 5;
         private const int TitleMaxLength = 30;
+        
+
+        private protected ItemStatus minimumStatus;
+        private protected ItemStatus maximumStatus = ItemStatus.Verified;
+        
 
         private string title;
         private DateTime dueDate;
@@ -76,48 +81,9 @@ namespace BoardR
             this.events = new List<EventLog>();
             this.Title = title;
             this.DueDate = dueDate;
-            this.status = 0;
-            
-            string itemName = this.GetType().Name;
-            string eventMessage = GenerateEventMessage(itemName, title, Status, dueDate);
-            LogEvent(eventMessage);
         }
 
-        public void RevertStatus()
-        {
-            int minStatusIndex = 0;
-            int currentStatusIndex = (int)status;
-            if (currentStatusIndex != minStatusIndex)
-            {
-                status--;
-                string eventMessage = GenerateEventMessage(Status, minStatusIndex);
-                LogEvent(eventMessage);
-            }
-            else
-            {
-                string eventMessage = GenerateEventMessage(minStatusIndex);
-                LogEvent(eventMessage);
-            }
-        }
-        public void AdvanceStatus()
-        {
-            int maxStatusIndex = Enum.GetNames(typeof(ItemStatus)).Length - 1;
-            int currentStatusIndex = (int)status;
-
-            if (currentStatusIndex < maxStatusIndex)
-            {
-                status++;
-                string eventMessage = GenerateEventMessage(Status, maxStatusIndex);
-                LogEvent(eventMessage);
-            }
-            else
-            {
-                string eventMessage = GenerateEventMessage(maxStatusIndex);
-                LogEvent(eventMessage);
-            }
-            
-        }
-
+       
         public virtual string ViewInfo()
         {
             return $"'{title}', [{status}|{dueDate.ToString("dd-MM-yyyy")}]";
@@ -169,5 +135,7 @@ namespace BoardR
             }
             return isEqual;
         }
+        public abstract void AdvanceStatus();
+        public abstract void RevertStatus();
     }
 }

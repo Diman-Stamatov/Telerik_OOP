@@ -9,6 +9,8 @@ namespace BoardR
 {
     internal static class Board
     {
+        
+
         private static List<BoardItem> items; 
         public static int TotalItems
         {

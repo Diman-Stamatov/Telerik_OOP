@@ -30,7 +30,7 @@ namespace BoardR
                 {
                     string eventMessage = GenerateEventMessage(propertyName, Assignee, value);
                     LogEvent(eventMessage);
-                }
+                }                
                 this.assignee = value; 
 
             }
@@ -39,10 +39,46 @@ namespace BoardR
         public Task (string title, string assignee, DateTime dueDate ) : base (title, dueDate)
         {
             this.Assignee = assignee;
-            this.status = ItemStatus.ToDo;
-            
+            this.minimumStatus = ItemStatus.ToDo;
 
-        }        
+            this.status = this.minimumStatus;
+
+            string itemName = this.GetType().Name;
+            string eventMessage = GenerateEventMessage(itemName, title, Status, dueDate);
+            LogEvent(eventMessage);
+
+
+        }
+
+        public override void AdvanceStatus()
+        {
+            if (status <maximumStatus)
+            {
+                status++;
+                string eventMessage = GenerateEventMessage(Status, maximumStatus);
+                LogEvent(eventMessage);
+            }
+            else
+            {
+                string eventMessage = GenerateEventMessage(maximumStatus);
+                LogEvent(eventMessage);
+            }
+        }
+        public override void RevertStatus()
+        {
+            if (status != minimumStatus)
+            {
+                status--;
+                string eventMessage = GenerateEventMessage(Status, minimumStatus);
+                LogEvent(eventMessage);
+            }
+            else
+            {
+                string eventMessage = GenerateEventMessage(minimumStatus);
+                LogEvent(eventMessage);
+            }
+        }
+
         
     }
 }

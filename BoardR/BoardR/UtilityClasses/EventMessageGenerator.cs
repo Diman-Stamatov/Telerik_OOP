@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BoardR
 
 {
@@ -11,49 +12,52 @@ namespace BoardR
     {
         public static string GenerateEventMessage(string propertyName, string oldValue, string newValue)
         {
-            string creationMessage = $"{propertyName} changed from '{oldValue}' to '{newValue}'";
-            return creationMessage;
+            string eventMessage = $"{propertyName} changed from '{oldValue}' to '{newValue}'";
+            return eventMessage;
         }
         public static string GenerateEventMessage(string propertyName, DateTime oldValue, DateTime newValue)
         {
-            string creationMessage = $"{propertyName} changed from '{oldValue.ToString("dd-MM-yyyy")}' to '{newValue.ToString("dd-MM-yyyy")}'";
-            return creationMessage;
+            string eventMessage = $"{propertyName} changed from '{oldValue.ToString("dd-MM-yyyy")}' to '{newValue.ToString("dd-MM-yyyy")}'";
+            return eventMessage;
         }
         public static string GenerateEventMessage(string itemName, string title, ItemStatus status, DateTime dueDate)
         {
-            string creationMessage = $"{itemName} created: '{title}', [{status}|{dueDate.ToString("dd-MM-yyyy")}]";
-            return creationMessage;
+            string eventMessage = $"{itemName} created: '{title}', [{status}|{dueDate.ToString("dd-MM-yyyy")}]";
+            return eventMessage;
         }
         public static string GenerateEventMessage(string itemName, string title, ItemStatus status, DateTime dueDate, string description)
         {
-            string creationMessage = $"{itemName} created: '{title}', [{status}|{dueDate.ToString("dd-MM-yyyy")}]. Description: {description}";
-            return creationMessage;
+            string eventMessage = $"{itemName} created: '{title}', [{status}|{dueDate.ToString("dd-MM-yyyy")}]. Description: {description}";
+            return eventMessage;
         }
-        public static string GenerateEventMessage(ItemStatus status, int IndexConstraint)
+        public static string GenerateEventMessage(ItemStatus status, ItemStatus statusConstraint)
         {
-            string creationMessage = "";
-            if (IndexConstraint == 0)
+            string eventMessage;
+            if (statusConstraint == ItemStatus.Verified)
             {
-                creationMessage = $"Status changed from {status + 1} to {status}";
+                eventMessage = $"Status changed from {status - 1} to {status}";
+                
             }
             else
             {
-                creationMessage = $"Status changed from {status - 1} to {status}";
+                eventMessage = $"Status changed from {status + 1} to {status}";
             }
-            return creationMessage;
+            return eventMessage;
         }
-        public static string GenerateEventMessage(int IndexConstraint)
+        public static string GenerateEventMessage(ItemStatus statusConstraint)
         {
-            string creationMessage = "";
-            if (IndexConstraint == 0)
+            string eventMessage;
+            
+            if (statusConstraint == ItemStatus.Verified)
             {
-                creationMessage = $"Unable to revert the status any further!";
+                eventMessage = $"Unable to advance the status any further!";
+                
             }
             else
             {
-                creationMessage = $"Unable to advance the status any further!";
+                eventMessage = $"Unable to revert the status any further!";
             }
-            return creationMessage;
+            return eventMessage;
         }
     }
 }
