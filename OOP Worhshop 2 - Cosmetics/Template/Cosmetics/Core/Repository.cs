@@ -13,6 +13,7 @@ namespace Cosmetics.Core
         private readonly List<ICategory> categories;
         private readonly IShoppingCart shoppingCart;
 
+
         public Repository()
         {
             this.products = new List<IProduct>();
@@ -54,14 +55,24 @@ namespace Cosmetics.Core
         public IShampoo CreateShampoo(string name, string brand, decimal price, GenderType genderType, 
                                     int millilitres, UsageType usageType)
         {
-            IShampoo newShampoo = new Shampoo(name, brand, price, genderType, millilitres, usageType);
+            IShampoo newShampoo = new Shampoo(name, brand, price, genderType, millilitres, usageType);            
+            this.products.Add((IProduct)newShampoo);
             return newShampoo;
+
         }
 
         public IToothpaste CreateToothpaste(string name, string brand, decimal price, GenderType genderType, string ingredients)
         {
-            IToothpaste newToothpaste = new Toothpaste(name, brand, price, genderType, ingredients);
+            Toothpaste newToothpaste = new Toothpaste(name, brand, price, genderType, ingredients);            
+            this.products.Add(newToothpaste);
             return newToothpaste;
+        }
+        public ICream CreateCream(string name, string brand, decimal price, GenderType genderType, ScentType scentType)
+        {
+            Cream newCream = new Cream(name, brand, price, genderType, scentType);
+            this.products.Add(newCream);
+            return newCream;
+
         }
 
         public ICategory FindCategoryByName(string categoryName)
@@ -79,15 +90,15 @@ namespace Cosmetics.Core
 
         public IProduct FindProductByName(string productName)
         {
-            IProduct foundProduct = null;
+           
             foreach (IProduct product in products)
             {
                 if (product.Name == productName)
                 {
-                    foundProduct = product;
+                    return product;
                 }
             }
-            return foundProduct;
+            throw new ArgumentException($"Product {productName} does not exist!");
         }
 
         public bool CategoryExists(string categoryName)

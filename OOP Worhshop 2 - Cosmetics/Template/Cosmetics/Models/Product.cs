@@ -79,12 +79,8 @@ namespace Cosmetics.Models
             this.Price = price;
             this.Gender = gender;
         }
-        public virtual string Print()
-        {
-            string message = $"{this.GetType().Name} with name {this.Name} was created!";
-            return message;
-        }
-        public string GetPropertyName([CallerMemberName] string methodName = null)
+        public abstract string Print();       
+        public static string GetPropertyName([CallerMemberName] string methodName = null)
         {
             return methodName;
         }

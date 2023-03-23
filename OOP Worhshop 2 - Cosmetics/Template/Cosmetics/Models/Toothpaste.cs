@@ -5,7 +5,7 @@ using static Cosmetics.Helpers.ValidationHelper;
 
 namespace Cosmetics.Models
 {
-    public class Toothpaste :Product, IToothpaste
+    public class Toothpaste :Product, IProduct, IToothpaste
     {
         
 
@@ -31,9 +31,17 @@ namespace Cosmetics.Models
         {            
             this.Ingredients = ingredients;
         }
+        public override string Print()
+        {
+            return $"#{this.Name} {this.Brand}\n" +
+                $" #Price: ${this.Price}\n" +
+                $" #Gender: {this.Gender}\n" +
+                $" #Ingredients: {this.Ingredients}\n" +
+                $" ===";
 
-        
+        }
 
-        
+
+
     }
 }

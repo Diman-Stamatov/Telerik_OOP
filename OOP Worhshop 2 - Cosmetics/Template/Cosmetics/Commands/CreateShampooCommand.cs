@@ -23,9 +23,10 @@ namespace Cosmetics.Commands
 
             string shampooName = this.CommandParameters[0];
             string shampooBrand = this.CommandParameters[1];
-            decimal price = Decimal.Parse(this.CommandParameters[2]);
-            GenderType genderType = (GenderType)Enum.Parse(typeof(GenderType) , this.CommandParameters[3] );
-            int milliliters = int.Parse(this.CommandParameters[4]);
+            decimal price = ParseDecimalParameter(this.CommandParameters[2], "Price");
+            ValidationHelper.ValidateNonNegative(price, "Price");
+            GenderType genderType = ParseGenderType(this.CommandParameters[3]);
+            int milliliters = ParseIntParameter(this.CommandParameters[4], "Milliliters");
             UsageType usageType = (UsageType)Enum.Parse(typeof(UsageType), this.CommandParameters[5]);
 
             return CreateShampoo(shampooName, shampooBrand,  price,  genderType,  milliliters,  usageType);

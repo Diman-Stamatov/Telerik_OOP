@@ -21,8 +21,9 @@ namespace Cosmetics.Commands
 
             string toothpasteName = this.CommandParameters[0];
             string toothpasteBrand = this.CommandParameters[1];
-            decimal price = Decimal.Parse(this.CommandParameters[2]);
-            GenderType genderType = (GenderType)Enum.Parse(typeof(GenderType), this.CommandParameters[3]);
+            decimal price = ParseDecimalParameter(this.CommandParameters[2], "Price");
+            ValidationHelper.ValidateNonNegative(price, "Price");
+            GenderType genderType = ParseGenderType(this.CommandParameters[3]);
             string ingredients = this.CommandParameters[4];
 
             return CreateToothpaste(toothpasteName, toothpasteBrand, price, genderType, ingredients);
