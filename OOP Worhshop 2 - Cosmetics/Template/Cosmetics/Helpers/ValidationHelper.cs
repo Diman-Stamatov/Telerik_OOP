@@ -5,7 +5,7 @@ namespace Cosmetics.Helpers
 {
     public class ValidationHelper
     {
-        private const string InvalidNumberOfArguments = "{Invalid number of arguments. Expected: {0}; received: {1}.";
+        private const string InvalidNumberOfArguments = "Invalid number of arguments. Expected: {0}; received: {1}.";
         private const string InvalidLengthErrorMessage = "{0} should be between {1} and {2} symbols.";
         private const string NegativeNumberErrorMessage = "{0} cannot be negative.";
 
