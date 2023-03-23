@@ -79,8 +79,12 @@ namespace BoardR
             this.status = 0;
             
             string itemName = this.GetType().Name;
-            string eventMessage = GenerateEventMessage(itemName, title, Status, dueDate);
-            LogEvent(eventMessage);
+            if (itemName != "Issue")
+            {
+                string eventMessage = GenerateEventMessage(itemName, title, Status, dueDate);
+                LogEvent(eventMessage);
+            }
+            
         }
 
         public void RevertStatus()

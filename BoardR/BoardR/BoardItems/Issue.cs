@@ -31,7 +31,7 @@ namespace BoardR
             }
             string itemName = this.GetType().Name;
             string eventMessage = GenerateEventMessage(itemName, title, Status, dueDate, Description);
-            this.events.Clear();
+            
             LogEvent(eventMessage);
         }
 
