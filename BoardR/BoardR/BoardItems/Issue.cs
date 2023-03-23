@@ -29,11 +29,43 @@ namespace BoardR
             {
                 this.description = description;
             }
+            this.minimumStatus = ItemStatus.Open;
+            this.status = minimumStatus;
+            
             string itemName = this.GetType().Name;
             string eventMessage = GenerateEventMessage(itemName, title, Status, dueDate, Description);
             
             LogEvent(eventMessage);
         }
-
+        public override void AdvanceStatus()
+        {
+            if (status < maximumStatus)
+            {
+                status=ItemStatus.Verified;
+                string callerName = this.GetType().Name;
+                string eventMessage = GenerateEventMessage(Status, maximumStatus, callerName);
+                LogEvent(eventMessage);
+            }
+            else
+            {
+                string eventMessage = GenerateEventMessage(maximumStatus);
+                LogEvent(eventMessage);
+            }
+        }
+        public override void RevertStatus()
+        {
+            if (status != minimumStatus)
+            {
+                status = ItemStatus.Open;
+                string callerName = this.GetType().Name;
+                string eventMessage = GenerateEventMessage(Status, minimumStatus, callerName);
+                LogEvent(eventMessage);
+            }
+            else
+            {
+                string eventMessage = GenerateEventMessage(minimumStatus);
+                LogEvent(eventMessage);
+            }
+        }
     }
 }
