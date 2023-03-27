@@ -91,17 +91,11 @@ namespace BoardR
         public string ViewHistory()
         {
             var historyLog = new StringBuilder();
-            int numberOfEvents = this.events.Count;
-            for (int loggedEvent = 0; loggedEvent < numberOfEvents; loggedEvent++)
+            foreach (var loggedEvent in this.events)
             {
-                var currentEvent = this.events[loggedEvent];
-                historyLog.Append(currentEvent.ViewInfo());
-                if (loggedEvent != numberOfEvents - 1)
-                {
-                    historyLog.Append("\n");
-                }
+                historyLog.AppendLine(loggedEvent.ViewInfo());
             }
-            return historyLog.ToString();
+            return historyLog.ToString().Trim();
         }
 
         private protected void LogEvent(string message)

@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Dumbo\\.nuget\\packages\\": {}
+    "C:\\Users\\ics\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dumbo\\source\\repos\\oop\\BoardR\\BoardR\\BoardR.csproj",
+      "projectUniqueName": "C:\\Users\\ics\\source\\repos\\oop\\BoardR\\BoardR\\BoardR.csproj",
       "projectName": "BoardR",
-      "projectPath": "C:\\Users\\Dumbo\\source\\repos\\oop\\BoardR\\BoardR\\BoardR.csproj",
-      "packagesPath": "C:\\Users\\Dumbo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dumbo\\source\\repos\\oop\\BoardR\\BoardR\\obj\\",
+      "projectPath": "C:\\Users\\ics\\source\\repos\\oop\\BoardR\\BoardR\\BoardR.csproj",
+      "packagesPath": "C:\\Users\\ics\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ics\\source\\repos\\oop\\BoardR\\BoardR\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Dumbo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ics\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -37,6 +37,11 @@ namespace BoardR
             
             LogEvent(eventMessage);
         }
+        public override string ViewInfo()
+        {
+            string taskInfo = base.ViewInfo() + $" Description: {this.Description}";
+            return taskInfo;
+        }
         public override void AdvanceStatus()
         {
             if (status < maximumStatus)
@@ -65,7 +70,6 @@ namespace BoardR
                 LogEvent(eventMessage);
             }
         }
-
         public override string GenerateAdvanceStatusMessage()
         {
             string advanceStatusMessage;
@@ -79,7 +83,6 @@ namespace BoardR
             }
              return advanceStatusMessage;
         }
-
         public override string GenerateRevertStatusMessage()
         {
             string advanceStatusMessage;

@@ -14,8 +14,7 @@ namespace BoardR
         private const int AssigneeMinLength = 5;
         private const int AssigneeMaxLength = 30;
 
-        private string assignee;
-        
+        private string assignee;        
         public string Assignee
         {
             get 
@@ -49,7 +48,11 @@ namespace BoardR
 
 
         }
-
+        public override string ViewInfo()
+        {
+            string taskInfo = base.ViewInfo() + $" Assignee: {this.Assignee}";
+            return taskInfo;
+        }
         public override void AdvanceStatus()
         {
             if (status <maximumStatus)
@@ -80,7 +83,6 @@ namespace BoardR
                 LogEvent(eventMessage);
             }
         }
-
         public override string GenerateAdvanceStatusMessage()
         {
             string advanceStatusMessage;
@@ -94,7 +96,6 @@ namespace BoardR
             }
             return advanceStatusMessage;
         }
-
         public override string GenerateRevertStatusMessage()
         {
             string advanceStatusMessage;

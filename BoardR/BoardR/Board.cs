@@ -44,14 +44,14 @@ namespace BoardR
             
             items.Add(item);
         }
-        public static void LogHistory()
+        public static void LogHistory(ILogger logger)
         {
             var fullHistory = new StringBuilder();
             foreach (var boardItem in items)
             {
                 fullHistory.AppendLine(boardItem.ViewHistory());
             }
-            Console.WriteLine(fullHistory.ToString());
+            logger.Log(fullHistory.ToString());
         }
 
         
