@@ -54,14 +54,13 @@ namespace BoardR
         {
             if (status <maximumStatus)
             {
+                string eventMessage = GenerateAdvanceStatusMessage();
                 status++;
-                string callerName = this.GetType().Name;
-                string eventMessage = GenerateEventMessage(Status, maximumStatus, callerName);
                 LogEvent(eventMessage);
             }
             else
             {
-                string eventMessage = GenerateEventMessage(maximumStatus);
+                string eventMessage = GenerateAdvanceStatusMessage();
                 LogEvent(eventMessage);
             }
         }
@@ -69,18 +68,45 @@ namespace BoardR
         {
             if (status != minimumStatus)
             {
+
+
+                string eventMessage = GenerateRevertStatusMessage();
                 status--;
-                string callerName = this.GetType().Name;
-                string eventMessage = GenerateEventMessage(Status, minimumStatus, callerName);
                 LogEvent(eventMessage);
             }
             else
             {
-                string eventMessage = GenerateEventMessage(minimumStatus);
+                string eventMessage = GenerateRevertStatusMessage();
                 LogEvent(eventMessage);
             }
         }
 
-        
+        public override string GenerateAdvanceStatusMessage()
+        {
+            string advanceStatusMessage;
+            if (this.status != maximumStatus)
+            {
+                advanceStatusMessage = $"Status changed from {status} to {status+1}";
+            }
+            else
+            {
+                advanceStatusMessage = $"Unable to advance the status any further, it is already set to {maximumStatus}!";
+            }
+            return advanceStatusMessage;
+        }
+
+        public override string GenerateRevertStatusMessage()
+        {
+            string advanceStatusMessage;
+            if (this.status != minimumStatus)
+            {
+                advanceStatusMessage = $"Status changed from {status} to {status-1}";
+            }
+            else
+            {
+                advanceStatusMessage = $"Unable to revert the status any further, it is already set to {minimumStatus}!";
+            }
+            return advanceStatusMessage;
+        }
     }
 }

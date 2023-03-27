@@ -14,7 +14,13 @@ namespace BoardR
             Board.AddItem(task);
             Board.AddItem(issue);
             task.AdvanceStatus();
+            task.RevertStatus();
+            task.RevertStatus();
+            task.RevertStatus();
             issue.AdvanceStatus();
+            issue.AdvanceStatus();
+            issue.RevertStatus();
+            issue.RevertStatus();
 
             Board.LogHistory();
 

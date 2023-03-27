@@ -137,5 +137,8 @@ namespace BoardR
         }
         public abstract void AdvanceStatus();
         public abstract void RevertStatus();
+
+        public abstract string GenerateAdvanceStatusMessage();
+        public abstract string GenerateRevertStatusMessage();
     }
 }
