@@ -22,6 +22,8 @@ namespace Cosmetics.Core.Contracts
 
         IToothpaste CreateToothpaste(string name, string brand, decimal price, GenderType genderType, string ingredients);
 
+        ICream CreateCream(string name, string brand, decimal price, GenderType genderType, ScentType scentType);
+
         bool CategoryExists(string categoryName);
 
         bool ProductExists(string productName);

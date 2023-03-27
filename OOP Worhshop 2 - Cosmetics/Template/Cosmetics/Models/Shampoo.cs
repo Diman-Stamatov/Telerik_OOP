@@ -6,82 +6,24 @@ using System.Runtime.CompilerServices;
 
 namespace Cosmetics.Models
 {
-    public class Shampoo :IProduct, IShampoo
+    public class Shampoo :Product, IProduct, IShampoo
     {
-        public const int NameMinLength = 3;
-        public const int NameMaxLength = 10;
-        public const int BrandMinLength = 2;
-        public const int BrandMaxLength = 10;
+        
 
-        private string name;
-        private string brand;
-        private decimal price;
-        private GenderType gender;
-        private int millilitres;
+        private int milliliters;
         private UsageType usage;
-
-        public string Name
-        {
-            get 
-            { 
-                return this.name;
-            }
-            set
-            {
-                ValidateStringLength(value, NameMinLength, NameMaxLength);
-                this.name = value;
-            }
-        }
-        public string Brand
+        
+        public int Milliliters
         {
             get
             {
-                return this.brand;
+                return this.milliliters;
             }
             set
             {
-                ValidateStringLength(value, BrandMinLength, BrandMaxLength);
-                this.brand = value;
-            }
-        }
-        public decimal Price
-        {
-            get
-            {
-                return this.price;
-            }
-            set
-            {
-                string propertyName = "Price";
-               
+                string propertyName = GetPropertyName();
                 ValidateNonNegative(value, propertyName);
-                this.price = value;
-            }
-        }
-        public GenderType Gender
-        {
-            get
-            {
-                return this.gender;
-            }
-            set
-            {
-                this.gender = value;
-            }
-        }
-        public int Millilitres
-        {
-            get
-            {
-                return this.millilitres;
-            }
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentOutOfRangeException("The mililiters cannot be negative!");
-                }
-                this.millilitres = value;
+                this.milliliters = value;
             }
         }
 
@@ -99,24 +41,22 @@ namespace Cosmetics.Models
 
         
 
-        public Shampoo(string name, string brand, decimal price, GenderType gender, int millilitres, UsageType usage)
+        public Shampoo(string name, string brand, decimal price, GenderType gender, int millilitres, UsageType usage): base(name, brand, price, gender)
         {
-            this.Name = name;
-            this.Brand = brand;
-            this.Price = Price;
-            this.Gender = gender;
-            this.Millilitres = millilitres;
+            
+            this.Milliliters = millilitres;
             this.Usage = usage;
         }
 
-        public string Print()
+        public override string Print()
         {
-            string message = $"{this.GetType().Name} with name {this.Name} was created!";
-            return message;
-        }
-        public string GetCallerName([CallerMemberName] string caller = null)
-        {
-            return caller;
+            return $"#{this.Name} {this.Brand}\n" +
+                $" #Price: ${this.Price}\n" +
+                $" #Gender: {this.Gender}\n" +
+                $" #Millileters: {this.Milliliters}\n" +
+                $" #Usage: {this.Usage}\n" +
+                $" ===";
+            
         }
     }
 }

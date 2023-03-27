@@ -4,7 +4,7 @@ namespace Cosmetics.Models.Contracts
 {
     public interface IShampoo
     {
-        int Millilitres { get; }
+        int Milliliters { get; }
 
         UsageType Usage { get; }
     }
