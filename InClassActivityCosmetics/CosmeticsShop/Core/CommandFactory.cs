@@ -1,6 +1,7 @@
 ﻿using CosmeticsShop.Commands;
-
+using CosmeticsShop.Enums;
 using System;
+
 
 namespace CosmeticsShop.Core
 {
@@ -9,17 +10,17 @@ namespace CosmeticsShop.Core
         public ICommand CreateCommand(string commandTypeValue, CosmeticsRepository productRepository)
         {
             // TODO: Validate command format
-            CommandType commandType = Enum.Parse<CommandType>(commandTypeValue, true);
+            CosmeticsCommandType commandType = Enum.Parse<CosmeticsCommandType>(commandTypeValue, true);
 
             switch (commandType)
             {
-                case CommandType.CreateCategory:
+                case CosmeticsCommandType.CreateCategory:
                     return new CreateCategory(productRepository);
-                case CommandType.CreateProduct:
+                case CosmeticsCommandType.CreateProduct:
                     return new CreateProduct(productRepository);
-                case CommandType.AddProductToCategory:
+                case CosmeticsCommandType.AddProductToCategory:
                     return new AddProductToCategory(productRepository);
-                case CommandType.ShowCategory:
+                case CosmeticsCommandType.ShowCategory:
                     return new ShowCategory(productRepository);
                 default:
                     // TODO: Can we improve this code?

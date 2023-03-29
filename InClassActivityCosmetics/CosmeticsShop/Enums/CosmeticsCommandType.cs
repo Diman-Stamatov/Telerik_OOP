@@ -1,6 +1,6 @@
-﻿namespace CosmeticsShop.Commands
+﻿namespace CosmeticsShop.Enums
 {
-    public enum CommandType
+    public enum CosmeticsCommandType
     {
         CreateCategory,
         CreateProduct,

@@ -1,4 +1,6 @@
-﻿using CosmeticsShop.Core;
+﻿using CosmeticsShop.ApplicationErrors;
+using CosmeticsShop.Core;
+using static CosmeticsShop.Helpers.ValidationHelpers;
 
 namespace CosmeticsShop
 {
@@ -6,8 +8,19 @@ namespace CosmeticsShop
     {
         public static void Main()
         {
-            Engine engine = new Engine();
-            engine.Start();
+            try
+            {
+                string price = "-1";
+                ParsePrice(price);
+            }
+            catch (PriceValueException ex)
+            {
+
+                System.Console.WriteLine(ex.Message);
+            }
+            /*Engine engine = new Engine();
+            engine.Start();*/
+
         }
     }
 }
