@@ -4,11 +4,14 @@ using CosmeticsShop.Enums;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using static CosmeticsShop.Helpers.ValidationHelpers;
 
 namespace CosmeticsShop.Commands
 {
     public class CreateProduct : ICommand
     {
+        private const int ValidArgumentsCount = 4;
+
         private readonly CosmeticsRepository cosmeticsRepository;
 
         public CreateProduct(CosmeticsRepository productRepository)
@@ -18,17 +21,15 @@ namespace CosmeticsShop.Commands
 
         public string Execute(List<string> parameters)
         {
-            // TODO: Validate parameters count
+            string commandName = this.GetType().Name;
+            ValidateArgumentsCount(ValidArgumentsCount, parameters, commandName);
             string name = parameters[0];
             string brand = parameters[1];
 
-            // TODO: Validate price format
-            double price = double.Parse(parameters[2], CultureInfo.InvariantCulture);
+            double price = ParsePositiveDouble(parameters[2], "Price");
 
-            // TODO: Validate gender format
-            GenderType gender = Enum.Parse<GenderType>(parameters[3], true);
-
-            // TODO: Ensure category name is unique
+            GenderType gender = ParseGenderType(parameters[3]);
+            
             this.cosmeticsRepository.CreateProduct(name, brand, price, gender);
 
             return $"Product with name {name} was created!";

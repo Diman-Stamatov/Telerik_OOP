@@ -1,11 +1,13 @@
 ﻿using CosmeticsShop.Core;
-
+using static CosmeticsShop.Helpers.ValidationHelpers;
 using System.Collections.Generic;
 
 namespace CosmeticsShop.Commands
 {
     public class CreateCategory : ICommand
     {
+        private const int ValidArgumentsCount = 1;
+
         private readonly CosmeticsRepository cosmeticsRepository;
 
         public CreateCategory(CosmeticsRepository productRepository)
@@ -15,10 +17,10 @@ namespace CosmeticsShop.Commands
 
         public string Execute(List<string> parameters)
         {
-            // TODO: Validate parameters count
+            string commandName = this.GetType().Name;
+            ValidateArgumentsCount(ValidArgumentsCount, parameters, commandName);
             string categoryName = parameters[0];
 
-            // TODO: Ensure category name is unique
             this.cosmeticsRepository.CreateCategory(categoryName);
 
             return $"Category with name {categoryName} was created!";

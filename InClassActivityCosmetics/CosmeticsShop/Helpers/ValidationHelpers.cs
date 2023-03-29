@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -38,10 +39,10 @@ namespace CosmeticsShop.Helpers
                 throw new NumberValueException($"The {fieldBeingValidated} must be a positive number!");
             }
         }
-        public static double ParseDouble(string possibleDouble, string fieldBeingValidated)
+        public static double ParsePositiveDouble(string possibleDouble, string fieldBeingValidated)
         {
             ValidateDoubleFromString(possibleDouble, fieldBeingValidated);
-            double number = double.Parse(possibleDouble);
+            double number = double.Parse(possibleDouble, CultureInfo.InvariantCulture);
             ValidatePositiveDouble(number, fieldBeingValidated);
             return number;
         }
@@ -73,9 +74,9 @@ namespace CosmeticsShop.Helpers
             var commandType = Enum.Parse<CosmeticsCommandType>(inputCommand, true);        
             return commandType;
         }
-        public static void ValidateArgumentsCount(int correctCount, string[] arguments, string commandName)
+        public static void ValidateArgumentsCount(int correctCount, List<string> arguments, string commandName)
         {
-            if (arguments.Length != correctCount)
+            if (arguments.Count != correctCount)
             {
                 throw new ArgumentsCountException($"The {commandName} command requires {correctCount} arguments!");
             }

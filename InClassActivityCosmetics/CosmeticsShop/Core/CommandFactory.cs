@@ -9,8 +9,7 @@ namespace CosmeticsShop.Core
     public class CommandFactory
     {
         public ICommand CreateCommand(string commandTypeValue, CosmeticsRepository productRepository)
-        {
-            ValidateCommandType(commandTypeValue);
+        {            
             CosmeticsCommandType commandType = ParseCommandType(commandTypeValue);
             
             ICommand iCommand = null;
