@@ -17,7 +17,6 @@ namespace Cosmetics.Helpers
             }
         }
 
-
         public static void ValidateStringLength(string stringToValidate, int minLength, int maxLength)
         {
             ValidateIntRange(minLength, maxLength, stringToValidate.Length, stringToValidate);
@@ -39,6 +38,5 @@ namespace Cosmetics.Helpers
                 throw new ArgumentOutOfRangeException(string.Format(NegativeNumberErrorMessage, field));
             }
         }
-        
     }
 }
