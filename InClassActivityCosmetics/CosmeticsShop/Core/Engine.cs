@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace CosmeticsShop.Core
 {
@@ -11,11 +12,13 @@ namespace CosmeticsShop.Core
 
         private readonly CommandFactory commandFactory;
         private readonly CosmeticsRepository productRepository;
+        private List<string> exceptionLog;
 
         public Engine()
         {
             this.commandFactory = new CommandFactory();
             this.productRepository = new CosmeticsRepository();
+            exceptionLog= new List<string>();
         }
 
         public void Start()
@@ -28,7 +31,28 @@ namespace CosmeticsShop.Core
                     break;
                 }
 
-                this.ProcessCommand(commandLine);
+                try
+                {
+                    this.ProcessCommand(commandLine);
+                }
+                catch (ApplicationException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    exceptionLog.Add(DateTime.Now + "| [" + ex.Message + "]");
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    exceptionLog.Add(DateTime.Now + "| [" + ex.Message + "]");
+                }
+                catch (InvalidOperationException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    exceptionLog.Add(DateTime.Now + "| [" + ex.Message + "]");
+                }
+
+
+
             }
         }
 
@@ -56,6 +80,15 @@ namespace CosmeticsShop.Core
                 parameters.Add(commandParts[i]);
             }
             return parameters;
+        }
+        public void ShowErrorLog()
+        {
+            var fullLog = new StringBuilder();
+            foreach (var log in exceptionLog)
+            {
+                fullLog.AppendLine(log);
+            }
+            Console.WriteLine(fullLog.ToString().Trim());
         }
     }
 }

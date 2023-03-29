@@ -13,23 +13,8 @@ namespace CosmeticsShop
         public static void Main()
         {
             
-            try
-            {
-                var product = new Product("name", "Brand", 2, GenderType.Men);
-                var productTwo = product.Clone();
-                product.Name = "NewName";
-                Console.WriteLine(productTwo.Name);
-                Console.WriteLine(productTwo.Brand);
-                Console.WriteLine(productTwo.Price);
-                Console.WriteLine(productTwo.Gender);
-            }
-            catch (Exception ex)
-            {
-
-                System.Console.WriteLine(ex.Message);
-            }
-            /*Engine engine = new Engine();
-            engine.Start();*/
+            Engine engine = new Engine();
+            engine.Start();
 
         }
     }
