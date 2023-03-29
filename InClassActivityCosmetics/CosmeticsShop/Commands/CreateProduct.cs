@@ -32,7 +32,7 @@ namespace CosmeticsShop.Commands
             
             this.cosmeticsRepository.CreateProduct(name, brand, price, gender);
 
-            return $"Product with name {name} was created!";
+            return $"A product named {name} was created!";
         }
     }
 }

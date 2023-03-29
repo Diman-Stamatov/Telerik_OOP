@@ -50,10 +50,8 @@ namespace CosmeticsShop.Core
                     Console.WriteLine(ex.Message);
                     exceptionLog.Add(DateTime.Now + "| [" + ex.Message + "]");
                 }
-
-
-
             }
+            
         }
 
         private void ProcessCommand(string commandLine)

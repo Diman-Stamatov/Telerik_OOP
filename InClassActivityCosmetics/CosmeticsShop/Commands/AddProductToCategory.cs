@@ -30,7 +30,7 @@ namespace CosmeticsShop.Commands
 
             category.AddProduct(product);
 
-            return $"Product {productName} added to category {categoryName}!";
+            return $"The product {productName} was added to the category {categoryName}!";
         }
     }
 }

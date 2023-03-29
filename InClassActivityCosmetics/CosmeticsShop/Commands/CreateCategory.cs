@@ -23,7 +23,7 @@ namespace CosmeticsShop.Commands
 
             this.cosmeticsRepository.CreateCategory(categoryName);
 
-            return $"Category with name {categoryName} was created!";
+            return $"A category named {categoryName} was created!";
         }
     }
 }

@@ -63,7 +63,7 @@ namespace CosmeticsShop.Helpers
         public static void ValidateCommandType(string inputCommand)
         {
             string validCommandTypes = string.Join(", ", Enum.GetNames(typeof(CosmeticsCommandType)));            
-            if (Enum.IsDefined(typeof(CommandType), inputCommand) == false)
+            if (Enum.IsDefined(typeof(CosmeticsCommandType), inputCommand) == false)
             {
                 throw new ArgumentException($"Please input a valid command out of the following: {validCommandTypes}!");
             }
