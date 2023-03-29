@@ -26,7 +26,7 @@ namespace CosmeticsShop.Commands
             string name = parameters[0];
             string brand = parameters[1];
 
-            double price = ParsePositiveDouble(parameters[2], "Price");
+            double price = ParsePositiveDouble(parameters[2], "product price");
 
             GenderType gender = ParseGenderType(parameters[3]);
             

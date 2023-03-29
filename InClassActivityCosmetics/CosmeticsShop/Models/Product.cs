@@ -32,7 +32,7 @@ namespace CosmeticsShop.Models
             {
                 return this.name;
             }
-            set
+            private set
             {
                 string className = this.GetType().Name;
                 string propertyName = GetThisMethodName();
@@ -47,7 +47,7 @@ namespace CosmeticsShop.Models
             {
                 return this.brand;
             }
-            set
+            private set
             {
                 string className = this.GetType().Name;
                 string propertyName = GetThisMethodName();
@@ -62,7 +62,7 @@ namespace CosmeticsShop.Models
             {
                 return this.price;
             }
-            set
+            private set
             {
                 string fieldName = GetThisMethodName(); 
                 ValidatePositiveDouble(value, fieldName);

@@ -19,7 +19,7 @@ namespace CosmeticsShop.Helpers
             int realLength = inputString.Length;
             if (inputString == null ||realLength < minLength || realLength > maxLength)
             {
-                throw new ParameterLengthException($"The {currentClass} {fieldBeingValidated} must be " +
+                throw new ParameterLengthException($"The {currentClass.ToLower()} {fieldBeingValidated.ToLower()} must be " +
                     $"between {minLength} and {maxLength} characters long!");
             }
         }
