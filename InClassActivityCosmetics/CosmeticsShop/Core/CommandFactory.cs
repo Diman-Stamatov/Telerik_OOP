@@ -1,6 +1,7 @@
 ﻿using CosmeticsShop.Commands;
 using CosmeticsShop.Enums;
 using System;
+using static CosmeticsShop.Helpers.ValidationHelpers;
 
 
 namespace CosmeticsShop.Core
@@ -9,23 +10,26 @@ namespace CosmeticsShop.Core
     {
         public ICommand CreateCommand(string commandTypeValue, CosmeticsRepository productRepository)
         {
-            // TODO: Validate command format
-            CosmeticsCommandType commandType = Enum.Parse<CosmeticsCommandType>(commandTypeValue, true);
-
+            ValidateCommandType(commandTypeValue);
+            CosmeticsCommandType commandType = ParseCommandType(commandTypeValue);
+            
+            ICommand iCommand = null;
             switch (commandType)
             {
                 case CosmeticsCommandType.CreateCategory:
-                    return new CreateCategory(productRepository);
+                    iCommand = new CreateCategory(productRepository);
+                    break;
                 case CosmeticsCommandType.CreateProduct:
-                    return new CreateProduct(productRepository);
+                    iCommand = new CreateProduct(productRepository);
+                    break;
                 case CosmeticsCommandType.AddProductToCategory:
-                    return new AddProductToCategory(productRepository);
+                    iCommand = new AddProductToCategory(productRepository);
+                    break;
                 case CosmeticsCommandType.ShowCategory:
-                    return new ShowCategory(productRepository);
-                default:
-                    // TODO: Can we improve this code?
-                    return null;
+                    iCommand = new ShowCategory(productRepository);
+                    break;
             }
+            return iCommand;
         }
     }
 }
