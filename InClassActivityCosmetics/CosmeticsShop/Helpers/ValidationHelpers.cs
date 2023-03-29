@@ -22,29 +22,34 @@ namespace CosmeticsShop.Helpers
                     $"between {minLength} and {maxLength} characters long!");
             }
         }
-        public static void ValidatePrice(string price)
+        public static void ValidateDoubleFromString(string possibleDouble, string fieldBeingValidated)
         {
-            double priceAsDouble = 0;
-            if (double.TryParse(price, out priceAsDouble) == false)
+            
+            if (double.TryParse(possibleDouble, out double stringAsDouble) == false)
             {
-                throw new PriceValueException($"The Price must be a number!");
+                throw new NumberValueException($"The {fieldBeingValidated} must be a number!");
             }
-            else if (priceAsDouble<0)
-            {
-                throw new PriceValueException($"The Price must be a positive number!");
-            }
-        }        
-        public static double ParsePrice(string price)
+             
+        }
+        public static void ValidatePositiveDouble(double number, string fieldBeingValidated) 
         {
-            ValidatePrice(price);
-            return double.Parse(price);
+            if (number < 0)
+            {
+                throw new NumberValueException($"The {fieldBeingValidated} must be a positive number!");
+            }
+        }
+        public static double ParseDouble(string possibleDouble, string fieldBeingValidated)
+        {
+            ValidateDoubleFromString(possibleDouble, fieldBeingValidated);
+            double number = double.Parse(possibleDouble);
+            ValidatePositiveDouble(number, fieldBeingValidated);
+            return number;
         }
         public static void ValidateGenderType(string inputGender)
         {
             string validGenderTypes = string.Join(", ", Enum.GetNames(typeof(GenderType)));
             if (Enum.IsDefined(typeof(GenderType), inputGender) == false)
             {
-
                 throw new ArgumentException($"Please input a valid gender type out of the following: {validGenderTypes}!");
             }
         }
@@ -61,7 +66,6 @@ namespace CosmeticsShop.Helpers
             {
                 throw new ArgumentException($"Please input a valid command out of the following: {validCommandTypes}!");
             }
-            
         }
         public static CosmeticsCommandType ParseCommandType(string inputCommand)
         {
@@ -75,10 +79,6 @@ namespace CosmeticsShop.Helpers
             {
                 throw new ArgumentsCountException($"The {commandName} command requires {correctCount} arguments!");
             }
-        }
-        public static string GetThisMethodName([CallerMemberName] string callerMemberName = null) 
-        {
-            return callerMemberName;
         }
     }
 }
