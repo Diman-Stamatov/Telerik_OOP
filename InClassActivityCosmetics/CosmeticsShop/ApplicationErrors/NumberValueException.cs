@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CosmeticsShop.ApplicationErrors
 {
-    internal class PriceValueException : ApplicationException 
+    internal class NumberValueException : ApplicationException 
     {
-        public PriceValueException(string message) : base(message)
+        public NumberValueException(string message) : base(message)
         { }
     }
 }
