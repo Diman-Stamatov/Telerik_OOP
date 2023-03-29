@@ -1,8 +1,9 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace CosmeticsShop.Models
 {
-    public class Product
+    public class Product 
     {
         private string name;
         private string brand;
@@ -72,6 +73,17 @@ namespace CosmeticsShop.Models
             strBulder.AppendLine($" #Gender: {this.gender}");
 
             return strBulder.ToString().Trim();
+        }
+
+        public Product Clone()
+        {
+            string clonedName = this.Name;
+            string clonedBrand = this.Brand;
+            double clonedPrice = this.Price;
+            GenderType clonedGender = this.Gender;
+            var clonedProduct = new Product(clonedName, clonedBrand, clonedPrice, clonedGender);
+            return clonedProduct;
+            
         }
     }
 }

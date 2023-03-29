@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using CosmeticsShop.ApplicationErrors;
@@ -11,12 +12,13 @@ namespace CosmeticsShop.Helpers
 {
     internal class ValidationHelpers
     {
-        public static void ValidateStringLength(int minLength, int maxLength, string inputString, string fieldBeingValidated)
+        public static void ValidateStringLength(int minLength, int maxLength, string inputString, 
+            string currentClass, string fieldBeingValidated )
         {
             int realLength = inputString.Length;
             if (inputString == null ||realLength < minLength || realLength > maxLength)
             {
-                throw new ParameterLengthException($"The {fieldBeingValidated} must be " +
+                throw new ParameterLengthException($"The {currentClass} {fieldBeingValidated} must be " +
                     $"between {minLength} and {maxLength} characters long!");
             }
         }
@@ -67,12 +69,16 @@ namespace CosmeticsShop.Helpers
             var commandType = Enum.Parse<CosmeticsCommandType>(inputCommand, true);        
             return commandType;
         }
-        public void ValidateArgumentsCount(int correctCount, string[] arguments, string commandName)
+        public static void ValidateArgumentsCount(int correctCount, string[] arguments, string commandName)
         {
             if (arguments.Length != correctCount)
             {
                 throw new ArgumentsCountException($"The {commandName} command requires {correctCount} arguments!");
             }
+        }
+        public static string GetThisMethodName([CallerMemberName] string callerMemberName = null) 
+        {
+            return callerMemberName;
         }
     }
 }

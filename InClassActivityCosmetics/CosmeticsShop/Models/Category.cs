@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using static CosmeticsShop.Helpers.ValidationHelpers;
 
 namespace CosmeticsShop.Models
 {
     public class Category
     {
+        private const int MinNameLength = 3;
+        private const int MaxNameLength = 10;
+        
         private string name;
         private readonly List<Product> products;
 
@@ -20,9 +24,11 @@ namespace CosmeticsShop.Models
             {
                 return this.name;
             }
-            set
+            private set
             {
-                // TODO: Validate value
+                string className = this.GetType().Name;
+                string propertyName = GetThisMethodName();
+                ValidateStringLength(MinNameLength, MaxNameLength, value, className , propertyName);
                 this.name = value;
             }
         }
@@ -64,6 +70,16 @@ namespace CosmeticsShop.Models
             }
 
             return strBuilder.ToString().Trim();
+        }
+        private List<Product> CloneProducts()
+        {
+            var clonedProducts = new List<Product>();
+            int loggedProducts = this.products.Count;
+            for (int product = 0; product < loggedProducts; product++)
+            {
+                clonedProducts.Add(products[0].Clone());
+            }
+            return clonedProducts;
         }
     }
 }
