@@ -32,9 +32,7 @@ namespace BoardR
             {
                 throw new ArgumentException(errorMessage);
             }
-        }
-        
-
+        }        
         public static void ValidateEventDescription(string description)
         {
             string errorMessage = "Please specify an event description!";

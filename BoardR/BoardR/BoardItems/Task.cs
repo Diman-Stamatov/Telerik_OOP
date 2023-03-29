@@ -11,10 +11,10 @@ namespace BoardR
 {
     internal class Task : BoardItem
     {
-        private const int AssigneeMinLength = 5;
-        private const int AssigneeMaxLength = 30;
+        public const int AssigneeMinLength = 5;
+        public const int AssigneeMaxLength = 30;
 
-        private string assignee;        
+        private string assignee;
         public string Assignee
         {
             get 

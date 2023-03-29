@@ -16,18 +16,15 @@ namespace BoardR
     internal abstract class BoardItem
     {
         private const int TitleMinLength = 5;
-        private const int TitleMaxLength = 30;
-        
+        private const int TitleMaxLength = 30;        
 
         private protected ItemStatus minimumStatus;
-        private protected ItemStatus maximumStatus = ItemStatus.Verified;
-        
+        private protected ItemStatus maximumStatus = ItemStatus.Verified;        
 
         private string title;
         private DateTime dueDate;
         private protected ItemStatus status;
         private protected List<EventLog> events;
-
        
         public string Title
         {
@@ -75,15 +72,13 @@ namespace BoardR
                 return status;
             }
         }
-
         public BoardItem(string title, DateTime dueDate)
         {
             this.events = new List<EventLog>();
             this.Title = title;
             this.DueDate = dueDate;
         }
-
-       
+        
         public virtual string ViewInfo()
         {
             return $"'{title}', [{status}|{dueDate.ToString("dd-MM-yyyy")}]";
@@ -97,19 +92,15 @@ namespace BoardR
             }
             return historyLog.ToString().Trim();
         }
-
         private protected void LogEvent(string message)
         {
             var newEvent = new EventLog(message);
             events.Add(newEvent);
         }
-
-
         public string GetPropertyName([CallerMemberName] string methodName = null)
         {
             return methodName;
         }
-
         public bool Equals(BoardItem item)
         {
             bool isEqual = false;
@@ -131,7 +122,6 @@ namespace BoardR
         }
         public abstract void AdvanceStatus();
         public abstract void RevertStatus();
-
         public abstract string GenerateAdvanceStatusMessage();
         public abstract string GenerateRevertStatusMessage();
     }

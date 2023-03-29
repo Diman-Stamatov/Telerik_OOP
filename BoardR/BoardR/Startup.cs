@@ -14,7 +14,7 @@ namespace BoardR
 
             Console.WriteLine(task.ViewInfo());
             Console.WriteLine(issue.ViewInfo());
-
+            
         }
     }
 }
