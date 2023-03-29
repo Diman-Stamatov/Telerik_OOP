@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using static CosmeticsShop.Helpers.ValidationHelpers;
+using static CosmeticsShop.Helpers.UtilityMethods;
+using System;
+using System.Linq;
 
 namespace CosmeticsShop.Models
 {
@@ -16,6 +19,11 @@ namespace CosmeticsShop.Models
         {
             this.Name = name;
             this.products = new List<Product>();
+        }
+        public Category(string name, List<Product> products)
+        {
+            this.Name = name;
+            this.products = CloneProductsList(products);
         }
 
         public string Name
@@ -37,19 +45,28 @@ namespace CosmeticsShop.Models
         {
             get
             {
-                // return a copy
-                return new List<Product>(this.products);
+                var clonedList = CloneProductsList(this.products);
+                return clonedList;
             }
         }
 
         public void AddProduct(Product product)
         {
+            if (this.products.Any(loggedProduct=>loggedProduct.Name == product.Name) == true)
+            {
+                throw new InvalidOperationException($"A product named {product.Name} has already been created!");
+            }
             this.products.Add(product);
         }
 
         public void RemoveProduct(Product product)
         {
-            this.products.Remove(product);
+            if (this.products.Any(loggedProduct => loggedProduct.Name == product.Name) == false)
+            {
+                throw new InvalidOperationException($"A product named {product.Name} has already been created!");
+            }
+            
+            this.products.RemoveAll(loggedProduct => loggedProduct.Name == product.Name);
         }
 
         public string Print()
@@ -71,15 +88,12 @@ namespace CosmeticsShop.Models
 
             return strBuilder.ToString().Trim();
         }
-        private List<Product> CloneProducts()
+        public Category Clone()
         {
-            var clonedProducts = new List<Product>();
-            int loggedProducts = this.products.Count;
-            for (int product = 0; product < loggedProducts; product++)
-            {
-                clonedProducts.Add(products[0].Clone());
-            }
-            return clonedProducts;
+            string clonedName = this.Name;
+            var clonedProducts = CloneProductsList(this.products);
+            var clonedCategory = new Category(clonedName, clonedProducts);
+            return clonedCategory;
         }
     }
 }
