@@ -1,5 +1,5 @@
 ﻿using CosmeticsShop.Commands;
-
+using CosmeticsShop.ApplicationErrors;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -35,7 +35,17 @@ namespace CosmeticsShop.Core
                 {
                     this.ProcessCommand(commandLine);
                 }
-                catch (ApplicationException ex)
+                catch (ArgumentsCountException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    exceptionLog.Add(DateTime.Now + "| [" + ex.Message + "]");
+                }
+                catch (NumberValueException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    exceptionLog.Add(DateTime.Now + "| [" + ex.Message + "]");
+                }
+                catch (ParameterLengthException ex)
                 {
                     Console.WriteLine(ex.Message);
                     exceptionLog.Add(DateTime.Now + "| [" + ex.Message + "]");
