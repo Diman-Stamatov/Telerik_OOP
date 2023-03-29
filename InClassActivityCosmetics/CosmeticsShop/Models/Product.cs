@@ -1,10 +1,18 @@
 ﻿using System;
 using System.Text;
+using CosmeticsShop.Enums;
+using static CosmeticsShop.Helpers.ValidationHelpers;
+using static CosmeticsShop.Helpers.UtilityMethods;
 
 namespace CosmeticsShop.Models
 {
     public class Product 
     {
+        private const int MinNameLength = 3;
+        private const int MaxNameLength = 10;
+        private const int MinBrandLength = 2;
+        private const int MaxBrandLength = 10;
+
         private string name;
         private string brand;
         private double price;
@@ -26,7 +34,9 @@ namespace CosmeticsShop.Models
             }
             set
             {
-                // TODO: Validate name
+                string className = this.GetType().Name;
+                string propertyName = GetThisMethodName();
+                ValidateStringLength(MinNameLength, MaxNameLength, value, className, propertyName);
                 this.name = value;
             }
         }
@@ -39,7 +49,9 @@ namespace CosmeticsShop.Models
             }
             set
             {
-                // TODO: Validate brand
+                string className = this.GetType().Name;
+                string propertyName = GetThisMethodName();
+                ValidateStringLength(MinBrandLength, MaxBrandLength, value, className, propertyName);
                 this.brand = value;
             }
         }
@@ -52,7 +64,8 @@ namespace CosmeticsShop.Models
             }
             set
             {
-                // TODO: Validate price
+                string fieldName = GetThisMethodName(); 
+                ValidatePositiveDouble(value, fieldName);
                 this.price = value;
             }
         }

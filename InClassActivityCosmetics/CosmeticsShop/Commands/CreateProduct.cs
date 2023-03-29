@@ -1,6 +1,6 @@
 ﻿using CosmeticsShop.Core;
 using CosmeticsShop.Models;
-
+using CosmeticsShop.Enums;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

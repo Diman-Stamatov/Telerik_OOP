@@ -4,6 +4,7 @@ using CosmeticsShop.Helpers;
 using CosmeticsShop.Models;
 using System;
 using static CosmeticsShop.Helpers.ValidationHelpers;
+using CosmeticsShop.Enums;
 
 namespace CosmeticsShop
 {

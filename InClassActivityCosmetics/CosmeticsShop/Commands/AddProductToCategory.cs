@@ -20,6 +20,7 @@ namespace CosmeticsShop.Commands
             string categoryName = parameters[0];
             string productName = parameters[1];
 
+            // TODO: Validate if not found?
             Category category = this.cosmeticsRepository.FindCategoryByName(categoryName);
             Product product = this.cosmeticsRepository.FindProductByName(productName);
 
