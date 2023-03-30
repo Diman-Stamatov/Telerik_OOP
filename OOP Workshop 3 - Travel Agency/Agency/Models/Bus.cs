@@ -1,17 +1,54 @@
-﻿using System;
+﻿using Agency.Models.Contracts;
+using System;
+using Agency.Exceptions;
+using System.Text;
 
 namespace Agency.Models
 {
-    public class Bus
+    public class Bus :Vehicle, IVehicle, IBus, IHasId
     {
-        public const int PassengerCapacityMinValue = 10;
-        public const int PassengerCapacityMaxValue = 50;
-        public const double PricePerKilometerMinValue = 0.10;
-        public const double PricePerKilometerMaxValue = 2.50;
-        
+        public new const int PassengerCapacityMinValue = 10;
+        public new const int PassengerCapacityMaxValue = 50;
+
+        private bool hasFreeTv;
         public Bus(int id, int passengerCapacity, double pricePerKilometer, bool hasFreeTv)
+            :base(id, pricePerKilometer)
         {
-            throw new NotImplementedException();
+            this.PassengerCapacity = passengerCapacity;
+            this.HasFreeTv = hasFreeTv;
         }
+        public new int PassengerCapacity
+        {
+            get
+            {
+                return this.passengerCapacity;
+            }
+            private protected set
+            {
+                ValidatePassangerCapacity(value, PassengerCapacityMinValue, PassengerCapacityMaxValue);
+                this.passengerCapacity = value;
+            }
+        }
+        public bool HasFreeTv
+        {
+            get
+            {
+                return this.hasFreeTv;
+            }
+            private set
+            {
+                this.hasFreeTv = value;
+            }
+        }
+        
+        public override string ToString()
+        {
+            var vehicleInfo = new StringBuilder();
+            vehicleInfo.Append(base.ToString());
+            vehicleInfo.AppendLine($"Has free TV: {this.HasFreeTv}");
+            return vehicleInfo.ToString().Trim();
+
+        }
+
     }
 }

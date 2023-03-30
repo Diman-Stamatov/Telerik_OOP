@@ -1,17 +1,36 @@
-﻿using System;
+﻿using Agency.Models.Contracts;
+using System;
+using Agency.Exceptions;
+using System.Text;
 
 namespace Agency.Models
 {
-    public class Airplane
+    public class Airplane :Vehicle, IVehicle, IAirplane, IHasId
     {
-        public const int PassengerCapacityMinValue = 1;
-        public const int PassengerCapacityMaxValue = 800;
-        public const double PricePerKilometerMinValue = 0.10;
-        public const double PricePerKilometerMaxValue = 2.50;
-        
-        public Airplane(int id, int passengerCapacity, double pricePerKilometer, bool isLowCost)
+        private bool isLowCost;
+        public Airplane(int id, int passengerCapacity, double pricePerKilometer, bool isLowCost) 
+            :base(id, passengerCapacity, pricePerKilometer)
         {
-            throw new NotImplementedException();
+            this.IsLowCost = isLowCost;
+        }
+
+        public bool IsLowCost
+        {
+            get 
+            { 
+                return isLowCost; 
+            }
+            private set
+            {
+                this.isLowCost = value;
+            }
+        }
+        public override string ToString()
+        {
+            var vehicleInfo = new StringBuilder();
+            vehicleInfo.Append(base.ToString());
+            vehicleInfo.AppendLine($"Is low-cost: {this.IsLowCost}");
+            return vehicleInfo.ToString().Trim();
         }
     }
 }

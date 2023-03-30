@@ -1,8 +1,9 @@
 ﻿namespace Agency.Models.Contracts
 {
     public interface IVehicle : IHasId
-    {
-        int PassangerCapacity { get; }
+    {        
+        int PassengerCapacity { get; }
         double PricePerKilometer { get; }
+        abstract string ToString();
     }
 }
