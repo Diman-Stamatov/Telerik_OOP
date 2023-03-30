@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Agency.Models.Contracts
 {
-    public interface ICloneable
+    public interface ICopyable
     {
-        IVehicle Clone();
+        IVehicle Copy();
 
     }
 }

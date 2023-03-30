@@ -1,6 +1,6 @@
 ﻿namespace Agency.Models.Contracts
 {
-    public interface ITrain : IVehicle, IHasId, ICloneable
+    public interface ITrain : IVehicle, IHasId, ICopyable
     {
         int Carts { get; }
     }

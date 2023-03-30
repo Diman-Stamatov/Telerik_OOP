@@ -42,13 +42,9 @@ namespace Agency.Models
             }
         }
 
-        public override IVehicle Clone()
+        public override IVehicle Copy()
         {
-            int id = this.Id;
-            int passengerCapacity = this.PassengerCapacity;
-            double pricePerKilometers = this.PricePerKilometer;
-            bool hasFreeTv = this.HasFreeTv;
-            var newBus = new Bus(id, passengerCapacity, pricePerKilometers, hasFreeTv);
+            Bus newBus = this;
             return newBus;
         }
         public override string ToString()

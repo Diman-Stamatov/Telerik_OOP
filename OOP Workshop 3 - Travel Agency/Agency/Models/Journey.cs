@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Agency.Models
 {
-    public class Journey :IJourney, IHasId, IDuplicateable
+    public class Journey :IJourney, IHasId
     {
         public const int StartLocationMinLength = 5;
         public const int StartLocationMaxLength = 25;
@@ -74,11 +74,11 @@ namespace Agency.Models
         {
             get
             {
-                return this.vehicle.Clone();
+                return this.vehicle.Copy();
             }
             private set
             {
-                this.vehicle = value.Clone();
+                this.vehicle = value.Copy();
             }
         }
         public int Id
@@ -120,9 +120,15 @@ namespace Agency.Models
             return journeyLog.ToString().Trim();
         }
 
-        public IJourney Duplicate()
+        public IJourney Clone()
         {
-            throw new NotImplementedException();
+            int clonedId = this.Id;
+            string clonedStartLocation = this.StartLocation;
+            string clonedDestination = this.Destination;
+            int clonedDistance = this.Distance;
+            IVehicle clonedVehicle = this.Vehicle;
+            IJourney clonedJourney = new Journey(clonedId, clonedStartLocation, clonedDestination, clonedDistance, clonedVehicle);
+            return clonedJourney;
         }
     }
 }

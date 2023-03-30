@@ -2,7 +2,7 @@
 
 namespace Agency.Models.Contracts
 {
-    public interface IVehicle : IHasId, ICloneable
+    public interface IVehicle : IHasId, ICopyable
     {        
         int PassengerCapacity { get; }
         double PricePerKilometer { get; }

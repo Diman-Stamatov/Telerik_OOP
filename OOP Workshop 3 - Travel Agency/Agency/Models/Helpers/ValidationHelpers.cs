@@ -20,6 +20,7 @@ namespace Agency.Models.Helpers
                 throw new InvalidUserInputException(errorMessage);
             }
         }
+         
         public static void ValidateId(int id)
         {
             if (id < 0)

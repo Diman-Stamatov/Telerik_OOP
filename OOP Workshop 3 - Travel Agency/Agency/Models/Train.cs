@@ -55,14 +55,10 @@ namespace Agency.Models
                     vehicleType, CartsMinValue, CartsMaxValue));
             }
         }
-        public override IVehicle Clone()
+        public override IVehicle Copy()
         {
-            int id = this.Id;
-            int passengerCapacity = this.PassengerCapacity;
-            double pricePerKilometers = this.PricePerKilometer;
-            int carts = this.Carts;
-            var newTrain = new Train(id, passengerCapacity, pricePerKilometers, carts);
-            return newTrain;
+            Train copiedTrain = this;
+            return copiedTrain;
         }
         public override string ToString()
         {
