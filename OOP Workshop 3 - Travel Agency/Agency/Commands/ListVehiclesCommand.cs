@@ -1,6 +1,8 @@
 ﻿using Agency.Commands.Abstracts;
 using Agency.Core.Contracts;
+using Agency.Models.Contracts;
 using System;
+using System.Text;
 
 namespace Agency.Commands
 {
@@ -13,8 +15,22 @@ namespace Agency.Commands
         
         public override string Execute()
         {
-            // TODO Implement command.
-            throw new NotImplementedException();
+            if (this.Repository.Vehicles.Count > 0)
+            {
+                var sb = new StringBuilder();
+
+                foreach (IVehicle vehicle in this.Repository.Vehicles)
+                {
+                    sb.AppendLine(vehicle.ToString());
+                    sb.AppendLine("####################");
+                }
+
+                return sb.ToString().Trim();
+            }
+            else
+            {
+                return "There are no registered vehicles.";
+            }
         }
     }
 }

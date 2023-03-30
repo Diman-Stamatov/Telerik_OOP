@@ -97,7 +97,7 @@ namespace Agency.Models
             var vehicleInfo = new StringBuilder();
             vehicleInfo.AppendLine($"{this.GetType().Name} ----");
             vehicleInfo.AppendLine($"Passenger capacity: {this.passengerCapacity}");
-            vehicleInfo.AppendLine($"Price per kilometer: {this.pricePerKilometers}");
+            vehicleInfo.AppendLine($"Price per kilometer: {this.pricePerKilometers:F2}");
             return vehicleInfo.ToString();
         }
         public abstract IVehicle Copy();

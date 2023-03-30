@@ -7,7 +7,7 @@ using System.Text;
 namespace Agency.Models
 
 {
-    public class Train :Vehicle, IVehicle, ITrain, IHasId
+    public class Train :Vehicle, IVehicle, ITrain, IHasId, ICopyable
     {
         public new const int PassengerCapacityMinValue = 30;
         public new const int PassengerCapacityMaxValue = 150;        

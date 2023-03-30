@@ -17,21 +17,13 @@ namespace Agency.Commands
 
         public override string Execute()
         {
-            if (this.CommandParameters.Count < ExpectedNumberOfArguments)
-            {
-                throw new InvalidUserInputException($"Invalid number of arguments. Expected: {ExpectedNumberOfArguments}, Received: {this.CommandParameters.Count}");
-            }
-
-            // Parameters:
-            //  [0] - passenger capacity
-            //  [1] - price per km
-            //  [2] - carts count
-            int passengerCapacity = this.ParseIntParameter(base.CommandParameters[0], "passengerCapacity");
-            double pricePerKilometer = this.ParseDoubleParameter(base.CommandParameters[1], "pricePerKilometer");
-            int cartsCount = this.ParseIntParameter(base.CommandParameters[2], "cartsCount");
+            ValidateArgumentCount(this.CommandParameters, ExpectedNumberOfArguments);
+            int passengerCapacity = ParseIntParameter(base.CommandParameters[0], "passengerCapacity");
+            double pricePerKilometer = ParseDoubleParameter(base.CommandParameters[1], "pricePerKilometer");
+            int cartsCount = ParseIntParameter(base.CommandParameters[2], "cartsCount");
 
             var train = this.Repository.CreateTrain(passengerCapacity, pricePerKilometer, cartsCount);
-            return $"Vehicle with ID {train.Id} was created.";
+            return $"A Vehicle with the ID {train.Id} was created.";
         }
     }
 }

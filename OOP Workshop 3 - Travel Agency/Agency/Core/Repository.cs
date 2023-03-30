@@ -18,30 +18,30 @@ namespace Agency.Core
         {
             get
             {
-                var copy = new List<IVehicle>(vehicles);
-                return copy;
+                var copiedList = DuplicateVehiclesList(this.vehicles);
+                return copiedList;
             }
         }
         public IList<IJourney> Journeys
         {
             get
             {
-                var copy = new List<IJourney>(journeys);
-                return copy;
+                var copiedList = DuplicateJourneysList(this.journeys);
+                return copiedList;
             }
         }
         public IList<ITicket> Tickets
         {
             get
             {
-                var copy = new List<ITicket>(tickets);
-                return copy;
+                var copiedList = DuplicateTicketsList(this.tickets);
+                return copiedList;
             }
         }
 
         public IBus CreateBus(int passengerCapacity, double pricePerKilometer, bool hasFreeTv)
         {
-            var nextId = vehicles.Count;
+            int nextId = vehicles.Count;
             var bus = new Bus(++nextId, passengerCapacity, pricePerKilometer, hasFreeTv);
             this.vehicles.Add(bus);
             return bus;
@@ -49,22 +49,34 @@ namespace Agency.Core
 
         public IAirplane CreateAirplane(int passengerCapacity, double pricePerKilometer, bool isLowCost)
         {
-            throw new NotImplementedException();
+            int nextId = vehicles.Count;
+            var airplane = new Airplane(++nextId, passengerCapacity, pricePerKilometer, isLowCost);
+            this.vehicles.Add(airplane);
+            return airplane;
         }
 
         public ITrain CreateTrain(int passengerCapacity, double pricePerKilometer, int carts)
         {
-            throw new NotImplementedException();
+            int nextId = vehicles.Count;
+            var train = new Train(++nextId, passengerCapacity, pricePerKilometer, carts);
+            this.vehicles.Add(train);
+            return train;
         }
 
         public IJourney CreateJourney(string startLocation, string destination, int distance, IVehicle vehicle)
         {
-            throw new NotImplementedException();
+            int nextId = journeys.Count;
+            var journey = new Journey(++nextId, startLocation, destination, distance, vehicle);
+            this.journeys.Add(journey);
+            return journey;
         }
 
         public ITicket CreateTicket(IJourney journey, double administrativeCosts)
         {
-            throw new NotImplementedException();
+            int nextId = tickets.Count;
+            var ticket = new Ticket(++nextId, journey, administrativeCosts);
+            this.tickets.Add(ticket);
+            return ticket;
         }
 
         public IVehicle FindVehicleById(int id)
@@ -76,18 +88,54 @@ namespace Agency.Core
                     return vehicle;
                 }
             }
-
-            throw new EntityNotFoundException($"Vehicle with id: {id} was not found!");
+            throw new EntityNotFoundException($"A vehicle with the id: {id} was not found!");
         }
 
         public IJourney FindJourneyById(int id)
         {
-            throw new NotImplementedException();
+            var foundJourney = journeys.Find(journey => journey.Id == id);
+            if (foundJourney == null)
+            {
+                throw new EntityNotFoundException($"A journey with the id: {id} was not found!");
+            }
+            return foundJourney;
         }
 
         public ITicket FindTicketById(int id)
         {
-            throw new NotImplementedException();
+            var foundTicket = tickets.Find(ticket => ticket.Id == id);
+            if (foundTicket == null)
+            {
+                throw new EntityNotFoundException($"A ticket with the id: {id} was not found!");
+            }
+            return foundTicket;
+        }
+        private IList<IVehicle> DuplicateVehiclesList(IList<IVehicle> vehicles)
+        {
+            var duplicateList = new List<IVehicle>();
+            foreach (var vehicle in vehicles) 
+            {
+                duplicateList.Add(vehicle.Copy());
+            }
+            return duplicateList;
+        }
+        private IList<IJourney> DuplicateJourneysList(IList<IJourney> journeys)
+        {
+            var duplicateList = new List<IJourney>();
+            foreach (var journey in journeys)
+            {
+                duplicateList.Add(journey.Clone());
+            }
+            return duplicateList;
+        }
+        private IList<ITicket> DuplicateTicketsList(IList<ITicket> tickets)
+        {
+            var duplicateList = new List<ITicket>();
+            foreach (var ticket in tickets)
+            {
+                duplicateList.Add(ticket.Clone());
+            }
+            return duplicateList;
         }
     }
 }

@@ -5,5 +5,6 @@
         double AdministrativeCosts { get; }
         IJourney Journey { get; }
         double CalculatePrice();
+        ITicket Clone();
     }
 }

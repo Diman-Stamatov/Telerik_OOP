@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Agency.Models
 {
-    public class Airplane :Vehicle, IVehicle, IAirplane, IHasId
+    public class Airplane :Vehicle, IVehicle, IAirplane, IHasId, ICopyable
     {
         private bool isLowCost;
         public Airplane(int id, int passengerCapacity, double pricePerKilometer, bool isLowCost) 

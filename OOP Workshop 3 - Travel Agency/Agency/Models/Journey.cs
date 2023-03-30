@@ -87,7 +87,7 @@ namespace Agency.Models
             {
                 return this.id;
             }
-            set
+            private set
             {
                 ValidateId(value);
                 this.id = value;
@@ -112,11 +112,11 @@ namespace Agency.Models
         {
             var journeyLog = new StringBuilder();
             string className = this.GetType().Name;
-            journeyLog.AppendLine($"{className} ----)");
+            journeyLog.AppendLine($"{className} ----");
             journeyLog.AppendLine($"Start location: {this.StartLocation}");
             journeyLog.AppendLine($"Destination: {this.Destination}");
             journeyLog.AppendLine($"Distance: {this.Distance}");
-            journeyLog.AppendLine($"Travel costs: {this.CalculatePrice()}");
+            journeyLog.AppendLine($"Travel costs: {this.CalculatePrice():F2}");
             return journeyLog.ToString().Trim();
         }
 

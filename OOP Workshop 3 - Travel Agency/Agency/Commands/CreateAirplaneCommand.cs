@@ -1,6 +1,7 @@
 ﻿using Agency.Commands.Abstracts;
 using Agency.Core.Contracts;
 using Agency.Exceptions;
+using Agency.Models;
 using System;
 using System.Collections.Generic;
 
@@ -17,8 +18,15 @@ namespace Agency.Commands
 
         public override string Execute()
         {
-            // TODO Implement command.
-            throw new NotImplementedException();
+            ValidateArgumentCount(this.CommandParameters, ExpectedNumberOfArguments);
+           
+            int passengerCapacity = ParseIntParameter(this.CommandParameters[0], "passengerCapacity");
+            double pricePerKilometer = ParseDoubleParameter(this.CommandParameters[1], "pricePerKilometer");
+            bool isLowCost = ParseBoolParameter(this.CommandParameters[2], "isLowCost");
+
+            var airplane = this.Repository.CreateAirplane(passengerCapacity, pricePerKilometer, isLowCost);
+            return $"A Vehicle with the ID {airplane.Id} was created.";
+            
         }
     }
 }

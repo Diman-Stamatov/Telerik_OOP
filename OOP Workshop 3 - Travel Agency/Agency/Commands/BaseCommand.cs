@@ -32,7 +32,7 @@ namespace Agency.Commands.Abstracts
             {
                 return result;
             }
-            throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be an integer number.");
+            throw new InvalidUserInputException($"Invalid value for the {parameterName}. The value should be an integer number.");
         }
 
         protected double ParseDoubleParameter(string value, string parameterName)
@@ -41,7 +41,7 @@ namespace Agency.Commands.Abstracts
             {
                 return result;
             }
-            throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be a real number.");
+            throw new InvalidUserInputException($"Invalid value for the {parameterName}. The value should be a real number.");
         }
 
         protected bool ParseBoolParameter(string value, string parameterName)
@@ -50,7 +50,15 @@ namespace Agency.Commands.Abstracts
             {
                 return result;
             }
-            throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be either true or false.");
+            throw new InvalidUserInputException($"Invalid value for the {parameterName}. The value should be either true or false.");
+        }
+        public static void ValidateArgumentCount(IList<string> arguments, int expectedArgumentsCount)
+        {
+            int actualArgumentCount = arguments.Count;
+            if (actualArgumentCount != expectedArgumentsCount)
+            {
+                throw new InvalidUserInputException($"Invalid number of arguments. Expected: {expectedArgumentsCount}, Received: {actualArgumentCount}");
+            }
         }
     }
 }

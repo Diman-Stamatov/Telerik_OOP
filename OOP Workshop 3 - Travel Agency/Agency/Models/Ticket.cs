@@ -63,9 +63,9 @@ namespace Agency.Models
         {
             var ticketInfo = new StringBuilder();
             string className = this.GetType().Name;
-            ticketInfo.AppendLine($"{className} ----)");
+            ticketInfo.AppendLine($"{className} ----");
             ticketInfo.AppendLine($"Destination: {this.journey.Destination}");
-            ticketInfo.AppendLine($"Prices: {this.CalculatePrice()}");
+            ticketInfo.AppendLine($"Prices: {this.CalculatePrice():F2}");
             return ticketInfo.ToString().Trim();
         }
         private void ValidateAdministraticeCosts(double costs)
@@ -75,6 +75,15 @@ namespace Agency.Models
                 string errorMessage = "The Administrative costs must be a positive number!";
                 throw new InvalidUserInputException(errorMessage);
             }
+        }
+
+        public ITicket Clone()
+        {
+            int clonedId = this.Id;
+            var clonedJourney = this.Journey;
+            double clonedAdministrativeCosts = this.AdministrativeCosts;
+            var clonedTicket = new Ticket(clonedId, clonedJourney, clonedAdministrativeCosts);
+            return clonedTicket;
         }
     }
 }
