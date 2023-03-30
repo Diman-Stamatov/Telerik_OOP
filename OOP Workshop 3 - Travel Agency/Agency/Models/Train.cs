@@ -3,6 +3,7 @@ using System;
 using Agency.Exceptions;
 using System.Text;
 
+
 namespace Agency.Models
 
 {
@@ -54,7 +55,15 @@ namespace Agency.Models
                     vehicleType, CartsMinValue, CartsMaxValue));
             }
         }
-        
+        public override IVehicle Clone()
+        {
+            int id = this.Id;
+            int passengerCapacity = this.PassengerCapacity;
+            double pricePerKilometers = this.PricePerKilometer;
+            int carts = this.Carts;
+            var newTrain = new Train(id, passengerCapacity, pricePerKilometers, carts);
+            return newTrain;
+        }
         public override string ToString()
         {
             var vehicleInfo = new StringBuilder();

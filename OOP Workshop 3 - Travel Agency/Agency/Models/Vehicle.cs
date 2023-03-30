@@ -6,10 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Agency.Exceptions;
 using System.Runtime.ConstrainedExecution;
+using ICloneable = Agency.Models.Contracts.ICloneable;
+using static Agency.Models.Helpers.ValidationHelpers;
 
 namespace Agency.Models
 {
-    public abstract class Vehicle : IVehicle, IHasId
+    public abstract class Vehicle : IVehicle, IHasId, ICloneable
     {
         public const int PassengerCapacityMinValue = 1;
         public const int PassengerCapacityMaxValue = 800;
@@ -67,6 +69,7 @@ namespace Agency.Models
             }
             private set
             {
+                ValidateId(value);
                 this.id = value;
             }
         }
@@ -97,5 +100,7 @@ namespace Agency.Models
             vehicleInfo.AppendLine($"Price per kilometer: {this.pricePerKilometers}");
             return vehicleInfo.ToString().Trim();
         }
+        public abstract IVehicle Clone();
+
     }
 }

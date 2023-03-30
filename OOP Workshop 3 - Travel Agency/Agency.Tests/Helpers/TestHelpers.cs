@@ -32,8 +32,8 @@ namespace Agency.Tests.Helpers
         {
             return new Journey(
                     id: 1,
-                    from: new string('x', Journey.StartLocationMinLength),
-                    to: new string('x', Journey.DestinationMinLength),
+                    startLocation: new string('x', Journey.StartLocationMinLength),
+                    destination: new string('x', Journey.DestinationMinLength),
                     distance: Journey.DistanceMinValue,
                     vehicle: GetTestVehicle());
         }

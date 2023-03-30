@@ -16,8 +16,8 @@ namespace Agency.Tests.Models
             Assert.ThrowsException<InvalidUserInputException>(() =>
                 new Journey(
                     id: 1,
-                    from: new string('x', testValue),
-                    to: new string('x', Journey.DestinationMinLength),
+                    startLocation: new string('x', testValue),
+                    destination: new string('x', Journey.DestinationMinLength),
                     distance: Journey.DistanceMinValue,
                     vehicle: TestHelpers.GetTestVehicle()));
         }
@@ -30,8 +30,8 @@ namespace Agency.Tests.Models
             Assert.ThrowsException<InvalidUserInputException>(() =>
                 new Journey(
                     id: 1,
-                    from: new string('x', Journey.StartLocationMinLength),
-                    to: new string('x', testValue),
+                    startLocation: new string('x', Journey.StartLocationMinLength),
+                    destination: new string('x', testValue),
                     distance: Journey.DistanceMinValue,
                     vehicle: TestHelpers.GetTestVehicle()));
         }
@@ -44,8 +44,8 @@ namespace Agency.Tests.Models
             Assert.ThrowsException<InvalidUserInputException>(() =>
                 new Journey(
                     id: 1,
-                    from: new string('x', Journey.StartLocationMinLength),
-                    to: new string('x', Journey.DestinationMinLength),
+                    startLocation: new string('x', Journey.StartLocationMinLength),
+                    destination: new string('x', Journey.DestinationMinLength),
                     distance: testValue,
                     vehicle: TestHelpers.GetTestVehicle()));
         }

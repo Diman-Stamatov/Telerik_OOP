@@ -1,6 +1,6 @@
 ﻿namespace Agency.Models.Contracts
 {
-    public interface IJourney : IHasId
+    public interface IJourney : IHasId, IDuplicateable
     {
         string StartLocation { get; }
         string Destination { get; }

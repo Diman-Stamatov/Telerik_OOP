@@ -3,6 +3,7 @@ using System;
 using Agency.Exceptions;
 using System.Text;
 
+
 namespace Agency.Models
 {
     public class Airplane :Vehicle, IVehicle, IAirplane, IHasId
@@ -25,6 +26,17 @@ namespace Agency.Models
                 this.isLowCost = value;
             }
         }
+
+        public override IVehicle Clone()
+        {
+            int id = this.Id;
+            int passengerCapacity = this.PassengerCapacity;
+            double pricePerKilometers = this.PricePerKilometer;
+            bool isLowCost = this.IsLowCost;
+            var newAirplane = new Airplane(id, passengerCapacity, pricePerKilometers, isLowCost);
+            return newAirplane;
+        }
+
         public override string ToString()
         {
             var vehicleInfo = new StringBuilder();

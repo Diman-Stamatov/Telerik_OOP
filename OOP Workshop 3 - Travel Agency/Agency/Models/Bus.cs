@@ -3,6 +3,7 @@ using System;
 using Agency.Exceptions;
 using System.Text;
 
+
 namespace Agency.Models
 {
     public class Bus :Vehicle, IVehicle, IBus, IHasId
@@ -40,7 +41,16 @@ namespace Agency.Models
                 this.hasFreeTv = value;
             }
         }
-        
+
+        public override IVehicle Clone()
+        {
+            int id = this.Id;
+            int passengerCapacity = this.PassengerCapacity;
+            double pricePerKilometers = this.PricePerKilometer;
+            bool hasFreeTv = this.HasFreeTv;
+            var newBus = new Bus(id, passengerCapacity, pricePerKilometers, hasFreeTv);
+            return newBus;
+        }
         public override string ToString()
         {
             var vehicleInfo = new StringBuilder();
