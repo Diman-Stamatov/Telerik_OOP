@@ -1,17 +1,37 @@
 ﻿
 using Dealership.Models.Contracts;
+using static Dealership.UtilityMethods;
 
 namespace Dealership.Models
 {
-    public class Truck :Vehicle, ITruck
+    public class Truck : Vehicle, ITruck
     {
-        public const int TruckTires = 8;
+        public const int TruckWheels = 8;
         public const int MinCapacity = 1;
         public const int MaxCapacity = 100;
-        public const string InvalidCapacityError = "Weight capacity must be between 1 and 100!";
 
-        public int WeightCapacity => throw new System.NotImplementedException();
+        private int weightCapacity;
 
-        //ToDo
+        public Truck(string make, string model, decimal price, int weightCapacity) : base(make, model, price)
+        {
+            this.WeightCapacity = weightCapacity;
+            GenerateWheels(TruckWheels);
+            GenerateType(TruckWheels);
+        }
+        public int WeightCapacity
+        {
+            get
+            {
+                return this.weightCapacity;
+            }
+            private set
+            {
+                string propertyName = GetMethodName();
+                ValidateNumberPropertyValue(value, propertyName, MinCapacity, MaxCapacity);
+                this.weightCapacity = value;
+            }
+        }
+
+        
     }
 }

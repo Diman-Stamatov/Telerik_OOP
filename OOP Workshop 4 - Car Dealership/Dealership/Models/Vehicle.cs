@@ -18,7 +18,7 @@ namespace Dealership.Models
         public const string InvalidStringPropertyMessage = "The {0}'s {1} must be between {2} and {3} characters long!";
         public const decimal MinPrice = 0.0m;
         public const decimal MaxPrice = 1000000.0m;
-        public const string InvalidPriceMessage = "The {0}'s price must be between {1} and {2}!";
+        public const string InvalidNumberPropertyMessage = "The {0}'s {1} must be between {2} and {3}!";
 
         private string make;
         private string model;
@@ -81,7 +81,8 @@ namespace Dealership.Models
             }
             private set
             {
-                ValidatePrice(value);
+                string propertyName = GetMethodName();
+                ValidateNumberPropertyValue(value, propertyName, MinPrice, MaxPrice);
                 this.price = value;
             }
         }
@@ -96,12 +97,22 @@ namespace Dealership.Models
                 throw new InvalidUserInputException(errorMessage);
             }
         }
-        private void ValidatePrice(decimal price)
+        //ToDo Might be the same as ValidateDecimalRange
+        protected void ValidateNumberPropertyValue(decimal value, string propertyName, decimal minValue, decimal maxValue)
         {
-            if (price < MinPrice || price> MaxPrice)
+            if (value < minValue || value > maxValue)
             {
                 string vehicleName = this.GetType().Name;
-                string errorMessage = String.Format(InvalidPriceMessage, vehicleName, MinPrice, MaxPrice);
+                string errorMessage = String.Format(InvalidNumberPropertyMessage, vehicleName, propertyName, minValue, maxValue);
+                throw new InvalidUserInputException(errorMessage);
+            }
+        }
+        protected void ValidateNumberPropertyValue(int value, string propertyName, int minValue, int maxValue)
+        {
+            if (value < minValue || value > maxValue)
+            {
+                string vehicleName = this.GetType().Name;
+                string errorMessage = String.Format(InvalidNumberPropertyMessage, vehicleName, propertyName, minValue, maxValue);
                 throw new InvalidUserInputException(errorMessage);
             }
         }

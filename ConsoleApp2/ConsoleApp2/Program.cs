@@ -1,10 +1,15 @@
-﻿namespace ConsoleApp2
+﻿using System.Globalization;
+
+namespace ConsoleApp2
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            decimal MaxPrice = 1000000.0m;
+            
+            Console.WriteLine(MaxPrice.ToString("G29", CultureInfo.InvariantCulture));
+            Console.WriteLine($"{MaxPrice:F0}");
         }
     }
 }
