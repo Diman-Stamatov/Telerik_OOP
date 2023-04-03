@@ -31,7 +31,5 @@ namespace Dealership.Models
                 this.weightCapacity = value;
             }
         }
-
-        
     }
 }

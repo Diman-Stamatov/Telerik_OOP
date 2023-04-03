@@ -2,7 +2,7 @@
 using Dealership.Exceptions;
 using Dealership.Models.Contracts;
 using System.Collections.Generic;
-
+using static Dealership.Validator;
 namespace Dealership.Commands
 {
     public class ShowVehiclesCommand : BaseCommand
@@ -20,10 +20,7 @@ namespace Dealership.Commands
 
         protected override string ExecuteCommand()
         {
-            if (this.CommandParameters.Count < 1)
-            {
-                throw new InvalidUserInputException($"Invalid number of arguments. Expected: 1, Received: {this.CommandParameters.Count}");
-            }
+            ValidateArgumentsCount(this.CommandParameters, ExpectedArgumentsCount);
 
             string username = this.CommandParameters[0];
 

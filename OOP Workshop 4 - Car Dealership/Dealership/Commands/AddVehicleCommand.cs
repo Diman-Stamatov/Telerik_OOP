@@ -4,6 +4,7 @@ using Dealership.Models;
 using Dealership.Models.Contracts;
 using System;
 using System.Collections.Generic;
+using static Dealership.Validator;
 
 namespace Dealership.Commands
 {
@@ -22,10 +23,7 @@ namespace Dealership.Commands
 
         protected override string ExecuteCommand()
         {
-            if (this.CommandParameters.Count < 5)
-            {
-                throw new InvalidUserInputException($"Invalid number of arguments. Expected: 5, Received: {this.CommandParameters.Count}");
-            }
+            ValidateArgumentsCount(this.CommandParameters, ExpectedArgumentsCount);
 
             VehicleType vehicleType = this.ParseVehicleTypeParameter(this.CommandParameters[0], "vehicleType");
             string make = this.CommandParameters[1];

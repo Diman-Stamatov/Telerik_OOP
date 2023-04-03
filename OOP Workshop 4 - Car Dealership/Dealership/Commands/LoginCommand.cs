@@ -1,6 +1,6 @@
 ﻿using Dealership.Core.Contracts;
 using Dealership.Exceptions;
-
+using static Dealership.Validator;
 using System.Collections.Generic;
 
 namespace Dealership.Commands
@@ -20,10 +20,7 @@ namespace Dealership.Commands
 
         protected override string ExecuteCommand()
         {
-            if (this.CommandParameters.Count < 2)
-            {
-                throw new InvalidUserInputException($"Invalid number of arguments. Expected: 2, Received: {this.CommandParameters.Count}");
-            }
+            ValidateArgumentsCount(this.CommandParameters, ExpectedArgumentsCount);
 
             string username = this.CommandParameters[0];
             string password = this.CommandParameters[1];

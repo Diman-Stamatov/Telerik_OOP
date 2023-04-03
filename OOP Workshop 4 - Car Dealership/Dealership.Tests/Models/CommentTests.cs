@@ -1,4 +1,5 @@
-﻿using Dealership.Models;
+﻿using Dealership.Exceptions;
+using Dealership.Models;
 using Dealership.Models.Contracts;
 using Dealership.Tests.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -30,7 +31,7 @@ namespace Dealership.Tests.Models
         public void Constructor_Should_Throw_When_ContentLenghtOutOfBounds(int contentLength)
         {
             string content = TestHelpers.GetTestString(contentLength);
-            Assert.ThrowsException<ArgumentException>(() => new Comment(content, CommentData.ValidAuthor));
+            Assert.ThrowsException<InvalidUserInputException>(() => new Comment(content, CommentData.ValidAuthor));
         }
 
         [TestMethod]

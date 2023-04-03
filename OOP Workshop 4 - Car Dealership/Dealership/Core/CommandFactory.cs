@@ -3,6 +3,8 @@ using Dealership.Commands.Contracts;
 using Dealership.Commands.Enums;
 using Dealership.Core.Contracts;
 using Dealership.Exceptions;
+using static Dealership.UtilityMethods;
+
 
 using System;
 using System.Collections.Generic;
@@ -25,34 +27,41 @@ namespace Dealership.Core
 
         public ICommand Create(string commandLine)
         {
-            //ToDo
+            
             CommandType commandType = ParseCommandType(commandLine);
             List<string> commandParameters = this.ExtractCommandParameters(commandLine);
-
+            ICommand command = null;
             switch (commandType)
             {
                 case CommandType.RegisterUser:
-                    return new RegisterUserCommand(commandParameters, repository);
+                    command = new RegisterUserCommand(commandParameters, repository);
+                    break;
                 case CommandType.Login:
-                    return new LoginCommand(commandParameters, repository);
+                    command = new LoginCommand(commandParameters, repository);
+                    break;
                 case CommandType.Logout:
-                    return new LogoutCommand(repository);
+                    command = new LogoutCommand(repository);
+                    break;
                 case CommandType.AddVehicle:
-                    return new AddVehicleCommand(commandParameters, repository);
+                    command = new AddVehicleCommand(commandParameters, repository);
+                    break;
                 case CommandType.RemoveVehicle:
-                    return new RemoveVehicleCommand(commandParameters, repository);
+                    command = new RemoveVehicleCommand(commandParameters, repository);
+                    break;
                 case CommandType.AddComment:
-                    return new AddCommentCommand(commandParameters, repository);
+                    command = new AddCommentCommand(commandParameters, repository);
+                    break;
                 case CommandType.RemoveComment:
-                    return new RemoveCommentCommand(commandParameters, repository);
+                    command = new RemoveCommentCommand(commandParameters, repository);
+                    break;
                 case CommandType.ShowUsers:
-                    // ToDo
-                    throw new NotImplementedException();
+                    command = new ShowUsersCommand(repository);
                 case CommandType.ShowVehicles:
-                    return new ShowVehiclesCommand(commandParameters, repository);
-                default:
-                    throw new InvalidUserInputException($"Command with name: {commandType} doesn't exist!");
+                    command = new ShowVehiclesCommand(commandParameters, repository);
+                    break;
+                
             }
+            return command;
         }
 
         // Receives a full line and extracts the command to be executed from it.
@@ -60,8 +69,12 @@ namespace Dealership.Core
         private CommandType ParseCommandType(string commandLine)
         {
             string commandName = commandLine.Split(SplitCommandSymbol)[0];
-            Enum.TryParse(commandName, true, out CommandType result);
-            return result;
+            if (Enum.TryParse(commandName, true, out CommandType result))
+            {
+                return result;
+            }
+            string commandTypes = GetCommandTypeNames();
+            throw new InvalidUserInputException($"Invalid command. Please use one of the following: {commandTypes}.");
         }
 
         // Receives a full line and extracts the parameters that are needed for the command to execute.

@@ -3,7 +3,7 @@ using Dealership.Exceptions;
 using Dealership.Models;
 using Dealership.Models.Contracts;
 using System.Collections.Generic;
-
+using static Dealership.Validator;
 namespace Dealership.Commands
 {
     public class RegisterUserCommand : BaseCommand
@@ -21,10 +21,7 @@ namespace Dealership.Commands
 
         protected override string ExecuteCommand()
         {
-            if (this.CommandParameters.Count < 4)
-            {
-                throw new InvalidUserInputException($"Invalid number of arguments. Expected: 4, Received: {this.CommandParameters.Count}");
-            }
+            ValidateArgumentsCount(this.CommandParameters, ExpectedArgumentsCount);
 
             string username = this.CommandParameters[0];
             string firstName = this.CommandParameters[1];
