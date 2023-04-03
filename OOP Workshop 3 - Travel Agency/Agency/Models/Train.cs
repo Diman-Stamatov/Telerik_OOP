@@ -21,7 +21,7 @@ namespace Agency.Models
             this.PassengerCapacity = passengerCapacity;
             this.Carts = carts;
         }
-        public new int PassengerCapacity
+        public override int PassengerCapacity
         {
             get
             {

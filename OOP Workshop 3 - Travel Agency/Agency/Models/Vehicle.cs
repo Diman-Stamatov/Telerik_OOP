@@ -37,7 +37,7 @@ namespace Agency.Models
         {
             this.PassengerCapacity = passengerCapacity;
         }
-        public int PassengerCapacity
+        public virtual int PassengerCapacity
         {
             get
             {
