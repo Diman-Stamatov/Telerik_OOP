@@ -38,7 +38,7 @@ namespace Dealership.Tests.Commands
                         UserData.ValidFirstName,
                         UserData.ValidLastName,
                         UserData.ValidPassword,
-                        Role.Normal);
+                        RoleType.Normal);
 
             repository.LogUser(user);
 

@@ -5,14 +5,17 @@
     using System.Linq;
     using System.Text.RegularExpressions;
     using Dealership.Exceptions;
+    using static Dealership.UtilityMethods;
 
     public static class Validator
     {
+        private const string InvalidStringPropertyMessage = "The {0}'s {1} must be between {2} and {3} characters long!";
+        private const string InvalidArgumentsCountMessage = "Invalid number of arguments. Expected: {0}, Received: {1}.";
         public static void ValidateIntRange(int value, int min, int max, string message)
         {
             if (value < min || value > max)
             {
-                throw new ArgumentException(message);
+                throw new EntityNotFoundException(message);
             }
         }
 
@@ -30,15 +33,28 @@
 
             if (!regex.IsMatch(value))
             {
-                throw new ArgumentException(message);
+                throw new InvalidUserInputException(message);
             }
         }
         public static void ValidateArgumentsCount(IEnumerable<String> arguments, int expectedArgumentsCount)
         {
             int actualArgumentsCount = arguments.Count();
-            string errorMessage = $"Invalid number of arguments. Expected: {expectedArgumentsCount}, Received: {actualArgumentsCount}.";
+            string errorMessage = String.Format(InvalidArgumentsCountMessage, expectedArgumentsCount, actualArgumentsCount);
             if (actualArgumentsCount != expectedArgumentsCount)
             {
+                throw new InvalidUserInputException(errorMessage);
+            }
+        }
+        public static void ValidateStringPropertyLength(string value, string className, string propertyName, int minLength, int maxLength)
+        {
+            string errorMessage = String.Format(InvalidStringPropertyMessage, className, propertyName, minLength, maxLength);
+            if (string.IsNullOrWhiteSpace(value) == true)
+            {
+                throw new InvalidUserInputException(errorMessage);
+            }
+            int valueLength = value.Length;
+            if (valueLength < minLength || valueLength > maxLength)
+            {   
                 throw new InvalidUserInputException(errorMessage);
             }
         }

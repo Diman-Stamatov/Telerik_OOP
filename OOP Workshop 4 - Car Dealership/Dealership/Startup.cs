@@ -1,5 +1,6 @@
 ﻿using Dealership.Core;
 using Dealership.Core.Contracts;
+using Dealership.Models;
 
 namespace Dealership
 {
@@ -7,10 +8,13 @@ namespace Dealership
     {
         public static void Main()
         {
-            IRepository repository = new Repository();
+            /*IRepository repository = new Repository();
             ICommandFactory commandFactory = new CommandFactory(repository);
             IEngine engine = new Core.Engine(commandFactory);
-            engine.Start();
+            engine.Start();*/
+
+            string make = "  ";
+            var car = new Car(make, " ", 10, 5);
         }
     }
 }

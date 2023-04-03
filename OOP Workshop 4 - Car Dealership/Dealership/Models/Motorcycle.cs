@@ -1,6 +1,7 @@
 ﻿
 using Dealership.Models.Contracts;
 using static Dealership.UtilityMethods;
+using static Dealership.Validator;
 
 namespace Dealership.Models
 {
@@ -26,8 +27,9 @@ namespace Dealership.Models
             }
             private set
             {
+                string className = this.GetType().Name;
                 string propertyName = GetMethodName();
-                ValidateStringPropertyLength(value, propertyName, CategoryMinLength, CategoryMaxLength);
+                ValidateStringPropertyLength(value, className, propertyName, CategoryMinLength, CategoryMaxLength);
                 this.category = value;
             }
         }

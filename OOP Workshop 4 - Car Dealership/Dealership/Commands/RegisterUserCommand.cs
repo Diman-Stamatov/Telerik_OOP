@@ -31,7 +31,7 @@ namespace Dealership.Commands
             string lastName = this.CommandParameters[2];
             string password = this.CommandParameters[3];
 
-            Role role = Role.Normal;
+            RoleType role = RoleType.Normal;
             if (this.CommandParameters.Count == 5)
             {
                 role = this.ParseRoleParameter(this.CommandParameters[4], "userRole");
@@ -40,7 +40,7 @@ namespace Dealership.Commands
             return this.RegisterUser(username, firstName, lastName, password, role);
         }
 
-        private string RegisterUser(string username, string firstName, string lastName, string password, Role role)
+        private string RegisterUser(string username, string firstName, string lastName, string password, RoleType role)
         {
             if (this.Repository.LoggedUser != null)
             {

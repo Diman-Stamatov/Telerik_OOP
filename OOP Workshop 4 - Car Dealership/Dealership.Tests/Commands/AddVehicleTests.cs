@@ -18,7 +18,7 @@ namespace Dealership.Tests.Commands
         {
             this.repository = new Repository();
             this.commandFactory = new CommandFactory(this.repository);
-            this.user = new User("username", "first", "last", "password", Role.Normal);
+            this.user = new User("username", "first", "last", "password", RoleType.Normal);
             this.repository.AddUser(this.user);
             this.repository.LogUser(this.user);
         }

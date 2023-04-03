@@ -6,14 +6,15 @@ using Dealership.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using static Dealership.UtilityMethods;
 
 namespace Dealership.Commands
 {
     public abstract class BaseCommand : ICommand
     {
-        protected const string UserAlreadyLoggedIn = "User {0} is logged in! Please log out first!";
-        private const string LoginRequiredError = "This command requires login first.";
-        //ToDo wtf is this
+        protected const string UserAlreadyLoggedIn = "User {0} is already logged in! Please log out first!";
+        private const string LoginRequiredError = "This command requires you to login first.";
+        //ToDo w
         protected BaseCommand(IRepository repository)
             : this(new List<string>(), repository)
         {
@@ -48,7 +49,7 @@ namespace Dealership.Commands
             {
                 return result;
             }
-            throw new InvalidUserInputException($"Invalid input for {parameterName}. Should be an integer number.");
+            throw new InvalidUserInputException($"Invalid input for {parameterName}. Please use an integer number.");
         }
 
         protected decimal ParseDecimalParameter(string value, string parameterName)
@@ -57,7 +58,7 @@ namespace Dealership.Commands
             {
                 return result;
             }
-            throw new InvalidUserInputException($"Invalid input for {parameterName}. Should be a real number.");
+            throw new InvalidUserInputException($"Invalid input for {parameterName}. Please use a real number.");
         }
 
         protected bool ParseBoolParameter(string value, string parameterName)
@@ -66,16 +67,17 @@ namespace Dealership.Commands
             {
                 return result;
             }
-            throw new InvalidUserInputException($"Invalid input for {parameterName}. Should be either true or false.");
+            throw new InvalidUserInputException($"Invalid input for {parameterName}. Please use either true or false.");
         }
         //ToDo GetEnumValues method
-        protected Role ParseRoleParameter(string value, string parameterName)
+        protected RoleType ParseRoleParameter(string value, string parameterName)
         {
-            if (Enum.TryParse(value, true, out Role result))
+            if (Enum.TryParse(value, true, out RoleType result))
             {
                 return result;
             }
-            throw new InvalidUserInputException($"Invalid input for {parameterName}. Should be either Normal, VIP or Admin.");
+            string roleTypes = GetRoleTypeNames();
+            throw new InvalidUserInputException($"Invalid input for {parameterName}. Please use one of the following: {roleTypes}.");
         }
 
         protected VehicleType ParseVehicleTypeParameter(string value, string parameterName)
@@ -85,7 +87,7 @@ namespace Dealership.Commands
                 return result;
             }
             string vehicleTypes = GetVehicleTypeNames();
-            throw new InvalidUserInputException($"Invalid input for {parameterName}. Should be either a valid vehicle type.");
+            throw new InvalidUserInputException($"Invalid input for {parameterName}. Please use one of the following: {vehicleTypes}.");
         }
         protected CommandType ParseCommandTypeParameter(string value, string parameterName)
         {
@@ -93,8 +95,8 @@ namespace Dealership.Commands
             {
                 return result;
             }
-            string commandTypes = G
-            throw new InvalidUserInputException($"Invalid input for {parameterName}. Please use one of the following: .");
+            string commandTypes = GetCommandTypeNames();
+            throw new InvalidUserInputException($"Invalid input for {parameterName}. Please use one of the following: {commandTypes}.");
         }
     }
 }

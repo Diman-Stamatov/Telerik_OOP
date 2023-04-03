@@ -10,7 +10,7 @@ namespace Dealership.Core.Contracts
 
         IUser LoggedUser { get; }
 
-        public IUser CreateUser(string username, string firstName, string lastName, string password, Role role);
+        public IUser CreateUser(string username, string firstName, string lastName, string password, RoleType role);
 
         void AddUser(IUser user);
 

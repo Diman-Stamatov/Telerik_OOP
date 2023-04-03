@@ -24,7 +24,7 @@ namespace Dealership.Tests.Commands
         public void Execute_Should_LoginUser_When_UserNotLoggedIn()
         {
             // Arrange
-            User user = new User("username", "first", "last", "password", Role.Normal);
+            User user = new User("username", "first", "last", "password", RoleType.Normal);
             this.repository.AddUser(user);
             ICommand login = this.commandFactory.Create("Login username password");
 
@@ -39,7 +39,7 @@ namespace Dealership.Tests.Commands
         public void Execute_Should_Throw_When_PasswordIsWrong()
         {
             // Arrange
-            User user = new User("username", "first", "last", "password", Role.Normal);
+            User user = new User("username", "first", "last", "password", RoleType.Normal);
             this.repository.AddUser(user);
             ICommand login = this.commandFactory.Create("Login username foo");
 
@@ -61,7 +61,7 @@ namespace Dealership.Tests.Commands
         public void Execute_Should_Throw_When_UserAlreadyLoggedIn()
         {
             // Arrange
-            User user = new User("username", "first", "last", "password", Role.Normal);
+            User user = new User("username", "first", "last", "password", RoleType.Normal);
             this.repository.AddUser(user);
             ICommand login = this.commandFactory.Create("Login username password");
             this.repository.LogUser(user);

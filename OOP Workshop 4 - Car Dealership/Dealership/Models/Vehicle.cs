@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Dealership.UtilityMethods;
 using Dealership.Exceptions;
+using static Dealership.Validator;
 
 namespace Dealership.Models
 {
@@ -15,7 +16,7 @@ namespace Dealership.Models
         public const int MakeMaxLength = 15;        
         public const int ModelMinLength = 1;
         public const int ModelMaxLength = 15;
-        public const string InvalidStringPropertyMessage = "The {0}'s {1} must be between {2} and {3} characters long!";
+        
         public const decimal MinPrice = 0.0m;
         public const decimal MaxPrice = 1000000.0m;
         public const string InvalidNumberPropertyMessage = "The {0}'s {1} must be between {2} and {3}!";
@@ -41,8 +42,9 @@ namespace Dealership.Models
             }
             private set
             {
+                string className = this.GetType().Name;               
                 string propertyName = GetMethodName();
-                ValidateStringPropertyLength(value, propertyName, MakeMinLength, MakeMaxLength);
+                ValidateStringPropertyLength(value, className, propertyName, MakeMinLength, MakeMaxLength);
                 this.make = value;
             }
         }
@@ -54,8 +56,9 @@ namespace Dealership.Models
             }
             private set
             {
+                string className = this.GetType().Name;
                 string propertyName = GetMethodName();
-                ValidateStringPropertyLength(value, propertyName, ModelMinLength, ModelMaxLength);
+                ValidateStringPropertyLength(value, className, propertyName, ModelMinLength, ModelMaxLength);
                 this.model = value;
             }
         }
@@ -87,16 +90,8 @@ namespace Dealership.Models
             }
         }
 
-        protected void ValidateStringPropertyLength(string value, string propertyName, int minLength, int maxLength)
-        {
-            int valueLength = value.Length;
-            if (valueLength < minLength || valueLength > maxLength)
-            {
-                string vehicleName = this.GetType().Name;
-                string errorMessage = String.Format(InvalidStringPropertyMessage, vehicleName, propertyName, minLength, maxLength);
-                throw new InvalidUserInputException(errorMessage);
-            }
-        }
+        public IList<IComment> Comments => throw new NotImplementedException();
+       
         //ToDo Might be the same as ValidateDecimalRange
         protected void ValidateNumberPropertyValue(decimal value, string propertyName, decimal minValue, decimal maxValue)
         {
@@ -124,6 +119,13 @@ namespace Dealership.Models
         {
             this.wheels = wheels;
         }
-        
+        public void AddComment(IComment comment)
+        {
+            throw new NotImplementedException();
+        }
+        public void RemoveComment(IComment comment)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -39,7 +39,7 @@ namespace Dealership.Tests.Commands
         public void Execute_Should_ThrowException_When_UserAlreadyExist()
         {
             // Arrange
-            this.repository.AddUser(new User("username", "first", "last", "password", Role.Normal));
+            this.repository.AddUser(new User("username", "first", "last", "password", RoleType.Normal));
             ICommand registerCommand = this.commandFactory.Create("RegisterUser username first last password");
 
             // Act, Assert

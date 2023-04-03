@@ -34,7 +34,7 @@ namespace Dealership.Commands
         {
             IUser user = this.Repository.GetUser(author);
 
-            Validator.ValidateIntRange(
+            ValidateIntRange(
                 vehicleIndex,
                 0,
                 user.Vehicles.Count,
@@ -46,7 +46,7 @@ namespace Dealership.Commands
 
             this.Repository.LoggedUser.AddComment(comment, vehicle);
 
-            return $"{this.Repository.LoggedUser.Username} added comment successfully!";
+            return $"{this.Repository.LoggedUser.Username} added a comment successfully!";
         }
     }
 }

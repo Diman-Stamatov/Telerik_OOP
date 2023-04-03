@@ -1,6 +1,6 @@
 ﻿namespace Dealership.Models
 {
-    public enum Role
+    public enum RoleType
     {
         Normal = 0,
         VIP = 1,

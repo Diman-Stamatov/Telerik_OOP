@@ -25,6 +25,11 @@ namespace Dealership
             string vehicleTypeNames = String.Join(", ", Enum.GetNames(typeof(VehicleType)));
             return vehicleTypeNames;
         }
+        public static string GetRoleTypeNames()
+        {
+            string roleTypeNames = String.Join(", ", Enum.GetNames(typeof(RoleType)));
+            return roleTypeNames;
+        }
 
     }
 }

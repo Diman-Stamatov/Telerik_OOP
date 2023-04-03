@@ -1,6 +1,6 @@
 ﻿namespace Dealership.Models.Contracts
 {
-    public interface IVehicle :IPriceable
+    public interface IVehicle :IPriceable, ICommentable
     {
         string Make { get; }
 

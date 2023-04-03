@@ -28,7 +28,7 @@ namespace Dealership.Tests.Helpers
                     UserData.ValidFirstName,
                     UserData.ValidLastName,
                     UserData.ValidPassword,
-                    Role.Normal);
+                    RoleType.Normal);
         }
 
         public static IComment InitializeTestComment()

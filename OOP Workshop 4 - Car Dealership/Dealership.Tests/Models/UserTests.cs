@@ -29,7 +29,7 @@ namespace Dealership.Tests.Models
                     UserData.ValidFirstName,
                     UserData.ValidLastName,
                     UserData.ValidPassword,
-                    Role.Normal));
+                    RoleType.Normal));
         }
 
         [TestMethod]
@@ -41,7 +41,7 @@ namespace Dealership.Tests.Models
                     UserData.ValidFirstName,
                     UserData.ValidLastName,
                     UserData.ValidPassword,
-                    Role.Normal));
+                    RoleType.Normal));
         }
 
         [TestMethod]
@@ -53,7 +53,7 @@ namespace Dealership.Tests.Models
                     UserData.ValidFirstName,
                     UserData.ValidLastName,
                     UserData.ValidPassword,
-                    Role.Normal));
+                    RoleType.Normal));
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@ namespace Dealership.Tests.Models
                     "f",
                     UserData.ValidLastName,
                     UserData.ValidPassword,
-                    Role.Normal));
+                    RoleType.Normal));
         }
 
         [TestMethod]
@@ -77,7 +77,7 @@ namespace Dealership.Tests.Models
                     "abcdefghijklmnopqrstu",
                     UserData.ValidLastName,
                     UserData.ValidPassword,
-                    Role.Normal));
+                    RoleType.Normal));
         }
 
         [TestMethod]
@@ -89,7 +89,7 @@ namespace Dealership.Tests.Models
                     UserData.ValidFirstName,
                     "l",
                     UserData.ValidPassword,
-                    Role.Normal));
+                    RoleType.Normal));
         }
 
         [TestMethod]
@@ -101,7 +101,7 @@ namespace Dealership.Tests.Models
                     UserData.ValidFirstName,
                     "abcdefghijklmnopqrstu",
                     UserData.ValidPassword,
-                    Role.Normal));
+                    RoleType.Normal));
         }
 
         [TestMethod]
@@ -113,7 +113,7 @@ namespace Dealership.Tests.Models
                     UserData.ValidFirstName,
                     UserData.ValidLastName,
                     "pass",
-                    Role.Normal));
+                    RoleType.Normal));
         }
 
         [TestMethod]
@@ -125,7 +125,7 @@ namespace Dealership.Tests.Models
                     UserData.ValidFirstName,
                     UserData.ValidLastName,
                     "passwordpasswordpasswordpassword",
-                    Role.Normal));
+                    RoleType.Normal));
         }
 
         [TestMethod]
@@ -137,7 +137,7 @@ namespace Dealership.Tests.Models
                    UserData.ValidFirstName,
                    UserData.ValidLastName,
                    "Pa-$$_w0rD",
-                   Role.Normal));
+                   RoleType.Normal));
         }
 
         [TestMethod]
@@ -149,7 +149,7 @@ namespace Dealership.Tests.Models
                    UserData.ValidFirstName,
                    UserData.ValidLastName,
                    UserData.ValidPassword,
-                   Role.Normal);
+                   RoleType.Normal);
 
             // Assert
             Assert.AreEqual(UserData.ValidUsername, user.Username);
@@ -219,7 +219,7 @@ namespace Dealership.Tests.Models
                         UserData.ValidFirstName,
                         UserData.ValidLastName,
                         UserData.ValidPassword,
-                        Role.Admin);
+                        RoleType.Admin);
 
             // Act, Assert
             Assert.ThrowsException<ArgumentException>(() => user.AddVehicle(TestHelpers.InitializeTestCar()));
@@ -234,7 +234,7 @@ namespace Dealership.Tests.Models
                         UserData.ValidFirstName,
                         UserData.ValidLastName,
                         UserData.ValidPassword,
-                        Role.VIP);
+                        RoleType.VIP);
 
             // Act
             user.AddVehicle(TestHelpers.InitializeTestCar());
@@ -252,7 +252,7 @@ namespace Dealership.Tests.Models
                         UserData.ValidFirstName,
                         UserData.ValidLastName,
                         UserData.ValidPassword,
-                        Role.VIP);
+                        RoleType.VIP);
 
             for (int i = 0; i < 5; i++)
             {
@@ -275,7 +275,7 @@ namespace Dealership.Tests.Models
                         UserData.ValidFirstName,
                         UserData.ValidLastName,
                         UserData.ValidPassword,
-                        Role.Normal);
+                        RoleType.Normal);
             var car = TestHelpers.InitializeTestCar();
             var comment = new Comment(CommentData.ValidContent, "user1");
             user.AddVehicle(car);
@@ -298,7 +298,7 @@ namespace Dealership.Tests.Models
                         UserData.ValidFirstName,
                         UserData.ValidLastName,
                         UserData.ValidPassword,
-                        Role.Normal);
+                        RoleType.Normal);
             var car = TestHelpers.InitializeTestCar();
             var comment = new Comment(CommentData.ValidContent, "user2");
             user.AddVehicle(car);

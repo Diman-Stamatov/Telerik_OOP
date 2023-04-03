@@ -26,7 +26,7 @@ namespace Dealership.Core
             private set;
         }
 
-        public IUser CreateUser(string username, string firstName, string lastName, string password, Role role)
+        public IUser CreateUser(string username, string firstName, string lastName, string password, RoleType role)
         {
             return new User(username, firstName, lastName, password, role);
         }

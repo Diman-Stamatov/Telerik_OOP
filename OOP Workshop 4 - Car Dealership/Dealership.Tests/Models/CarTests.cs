@@ -48,7 +48,7 @@ namespace Dealership.Tests.Models
                     "1",
                     VehicleData.ValidModel,
                     VehicleData.ValidPrice,
-                    CarData.ValidSeats));
+                    ValidSeats));
         }
 
         [TestMethod]
@@ -59,7 +59,7 @@ namespace Dealership.Tests.Models
                     "1234567890123456",
                     VehicleData.ValidModel,
                     VehicleData.ValidPrice,
-                    CarData.ValidSeats));
+                    ValidSeats));
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace Dealership.Tests.Models
                     VehicleData.ValidMake,
                     "",
                     VehicleData.ValidPrice,
-                    CarData.ValidSeats));
+                    ValidSeats));
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace Dealership.Tests.Models
                     VehicleData.ValidMake,
                     "1234567890123456",
                     VehicleData.ValidPrice,
-                    CarData.ValidSeats));
+                    ValidSeats));
         }
 
         [TestMethod]
@@ -92,7 +92,7 @@ namespace Dealership.Tests.Models
                     VehicleData.ValidMake,
                     VehicleData.ValidModel,
                     -10,
-                    CarData.ValidSeats));
+                    ValidSeats));
         }
 
         [TestMethod]
@@ -103,7 +103,7 @@ namespace Dealership.Tests.Models
                     VehicleData.ValidMake,
                     VehicleData.ValidModel,
                     1000001.0m,
-                    CarData.ValidSeats));
+                    ValidSeats));
         }
 
         [TestMethod]
@@ -136,13 +136,13 @@ namespace Dealership.Tests.Models
                     VehicleData.ValidMake,
                     VehicleData.ValidModel,
                     VehicleData.ValidPrice,
-                    CarData.ValidSeats);
+                    ValidSeats);
 
             // Assert
             Assert.AreEqual(VehicleData.ValidMake, car.Make);
             Assert.AreEqual(VehicleData.ValidModel, car.Model);
             Assert.AreEqual(VehicleData.ValidPrice, car.Price);
-            Assert.AreEqual(CarData.ValidSeats, car.Seats);
+            Assert.AreEqual(ValidSeats, car.Seats);
         }
 
         [TestMethod]

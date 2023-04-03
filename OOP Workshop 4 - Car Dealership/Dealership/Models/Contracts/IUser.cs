@@ -12,7 +12,7 @@ namespace Dealership.Models.Contracts
 
         string Password { get; }
 
-        Role Role { get; }
+        RoleType Role { get; }
 
         IList<IVehicle> Vehicles { get; }
 

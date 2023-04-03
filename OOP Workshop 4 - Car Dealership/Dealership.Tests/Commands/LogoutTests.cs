@@ -26,7 +26,7 @@ namespace Dealership.Tests.Commands
         public void Execute_Should_LogoutUser()
         {
             // Arrange
-            User user = new User("username", "first", "last", "password", Role.Normal);
+            User user = new User("username", "first", "last", "password", RoleType.Normal);
             this.repository.AddUser(user);
             this.repository.LogUser(user);
             ICommand logout = this.commandFactory.Create("Logout");
