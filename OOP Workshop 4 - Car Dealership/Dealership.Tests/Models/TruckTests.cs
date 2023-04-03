@@ -1,4 +1,5 @@
-﻿using Dealership.Models;
+﻿using Dealership.Exceptions;
+using Dealership.Models;
 using Dealership.Models.Contracts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -40,7 +41,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_MakeLenghtIsTooShort()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                 new Truck(
                     "1",
                     VehicleData.ValidModel,
@@ -51,7 +52,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_MakeLenghtIsTooLong()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                 new Truck(
                     "1234567890123456",
                     VehicleData.ValidModel,
@@ -62,7 +63,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_ModelLenghtIsTooShort()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                 new Truck(
                     VehicleData.ValidMake,
                     "",
@@ -73,7 +74,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_ModelLenghtIsTooLong()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                 new Truck(
                     VehicleData.ValidMake,
                     "1234567890123456",
@@ -84,7 +85,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_PriceIsNegative()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                 new Truck(
                     VehicleData.ValidMake,
                     VehicleData.ValidModel,
@@ -95,7 +96,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_PriceIsAbove100000()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                 new Truck(
                     VehicleData.ValidMake,
                     VehicleData.ValidModel,
@@ -106,7 +107,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_WeightCapacityIsNegative()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                new Truck(
                    VehicleData.ValidMake,
                    VehicleData.ValidModel,
@@ -117,7 +118,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_WeightCapacityIsAbove100()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                new Truck(
                    VehicleData.ValidMake,
                    VehicleData.ValidModel,

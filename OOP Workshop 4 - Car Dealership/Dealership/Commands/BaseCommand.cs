@@ -69,7 +69,7 @@ namespace Dealership.Commands
             }
             throw new InvalidUserInputException($"Invalid input for {parameterName}. Please use either true or false.");
         }
-        //ToDo GetEnumValues method
+        
         protected RoleType ParseRoleParameter(string value, string parameterName)
         {
             if (Enum.TryParse(value, true, out RoleType result))
@@ -89,14 +89,6 @@ namespace Dealership.Commands
             string vehicleTypes = GetVehicleTypeNames();
             throw new InvalidUserInputException($"Invalid input for {parameterName}. Please use one of the following: {vehicleTypes}.");
         }
-        protected CommandType ParseCommandTypeParameter(string value, string parameterName)
-        {
-            if (Enum.TryParse(value, true, out CommandType result))
-            {
-                return result;
-            }
-            string commandTypes = GetCommandTypeNames();
-            throw new InvalidUserInputException($"Invalid input for {parameterName}. Please use one of the following: {commandTypes}.");
-        }
+        
     }
 }

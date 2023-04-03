@@ -26,6 +26,7 @@ namespace Dealership.Models
         private VehicleType type;
         private int wheels;
         private decimal price;
+        private IList<IComment> comments;
         
         protected Vehicle(string make, string model, decimal price)
         {
@@ -121,7 +122,7 @@ namespace Dealership.Models
         }
         public void AddComment(IComment comment)
         {
-            throw new NotImplementedException();
+            this.comments.Add(comment);
         }
         public void RemoveComment(IComment comment)
         {
