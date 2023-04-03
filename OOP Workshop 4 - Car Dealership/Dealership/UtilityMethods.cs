@@ -4,6 +4,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Dealership.Commands.Enums;
+using Dealership.Models;
 
 namespace Dealership
 {
@@ -13,5 +15,16 @@ namespace Dealership
         {
             return memberName.ToLower();
         }
+        public static string GetCommandTypeNames()
+        {            
+            string commandNames = String.Join(", ", Enum.GetNames(typeof(CommandType))); 
+            return commandNames;
+        }
+        public static string GetVehicleTypeNames()
+        {
+            string vehicleTypeNames = String.Join(", ", Enum.GetNames(typeof(VehicleType)));
+            return vehicleTypeNames;
+        }
+
     }
 }

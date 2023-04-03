@@ -7,6 +7,7 @@ namespace Dealership.Commands
 {
     public class ShowVehiclesCommand : BaseCommand
     {
+        private const int ExpectedArgumentsCount = 1;
         public ShowVehiclesCommand(List<string> parameters, IRepository repository)
             : base(parameters, repository)
         {

@@ -8,6 +8,7 @@ namespace Dealership.Commands
 {
     public class RegisterUserCommand : BaseCommand
     {
+        private const int ExpectedArgumentsCount = 4;
         public RegisterUserCommand(List<string> parameters, IRepository repository)
             : base(parameters, repository)
         {

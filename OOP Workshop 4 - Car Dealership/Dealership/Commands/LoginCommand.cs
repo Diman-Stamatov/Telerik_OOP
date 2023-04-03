@@ -7,6 +7,7 @@ namespace Dealership.Commands
 {
     public class LoginCommand : BaseCommand
     {
+        private const int ExpectedArgumentsCount = 2;
         public LoginCommand(List<string> parameters, IRepository repository)
             : base(parameters, repository)
         {

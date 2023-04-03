@@ -1,7 +1,10 @@
 ﻿namespace Dealership
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Text.RegularExpressions;
+    using Dealership.Exceptions;
 
     public static class Validator
     {
@@ -28,6 +31,15 @@
             if (!regex.IsMatch(value))
             {
                 throw new ArgumentException(message);
+            }
+        }
+        public static void ValidateArgumentsCount(IEnumerable<String> arguments, int expectedArgumentsCount)
+        {
+            int actualArgumentsCount = arguments.Count();
+            string errorMessage = $"Invalid number of arguments. Expected: {expectedArgumentsCount}, Received: {actualArgumentsCount}.";
+            if (actualArgumentsCount != expectedArgumentsCount)
+            {
+                throw new InvalidUserInputException(errorMessage);
             }
         }
     }

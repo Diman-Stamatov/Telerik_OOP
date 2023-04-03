@@ -17,7 +17,7 @@ namespace Dealership.Core
         private const string CommentCloseSymbol = "}}";
 
         private readonly IRepository repository;
-
+        
         public CommandFactory(IRepository repository)
         {
             this.repository = repository;
@@ -25,6 +25,7 @@ namespace Dealership.Core
 
         public ICommand Create(string commandLine)
         {
+            //ToDo
             CommandType commandType = ParseCommandType(commandLine);
             List<string> commandParameters = this.ExtractCommandParameters(commandLine);
 

@@ -7,6 +7,7 @@ namespace Dealership.Commands
 {
     public class RemoveCommentCommand : BaseCommand
     {
+        private const int ExpectedArgumentsCount = 3;
         public RemoveCommentCommand(List<string> parameters, IRepository repository)
             : base(parameters, repository)
         {

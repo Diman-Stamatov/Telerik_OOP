@@ -2,11 +2,13 @@
 using Dealership.Exceptions;
 using Dealership.Models.Contracts;
 using System.Collections.Generic;
+using static Dealership.Validator;
 
 namespace Dealership.Commands
 {
     public class AddCommentCommand : BaseCommand
     {
+        private const int ExpectedArgumentsCount = 3;
         public AddCommentCommand(List<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
@@ -19,10 +21,7 @@ namespace Dealership.Commands
 
         protected override string ExecuteCommand()
         {
-            if (this.CommandParameters.Count < 3)
-            {
-                throw new InvalidUserInputException($"Invalid number of arguments. Expected: 3, Received: {this.CommandParameters.Count}");
-            }
+            ValidateArgumentsCount(this.CommandParameters, ExpectedArgumentsCount);
 
             string content = this.CommandParameters[0];
             string author = this.CommandParameters[1];
