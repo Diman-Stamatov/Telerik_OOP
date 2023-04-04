@@ -23,16 +23,17 @@ namespace Dealership.Models
 
         private string make;
         private string model;
-        private VehicleType type;
+        protected VehicleType type;
         private int wheels;
         private decimal price;
         private IList<IComment> comments;
-        
+
         protected Vehicle(string make, string model, decimal price)
         {
             this.Make = make;
             this.Model = model;
             this.Price = price;
+            this.comments = new List<IComment>();
         }
 
         public string Make
@@ -69,6 +70,7 @@ namespace Dealership.Models
             {
                 return this.type;
             }
+            
         }
         public int Wheels
         {
@@ -90,8 +92,18 @@ namespace Dealership.Models
                 this.price = value;
             }
         }
-
-        public IList<IComment> Comments => throw new NotImplementedException();
+        public IList<IComment> Comments
+        {
+            get
+            {
+                return CloneCommentsList(this.comments);
+            }
+            private set
+            {
+                this.comments = CloneCommentsList(value);
+            }
+            
+        }
        
         //ToDo Might be the same as ValidateDecimalRange
         protected void ValidateNumberPropertyValue(decimal value, string propertyName, decimal minValue, decimal maxValue)
@@ -127,6 +139,29 @@ namespace Dealership.Models
         public void RemoveComment(IComment comment)
         {
             throw new NotImplementedException();
+        }        
+        public IVehicle Clone()
+        {
+            Vehicle clonedVehicle = (Vehicle)this.MemberwiseClone();
+            clonedVehicle.Comments = this.Comments;            
+            return clonedVehicle;
+        }
+        public override bool Equals(object vehicle)
+        {
+            bool areEqual = false;
+            var comparedVehicle = vehicle as IVehicle;
+            if (comparedVehicle == null)
+            {
+                return areEqual;
+            }
+            if (comparedVehicle.Make == this.Make
+                && comparedVehicle.Model == this.Model
+                && comparedVehicle.Type == this.Type
+                && comparedVehicle.Price == this.Price)
+            {
+                areEqual = true;
+            }
+            return areEqual;
         }
     }
 }

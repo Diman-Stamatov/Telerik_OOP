@@ -14,8 +14,10 @@ namespace Dealership.Models
 
         private int seats;
         
-        public Car(string make, string model, decimal price, int seats) : base(make, model, price)
+        public Car(string make, string model, decimal price, int seats) 
+            : base(make, model, price)
         {
+            this.type = VehicleType.Car;
             this.Seats = seats;
             GenerateWheels(CarWheels);
             GenerateType(CarWheels);

@@ -14,18 +14,17 @@ namespace Dealership.Commands
     {
         protected const string UserAlreadyLoggedIn = "User {0} is already logged in! Please log out first!";
         private const string LoginRequiredError = "This command requires you to login first.";
-        //ToDo w
+
         protected BaseCommand(IRepository repository)
             : this(new List<string>(), repository)
         {
         }
-
         protected BaseCommand(IList<string> commandParameters, IRepository repository)
         {
             this.CommandParameters = commandParameters;
             this.Repository = repository;
         }
-
+        
         public string Execute()
         {
             if (this.RequireLogin && this.Repository.LoggedUser == null)

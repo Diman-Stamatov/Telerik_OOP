@@ -5,5 +5,7 @@
         string Content { get; }
 
         string Author { get; }
+
+        IComment Clone();
     }
 }

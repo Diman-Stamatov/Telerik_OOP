@@ -47,5 +47,9 @@ namespace Dealership.Models
                 this.author = value;
             }
         }
+        public IComment Clone()
+        {
+            return (IComment)this.MemberwiseClone();
+        }
     }
 }

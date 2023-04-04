@@ -13,8 +13,10 @@ namespace Dealership.Models
         public const int CategoryMaxLength = 10;
 
         private string category;
-        public Motorcycle(string make, string model, decimal price, string category): base(make, model, price)
+        public Motorcycle(string make, string model, decimal price, string category)
+            : base(make, model, price)
         {
+            this.type = VehicleType.Motorcycle;
             this.Category = category;
             GenerateWheels(MotorcycleWheels);
             GenerateType(MotorcycleWheels);

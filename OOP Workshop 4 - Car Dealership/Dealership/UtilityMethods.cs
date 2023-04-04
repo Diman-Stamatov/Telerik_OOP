@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dealership.Commands.Enums;
 using Dealership.Models;
+using Dealership.Models.Contracts;
 
 namespace Dealership
 {
@@ -29,6 +30,24 @@ namespace Dealership
         {
             string roleTypeNames = String.Join(", ", Enum.GetNames(typeof(RoleType)));
             return roleTypeNames;
+        }
+        public static IList<IComment> CloneCommentsList(IList<IComment> comments)
+        {
+            var clonedComments = new List<IComment>();
+            foreach (var comment in comments)
+            {
+                clonedComments.Add(comment.Clone());
+            }
+            return clonedComments;
+        }
+        public static IList<IVehicle> CloneVehiclesList(IList<IVehicle> vehicles)
+        {
+            var clonedVehicles = new List<IVehicle>();
+            foreach (var vehicle in vehicles)
+            {
+                clonedVehicles.Add(vehicle.Clone());
+            }
+            return clonedVehicles;
         }
 
     }

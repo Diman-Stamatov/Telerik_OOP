@@ -20,7 +20,7 @@ namespace Dealership.Models.Contracts
 
         void RemoveVehicle(IVehicle vehicle);
 
-        void AddComment(IComment commentToAdd, IVehicle vehicleToAddComment);
+        void AddComment(IComment commentToAdd, IVehicle vehicleToCommentOn);
 
         void RemoveComment(IComment commentToRemove, IVehicle vehicleToRemoveComment);
 

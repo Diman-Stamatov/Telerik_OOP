@@ -9,5 +9,7 @@
         VehicleType Type { get; }
 
         int Wheels { get; }
+        IVehicle Clone();
+        
     }
 }

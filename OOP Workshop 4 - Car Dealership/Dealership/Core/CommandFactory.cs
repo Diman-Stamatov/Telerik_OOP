@@ -56,6 +56,7 @@ namespace Dealership.Core
                     break;
                 case CommandType.ShowUsers:
                     command = new ShowUsersCommand(repository);
+                    break;
                 case CommandType.ShowVehicles:
                     command = new ShowVehiclesCommand(commandParameters, repository);
                     break;

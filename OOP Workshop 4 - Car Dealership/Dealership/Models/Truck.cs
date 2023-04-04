@@ -12,8 +12,10 @@ namespace Dealership.Models
 
         private int weightCapacity;
 
-        public Truck(string make, string model, decimal price, int weightCapacity) : base(make, model, price)
+        public Truck(string make, string model, decimal price, int weightCapacity) 
+            : base(make, model, price)
         {
+            this.type = VehicleType.Truck;
             this.WeightCapacity = weightCapacity;
             GenerateWheels(TruckWheels);
             GenerateType(TruckWheels);
