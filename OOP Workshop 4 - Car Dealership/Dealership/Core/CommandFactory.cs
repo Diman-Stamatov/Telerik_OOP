@@ -1,11 +1,10 @@
-﻿using Dealership.Commands;
+﻿
+using static Dealership.UtilityMethods;
+using Dealership.Commands;
 using Dealership.Commands.Contracts;
 using Dealership.Commands.Enums;
 using Dealership.Core.Contracts;
 using Dealership.Exceptions;
-using static Dealership.UtilityMethods;
-
-
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;

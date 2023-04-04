@@ -7,9 +7,13 @@
         string Model { get; }
 
         VehicleType Type { get; }
+
         int Wheels { get; }
+
         IVehicle Clone(); 
+
         bool Equals(object vehicle);
+
         string PrintComments();
         
 

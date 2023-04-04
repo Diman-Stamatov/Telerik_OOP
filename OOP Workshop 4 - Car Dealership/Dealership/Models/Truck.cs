@@ -1,8 +1,8 @@
 ﻿
-using Dealership.Models.Contracts;
-using System.Text;
 using static Dealership.PrintingHelpers;
 using static Dealership.UtilityMethods;
+using Dealership.Models.Contracts;
+using System.Text;
 
 namespace Dealership.Models
 {
@@ -22,6 +22,7 @@ namespace Dealership.Models
             GenerateWheels(TruckWheels);
             GenerateType(TruckWheels);
         }
+
         public int WeightCapacity
         {
             get
@@ -35,6 +36,7 @@ namespace Dealership.Models
                 this.weightCapacity = value;
             }
         }
+
         public override string Print()
         {
             var truckInfo = new StringBuilder();

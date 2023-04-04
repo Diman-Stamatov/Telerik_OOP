@@ -1,25 +1,25 @@
 ﻿using static Dealership.Validator;
 using Dealership.Core.Contracts;
-using Dealership.Exceptions;
 using Dealership.Models;
 using Dealership.Models.Contracts;
-using System;
 using System.Collections.Generic;
-
 
 namespace Dealership.Commands
 {
     public class AddVehicleCommand : BaseCommand
     {
         private const int ExpectedArgumentsCount = 5;
+
         public AddVehicleCommand(List<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
         }
+
         protected override bool RequireLogin
         {
             get { return true; }
         }
+
         protected override string ExecuteCommand()
         {
             ValidateArgumentsCount(this.CommandParameters, ExpectedArgumentsCount);
@@ -32,6 +32,7 @@ namespace Dealership.Commands
 
             return this.AddVehicle(vehicleType, make, model, price, additionalParam);
         }
+
         private string AddVehicle(VehicleType type, string make, string model, decimal price, string additionalParam)
         {
             IVehicle vehicle = null;

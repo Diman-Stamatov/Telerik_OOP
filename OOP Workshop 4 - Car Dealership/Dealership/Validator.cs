@@ -1,21 +1,21 @@
-﻿namespace Dealership
+﻿
+using Dealership.Exceptions;
+using Dealership.Models;
+using Dealership.Models.Contracts;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace Dealership
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Text.RegularExpressions;
-    using Dealership.Exceptions;
-    using Dealership.Models;
-    using Dealership.Models.Contracts;
-    using static Dealership.UtilityMethods;
 
     public static class Validator
     {
+        private const int MaxAllowedVehiclesPerUser = 5;
         private const string InvalidStringPropertyMessage = "The {0}'s {1} must be between {2} and {3} characters long!";
         private const string InvalidArgumentsCountMessage = "Invalid number of arguments. Expected: {0}, Received: {1}.";
-        private const string InvalidRegisterArgumentsCountMessage = "Invalid number of arguments. Expected: {0} or {1}, Received: {2}.";
-        private const int MaxAllowedVehiclesPerUser = 5;
+        private const string InvalidRegisterArgumentsCountMessage = "Invalid number of arguments. Expected: {0} or {1}, Received: {2}.";        
         private const string NotAVipUserError = "You are not a VIP and cannot add more than {0} vehicles!";
         private const string AdminUserError = "You are an admin and therefore cannot add vehicles!";
         private const string NotTheAuthorError = "You are not the author of the comment you are trying to remove!";
@@ -46,6 +46,7 @@
                 throw new InvalidUserInputException(message);
             }
         }
+
         public static void ValidateArgumentsCount(IEnumerable<String> arguments, int expectedArgumentsCount)
         {
             int actualArgumentsCount = arguments.Count();
@@ -55,6 +56,7 @@
                 throw new InvalidUserInputException(errorMessage);
             }
         }
+
         public static void ValidateArgumentsCount(IEnumerable<String> arguments, int expectedArgumentsCountOne, int expectedArgumentsCountTwo)
         {
             int actualArgumentsCount = arguments.Count();
@@ -64,6 +66,7 @@
                 throw new InvalidUserInputException(errorMessage);
             }
         }
+
         public static void ValidateStringPropertyLength(string value, string className, string propertyName, int minLength, int maxLength)
         {
             string errorMessage = String.Format(InvalidStringPropertyMessage, className, propertyName, minLength, maxLength);
@@ -74,6 +77,7 @@
                 throw new InvalidUserInputException(errorMessage);
             }
         }
+
         public static void ValidateStringNotNullOrEmpty(string value, string errorMessage)
         {
             if (string.IsNullOrWhiteSpace(value) == true)
@@ -81,6 +85,7 @@
                 throw new InvalidUserInputException(errorMessage);
             }
         }
+
         public static void ValidateAllowedVehiclesCount(IList<IVehicle> vehicles, RoleType role)
         {
             if (role == RoleType.Admin)
@@ -94,6 +99,7 @@
                 throw new AuthorizationException(errorMessage);
             }
         }
+
         public static void ValidateCommentAuthor(IComment comment, string currentUser)
         {
             if (comment.Author != currentUser)
@@ -101,6 +107,7 @@
                 throw new AuthorizationException(NotTheAuthorError);
             }
         }
+
         public static void ValidateAdminStatus(RoleType role)
         {
             if (role != RoleType.Admin)

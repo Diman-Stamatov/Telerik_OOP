@@ -25,6 +25,7 @@ namespace Dealership.Models.Contracts
         void RemoveComment(IComment commentToRemove, IVehicle vehicleToRemoveComment);
 
         string PrintVehicles();
+
         IUser Clone();
         
     }

@@ -10,14 +10,17 @@ namespace Dealership.Commands
     public class AddCommentCommand : BaseCommand
     {
         private const int ExpectedArgumentsCount = 3;
+
         public AddCommentCommand(List<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
         }
+
         protected override bool RequireLogin
         {
             get { return true; }
         }
+
         protected override string ExecuteCommand()
         {
             ValidateArgumentsCount(this.CommandParameters, ExpectedArgumentsCount);
@@ -28,6 +31,7 @@ namespace Dealership.Commands
 
             return this.AddComment(content, author, vehicleIndex);
         }
+
         private string AddComment(string content, string author, int vehicleIndex)
         {
             IUser user = this.Repository.GetUser(author);

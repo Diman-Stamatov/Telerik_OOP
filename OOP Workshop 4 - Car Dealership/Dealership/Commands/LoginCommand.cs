@@ -8,14 +8,17 @@ namespace Dealership.Commands
     public class LoginCommand : BaseCommand
     {
         private const int ExpectedArgumentsCount = 2;
+
         public LoginCommand(List<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
         }
+
         protected override bool RequireLogin
         {
             get { return false; }
         }
+
         protected override string ExecuteCommand()
         {
             ValidateArgumentsCount(this.CommandParameters, ExpectedArgumentsCount);
@@ -25,6 +28,7 @@ namespace Dealership.Commands
 
             return this.Login(username, password);
         }
+
         private string Login(string username, string password)
         {
             if (this.Repository.LoggedUser != null)

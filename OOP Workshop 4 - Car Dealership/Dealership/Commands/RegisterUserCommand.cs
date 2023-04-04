@@ -1,9 +1,11 @@
-﻿using Dealership.Core.Contracts;
+﻿using static Dealership.Validator;
+using Dealership.Core.Contracts;
 using Dealership.Exceptions;
 using Dealership.Models;
 using Dealership.Models.Contracts;
 using System.Collections.Generic;
-using static Dealership.Validator;
+
+
 namespace Dealership.Commands
 {
     public class RegisterUserCommand : BaseCommand
@@ -34,7 +36,6 @@ namespace Dealership.Commands
             {
                 role = this.ParseRoleParameter(this.CommandParameters[4], "userRole");
             }
-
             return this.RegisterUser(username, firstName, lastName, password, role);
         }
 

@@ -1,5 +1,6 @@
-﻿using Dealership.Core.Contracts;
+﻿
 using static Dealership.UtilityMethods;
+using Dealership.Core.Contracts;
 using Dealership.Exceptions;
 using Dealership.Models;
 using Dealership.Models.Contracts;

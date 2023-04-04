@@ -1,13 +1,12 @@
-﻿using Dealership.Models.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Dealership.UtilityMethods;
-using Dealership.Exceptions;
+﻿
 using static Dealership.Validator;
 using static Dealership.PrintingHelpers;
+using static Dealership.UtilityMethods;
+using Dealership.Models.Contracts;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using Dealership.Exceptions;
 
 namespace Dealership.Models
 {
@@ -16,8 +15,7 @@ namespace Dealership.Models
         public const int MakeMinLength = 2;
         public const int MakeMaxLength = 15;        
         public const int ModelMinLength = 1;
-        public const int ModelMaxLength = 15;
-        
+        public const int ModelMaxLength = 15;        
         public const decimal MinPrice = 0.0m;
         public const decimal MaxPrice = 1000000.0m;
         public const string InvalidNumberPropertyMessage = "The {0}'s {1} must be between {2} and {3}!";
@@ -51,6 +49,7 @@ namespace Dealership.Models
                 this.make = value;
             }
         }
+
         public string Model
         {
             get
@@ -65,6 +64,7 @@ namespace Dealership.Models
                 this.model = value;
             }
         }
+
         public VehicleType Type
         {
             get
@@ -73,6 +73,7 @@ namespace Dealership.Models
             }
             
         }
+
         public int Wheels
         {
             get
@@ -80,6 +81,7 @@ namespace Dealership.Models
                 return this.wheels;
             }
         }
+
         public decimal Price
         {
             get
@@ -93,6 +95,7 @@ namespace Dealership.Models
                 this.price = value;
             }
         }
+
         public IList<IComment> Comments
         {
             get
@@ -102,9 +105,9 @@ namespace Dealership.Models
             private set
             {
                 this.comments = CloneCommentsList(value);
-            }
-            
+            }            
         }
+
         protected void ValidateNumberPropertyValue(decimal value, string propertyName, decimal minValue, decimal maxValue)
         {
             if (value < minValue || value > maxValue)
@@ -114,6 +117,7 @@ namespace Dealership.Models
                 throw new InvalidUserInputException(errorMessage);
             }
         }
+
         protected void ValidateNumberPropertyValue(int value, string propertyName, int minValue, int maxValue)
         {
             if (value < minValue || value > maxValue)
@@ -123,18 +127,22 @@ namespace Dealership.Models
                 throw new InvalidUserInputException(errorMessage);
             }
         }
+
         protected void GenerateType(int wheels)
         {
             this.type = (VehicleType)wheels;
         }
+
         protected void GenerateWheels(int wheels)
         {
             this.wheels = wheels;
         }
+
         public void AddComment(IComment comment)
         {
             this.comments.Add(comment);
         }
+
         public void RemoveComment(IComment comment)
         {
             this.comments.Remove(comment);
@@ -145,6 +153,7 @@ namespace Dealership.Models
             clonedVehicle.Comments = this.Comments;            
             return clonedVehicle;
         }
+
         public override bool Equals(object vehicle)
         {
             bool areEqual = false;

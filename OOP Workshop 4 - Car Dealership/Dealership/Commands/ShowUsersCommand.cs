@@ -1,16 +1,13 @@
 ﻿
-using Dealership.Core.Contracts;
 using static Dealership.Validator;
 using static Dealership.PrintingHelpers;
-using System.Collections.Generic;
-using Dealership.Models.Contracts;
+using Dealership.Core.Contracts;
 using System.Text;
 
 namespace Dealership.Commands
 {
     public class ShowUsersCommand :BaseCommand
-    {
-        
+    {        
         public ShowUsersCommand(IRepository repository)
             : base(repository)
         {
@@ -38,8 +35,7 @@ namespace Dealership.Commands
                 userList.AppendLine($"{userRow}. {user.Print()}");
                 userRow++;
             }
-            return userList.ToString();
-            
+            return userList.ToString();            
         }
 
     }

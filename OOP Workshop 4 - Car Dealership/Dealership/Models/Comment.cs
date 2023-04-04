@@ -1,8 +1,8 @@
 ﻿
-using Dealership.Models.Contracts;
 using static Dealership.Validator;
 using static Dealership.UtilityMethods;
 using static Dealership.PrintingHelpers;
+using Dealership.Models.Contracts;
 using System.Text;
 
 namespace Dealership.Models
@@ -20,6 +20,7 @@ namespace Dealership.Models
             this.Content= content;
             this.Author= author;
         }
+
         public string Content
         {
             get
@@ -49,10 +50,12 @@ namespace Dealership.Models
                 this.author = value;
             }
         }
+
         public IComment Clone()
         {
             return (IComment)this.MemberwiseClone();
         }
+
         public override bool Equals(object comment)
         {
             bool areEqual = false;

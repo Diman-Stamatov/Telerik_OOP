@@ -1,5 +1,6 @@
-﻿using Dealership.Commands.Contracts;
+﻿
 using static Dealership.UtilityMethods;
+using Dealership.Commands.Contracts;
 using Dealership.Core.Contracts;
 using Dealership.Exceptions;
 using Dealership.Models;
@@ -19,11 +20,13 @@ namespace Dealership.Commands
             : this(new List<string>(), repository)
         {
         }
+
         protected BaseCommand(IList<string> commandParameters, IRepository repository)
         {
             this.CommandParameters = commandParameters;
             this.Repository = repository;
         }        
+
         public string Execute()
         {
             if (this.RequireLogin && this.Repository.LoggedUser == null)
@@ -32,10 +35,15 @@ namespace Dealership.Commands
             }
             return this.ExecuteCommand();
         }
+
         protected IRepository Repository { get; }
+
         protected IList<string> CommandParameters { get; }
+
         protected abstract bool RequireLogin { get; }
+
         protected abstract string ExecuteCommand();
+
         protected int ParseIntParameter(string value, string parameterName)
         {
             if (int.TryParse(value, out int result))
@@ -44,6 +52,7 @@ namespace Dealership.Commands
             }
             throw new InvalidUserInputException($"Invalid input for {parameterName}. Please use an integer number.");
         }
+
         protected decimal ParseDecimalParameter(string value, string parameterName)
         {
             if (decimal.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out decimal result))
@@ -52,6 +61,7 @@ namespace Dealership.Commands
             }
             throw new InvalidUserInputException($"Invalid input for {parameterName}. Please use a real number.");
         }
+
         protected bool ParseBoolParameter(string value, string parameterName)
         {
             if (bool.TryParse(value, out bool result))
@@ -60,6 +70,7 @@ namespace Dealership.Commands
             }
             throw new InvalidUserInputException($"Invalid input for {parameterName}. Please use either true or false.");
         }        
+
         protected RoleType ParseRoleParameter(string value, string parameterName)
         {
             if (Enum.TryParse(value, true, out RoleType result))
@@ -69,6 +80,7 @@ namespace Dealership.Commands
             string roleTypes = GetRoleTypeNames();
             throw new InvalidUserInputException($"Invalid input for {parameterName}. Please use one of the following: {roleTypes}.");
         }
+
         protected VehicleType ParseVehicleTypeParameter(string value, string parameterName)
         {
             if (Enum.TryParse(value, true, out VehicleType result))

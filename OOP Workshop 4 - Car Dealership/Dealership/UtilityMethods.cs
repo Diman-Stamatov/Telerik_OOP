@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using Dealership.Commands.Enums;
 using Dealership.Models;
 using Dealership.Models.Contracts;
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace Dealership
 {
@@ -16,21 +14,25 @@ namespace Dealership
         {
             return memberName.ToLower();
         }
+
         public static string GetCommandTypeNames()
         {            
             string commandNames = String.Join(", ", Enum.GetNames(typeof(CommandType))); 
             return commandNames;
         }
+
         public static string GetVehicleTypeNames()
         {
             string vehicleTypeNames = String.Join(", ", Enum.GetNames(typeof(VehicleType)));
             return vehicleTypeNames;
         }
+
         public static string GetRoleTypeNames()
         {
             string roleTypeNames = String.Join(", ", Enum.GetNames(typeof(RoleType)));
             return roleTypeNames;
         }
+
         public static IList<IComment> CloneCommentsList(IList<IComment> comments)
         {
             var clonedComments = new List<IComment>();
@@ -40,6 +42,7 @@ namespace Dealership
             }
             return clonedComments;
         }
+
         public static IList<IVehicle> CloneVehiclesList(IList<IVehicle> vehicles)
         {
             var clonedVehicles = new List<IVehicle>();
@@ -49,6 +52,7 @@ namespace Dealership
             }
             return clonedVehicles;
         }
+
         public static IList<IUser> CloneUsersList(IList<IUser> users)
         {
             var clonedUsers = new List<IUser>();

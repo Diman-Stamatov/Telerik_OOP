@@ -1,7 +1,7 @@
 ﻿
+using static Dealership.PrintingHelpers;
 using Dealership.Exceptions;
 using Dealership.Models.Contracts;
-using static Dealership.PrintingHelpers;
 using System.Text;
 
 namespace Dealership.Models
@@ -37,6 +37,7 @@ namespace Dealership.Models
                 this.seats = value; 
             }
         }
+
         private void ValidateSeatsCount(int value)
         {
             if (value < MinSeats || value > MaxSeats)
@@ -45,6 +46,7 @@ namespace Dealership.Models
                 throw new InvalidUserInputException(errorMessage);
             }
         }
+
         public override string Print()
         {
             var carInfo = new StringBuilder();

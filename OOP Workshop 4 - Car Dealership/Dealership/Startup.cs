@@ -1,8 +1,5 @@
 ﻿using Dealership.Core;
 using Dealership.Core.Contracts;
-using Dealership.Models;
-using Dealership.Models.Contracts;
-using System.Collections.Generic;
 
 namespace Dealership
 {
@@ -12,7 +9,7 @@ namespace Dealership
         {
             IRepository repository = new Repository();
             ICommandFactory commandFactory = new CommandFactory(repository);
-            IEngine engine = new Core.Engine(commandFactory);
+            IEngine engine = new Engine(commandFactory);
             engine.Start();
 
         }

@@ -1,9 +1,10 @@
 ﻿
-using Dealership.Models.Contracts;
+
 using static Dealership.PrintingHelpers;
-using System.Text;
 using static Dealership.UtilityMethods;
 using static Dealership.Validator;
+using Dealership.Models.Contracts;
+using System.Text;
 
 namespace Dealership.Models
 {
@@ -15,6 +16,7 @@ namespace Dealership.Models
         public const int CategoryMaxLength = 10;
 
         private string category;
+
         public Motorcycle(string make, string model, decimal price, string category)
             : base(make, model, price)
         {
@@ -23,6 +25,7 @@ namespace Dealership.Models
             GenerateWheels(MotorcycleWheels);
             GenerateType(MotorcycleWheels);
         }
+
         public string Category
         {
             get
@@ -37,6 +40,7 @@ namespace Dealership.Models
                 this.category = value;
             }
         }
+
         public override string Print()
         {
             var bikeInfo = new StringBuilder();

@@ -3,7 +3,6 @@ using static Dealership.UtilityMethods;
 using static Dealership.PrintingHelpers;
 using Dealership.Models.Contracts;
 using System.Collections.Generic;
-using System.Data;
 using System.Text;
 
 namespace Dealership.Models
@@ -28,6 +27,7 @@ namespace Dealership.Models
         private string password;
         private RoleType role;
         private IList<IVehicle> vehicles;
+
         public User(string username, string firstName, string lastName, string password, RoleType role)
         {
             this.Username = username;
@@ -37,6 +37,7 @@ namespace Dealership.Models
             this.Role = role;
             this.vehicles = new List<IVehicle>();
         }
+
         public string Username
         {
             get
@@ -116,10 +117,8 @@ namespace Dealership.Models
             get
             {
                 /*Returning a deep copy breaks the repository ¯\_(ツ)_/¯ */
-                return new List<IVehicle>(this.vehicles);
-                
-            }
-            
+                return new List<IVehicle>(this.vehicles);                
+            }            
         }
 
         public void AddComment(IComment commentToAdd, IVehicle vehicleToCommentOn)
@@ -132,6 +131,7 @@ namespace Dealership.Models
             ValidateAllowedVehiclesCount(this.vehicles, this.role);
             this.vehicles.Add(vehicle);
         }
+
         public string PrintVehicles()
         {
             var fulLVehiclesInfo = new StringBuilder();
@@ -166,6 +166,7 @@ namespace Dealership.Models
         {
             this.vehicles.Remove(vehicle);
         }
+
         public IUser Clone()
         {
             var clonedUser = (User)this.MemberwiseClone();

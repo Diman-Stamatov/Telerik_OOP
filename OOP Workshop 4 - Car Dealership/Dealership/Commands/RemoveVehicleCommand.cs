@@ -1,13 +1,15 @@
-﻿using Dealership.Core.Contracts;
-using Dealership.Exceptions;
+﻿
+using static Dealership.Validator;
+using Dealership.Core.Contracts;
 using Dealership.Models.Contracts;
 using System.Collections.Generic;
-using static Dealership.Validator;
+
 namespace Dealership.Commands
 {
     public class RemoveVehicleCommand : BaseCommand
     {
         private const int ExpectedArgumentsCount = 1;
+
         public RemoveVehicleCommand(List<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
