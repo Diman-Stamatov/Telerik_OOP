@@ -36,7 +36,8 @@ namespace Dealership.Commands
 
         private string AddVehicle(VehicleType type, string make, string model, decimal price, string additionalParam)
         {
-            IVehicle vehicle;
+
+            IVehicle vehicle = null;
             switch (type)
             {
                 case VehicleType.Car:
@@ -50,13 +51,11 @@ namespace Dealership.Commands
                     int weightCapacity = this.ParseIntParameter(additionalParam, "weightCapacity");
                     vehicle = this.Repository.CreateTruck(make, model, price, weightCapacity);
                     break;
-                default:
-                    throw new InvalidOperationException($"Creating vehicle type: {type} is not supported!");
             }
 
             this.Repository.LoggedUser.AddVehicle(vehicle);
 
-            return $"{this.Repository.LoggedUser.Username} added vehicle successfully!";
+            return $"{this.Repository.LoggedUser.Username} successfully added a vehicle!";
         }
     }
 }

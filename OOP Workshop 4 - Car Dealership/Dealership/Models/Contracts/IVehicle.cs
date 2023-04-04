@@ -10,6 +10,10 @@
 
         int Wheels { get; }
         IVehicle Clone();
+        string Print();
+        string PrintComments();
+        bool Equals(object vehicle);
         
+
     }
 }

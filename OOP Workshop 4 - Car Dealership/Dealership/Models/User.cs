@@ -3,6 +3,7 @@ using static Dealership.UtilityMethods;
 using Dealership.Models.Contracts;
 using System.Collections.Generic;
 using System.Data;
+using System.Text;
 
 namespace Dealership.Models
 {
@@ -18,12 +19,7 @@ namespace Dealership.Models
         private const int PasswordMaxLength = 30;
         private const string PasswordPattern = "^[A-Za-z0-9@*_-]+$";
         private const string InvalidPasswordFormatError = "Username contains invalid symbols!";
-        
-        private const int MaxVehiclesToAdd = 5;
-        private const string NotAnVipUserVehiclesAdd = "You are not VIP and cannot add more than {0} vehicles!";
-        private const string AdminCannotAddVehicles = "You are an admin and therefore cannot add vehicles!";
-        private const string YouAreNotTheAuthor = "You are not the author of the comment you are trying to remove!";
-        private const string NoVehiclesHeader = "--NO VEHICLES--";
+        private const string NoSavedVehiclesMessage = "--NO VEHICLES--";
 
         private string username;
         private string firstName;
@@ -123,32 +119,55 @@ namespace Dealership.Models
             
         }
 
-        public void AddComment(IComment commentToAdd, IVehicle vehicleTocommentOn)
+        public void AddComment(IComment commentToAdd, IVehicle vehicleToCommentOn)
         {
-            int vehicleIndex = this.vehicles.IndexOf(vehicleTocommentOn);
+            int vehicleIndex = this.vehicles.IndexOf(vehicleToCommentOn);
             this.vehicles[vehicleIndex].AddComment(commentToAdd);
         }
 
         public void AddVehicle(IVehicle vehicle)
         {
-            throw new System.NotImplementedException();
+            ValidateAllowedVehiclesCount(this.vehicles, this.role);
+            this.vehicles.Add(vehicle);
         }
-
         public string PrintVehicles()
         {
-            throw new System.NotImplementedException();
+            if (this.vehicles.Count == 0)
+            {
+                return NoSavedVehiclesMessage;
+            }
+            var fulLVehiclesInfo = new StringBuilder();
+            foreach (var vehicle in this.vehicles)
+            {
+                fulLVehiclesInfo.AppendLine(vehicle.Print());
+                fulLVehiclesInfo.AppendLine(vehicle.PrintComments());
+            }
+            return fulLVehiclesInfo.ToString();
         }
 
-        public void RemoveComment(IComment commentToRemove, IVehicle vehicleToRemoveComment)
+        public void RemoveComment(IComment commentToRemove, IVehicle vehicleToRemoveCommentFrom)
         {
-            throw new System.NotImplementedException();
+            string currentUser = this.Username;
+            ValidateCommentAuthor(commentToRemove, currentUser);
+            int vehicleIndex = this.vehicles.IndexOf(vehicleToRemoveCommentFrom);
+            this.vehicles[vehicleIndex].RemoveComment(commentToRemove);
         }
 
         public void RemoveVehicle(IVehicle vehicle)
         {
-            throw new System.NotImplementedException();
+            this.vehicles.Remove(vehicle);
+        }
+        public IUser Clone()
+        {
+            var clonedUser = (User)this.MemberwiseClone();
+            clonedUser.vehicles = CloneVehiclesList(this.vehicles);
+            return clonedUser;
         }
 
-        
+        public string Print()
+        {
+            string userInfo = $"Username: {this.Username}, FullName: {this.FirstName} {this.LastName}, Role: {this.Role}";
+            return userInfo;
+        }
     }
 }

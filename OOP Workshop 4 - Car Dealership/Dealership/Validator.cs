@@ -2,15 +2,23 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Text.RegularExpressions;
     using Dealership.Exceptions;
+    using Dealership.Models;
+    using Dealership.Models.Contracts;
     using static Dealership.UtilityMethods;
 
     public static class Validator
     {
         private const string InvalidStringPropertyMessage = "The {0}'s {1} must be between {2} and {3} characters long!";
         private const string InvalidArgumentsCountMessage = "Invalid number of arguments. Expected: {0}, Received: {1}.";
+        private const int MaxAllowedVehiclesPerUser = 5;
+        private const string NotAVipUserError = "You are not a VIP and cannot add more than {0} vehicles!";
+        private const string AdminUserError = "You are an admin and therefore cannot add vehicles!";
+        private const string NotTheAuthorError = "You are not the author of the comment you are trying to remove!";
+        public const string InvalidAdminStatusError = "You are not an admin!";
 
         public static void ValidateIntRange(int value, int min, int max, string message)
         {
@@ -63,5 +71,33 @@
                 throw new InvalidUserInputException(errorMessage);
             }
         }
+        public static void ValidateAllowedVehiclesCount(IList<IVehicle> vehicles, RoleType role)
+        {
+            if (role == RoleType.Admin)
+            {
+                throw new AuthorizationException(AdminUserError);
+            }
+            int currentVehiclesCount = vehicles.Count;
+            if (currentVehiclesCount == MaxAllowedVehiclesPerUser && role != RoleType.VIP)
+            {
+                string errorMessage = String.Format(NotAVipUserError, MaxAllowedVehiclesPerUser);
+                throw new AuthorizationException(errorMessage);
+            }
+        }
+        public static void ValidateCommentAuthor(IComment comment, string currentUser)
+        {
+            if (comment.Author != currentUser)
+            {
+                throw new AuthorizationException(NotTheAuthorError);
+            }
+        }
+        public static void ValidateAdminStatus(RoleType role)
+        {
+            if (role != RoleType.Admin)
+            {
+                throw new AuthorizationException(InvalidAdminStatusError);
+            }
+        }
+        
     }
 }

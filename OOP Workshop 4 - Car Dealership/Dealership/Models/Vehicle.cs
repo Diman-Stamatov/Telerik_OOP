@@ -104,8 +104,6 @@ namespace Dealership.Models
             }
             
         }
-       
-        //ToDo Might be the same as ValidateDecimalRange
         protected void ValidateNumberPropertyValue(decimal value, string propertyName, decimal minValue, decimal maxValue)
         {
             if (value < minValue || value > maxValue)
@@ -138,7 +136,7 @@ namespace Dealership.Models
         }
         public void RemoveComment(IComment comment)
         {
-            throw new NotImplementedException();
+            this.comments.Remove(comment);
         }        
         public IVehicle Clone()
         {
@@ -162,6 +160,17 @@ namespace Dealership.Models
                 areEqual = true;
             }
             return areEqual;
+        }
+
+        public virtual string Print()
+        {
+            var vehicleInfo = new StringBuilder();
+
+        }
+
+        public string PrintComments()
+        {
+            throw new NotImplementedException();
         }
     }
 }

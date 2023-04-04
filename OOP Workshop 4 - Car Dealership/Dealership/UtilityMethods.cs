@@ -49,6 +49,15 @@ namespace Dealership
             }
             return clonedVehicles;
         }
+        public static IList<IUser> CloneUsersList(IList<IUser> users)
+        {
+            var clonedUsers = new List<IUser>();
+            foreach (var user in users)
+            {
+                clonedUsers.Add(user.Clone());
+            }
+            return clonedUsers;
+        }
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Dealership.Core.Contracts;
+using static Dealership.UtilityMethods;
 using Dealership.Exceptions;
 using Dealership.Models;
 using Dealership.Models.Contracts;
@@ -9,13 +10,14 @@ namespace Dealership.Core
 {
     public class Repository : IRepository
     {
+        //ToDo Check if deep copying fucks the repository
         private readonly IList<IUser> users = new List<IUser>();
         //ToDo DeepCopyList
         public IList<IUser> Users
         {
             get
             {
-                var usersCopy = new List<IUser>(this.users);
+                var usersCopy = CloneUsersList(this.users);
                 return usersCopy;
             }
         }

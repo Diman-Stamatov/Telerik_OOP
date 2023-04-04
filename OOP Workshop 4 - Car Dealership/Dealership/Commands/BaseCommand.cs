@@ -14,6 +14,7 @@ namespace Dealership.Commands
     {
         protected const string UserAlreadyLoggedIn = "User {0} is already logged in! Please log out first!";
         private const string LoginRequiredError = "This command requires you to login first.";
+        
 
         protected BaseCommand(IRepository repository)
             : this(new List<string>(), repository)
@@ -88,6 +89,7 @@ namespace Dealership.Commands
             string vehicleTypes = GetVehicleTypeNames();
             throw new InvalidUserInputException($"Invalid input for {parameterName}. Please use one of the following: {vehicleTypes}.");
         }
+         
         
     }
 }

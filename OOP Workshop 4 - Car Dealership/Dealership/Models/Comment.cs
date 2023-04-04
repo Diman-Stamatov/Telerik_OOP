@@ -51,5 +51,20 @@ namespace Dealership.Models
         {
             return (IComment)this.MemberwiseClone();
         }
+        public override bool Equals(object comment)
+        {
+            bool areEqual = false;
+            var comparedComment = comment as IComment;
+            if (comparedComment == null)
+            {
+                return areEqual;
+            }
+            if (comparedComment.Author == this.Author
+                && comparedComment.Content == this.Content)
+            {
+                areEqual = true;
+            }
+            return areEqual;
+        }
     }
 }
