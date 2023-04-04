@@ -17,7 +17,7 @@ namespace Dealership.Core
         {
             get
             {
-                var usersCopy = new List<IUser>(this.users);
+                var usersCopy = CloneUsersList(this.users);
                 return usersCopy;
 
             }
