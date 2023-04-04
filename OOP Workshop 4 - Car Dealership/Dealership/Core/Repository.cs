@@ -1,4 +1,5 @@
 ﻿using Dealership.Core.Contracts;
+using static Dealership.UtilityMethods;
 using Dealership.Exceptions;
 using Dealership.Models;
 using Dealership.Models.Contracts;
@@ -9,14 +10,16 @@ namespace Dealership.Core
 {
     public class Repository : IRepository
     {
+        
         private readonly IList<IUser> users = new List<IUser>();
-        //ToDo DeepCopyList
+        
         public IList<IUser> Users
         {
             get
             {
                 var usersCopy = new List<IUser>(this.users);
                 return usersCopy;
+
             }
         }
 

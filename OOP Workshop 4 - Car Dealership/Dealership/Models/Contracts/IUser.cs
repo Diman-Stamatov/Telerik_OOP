@@ -2,7 +2,7 @@
 
 namespace Dealership.Models.Contracts
 {
-    public interface IUser
+    public interface IUser : IPrintable
     {
         string Username { get; }
 
@@ -20,10 +20,12 @@ namespace Dealership.Models.Contracts
 
         void RemoveVehicle(IVehicle vehicle);
 
-        void AddComment(IComment commentToAdd, IVehicle vehicleToAddComment);
+        void AddComment(IComment commentToAdd, IVehicle vehicleToCommentOn);
 
         void RemoveComment(IComment commentToRemove, IVehicle vehicleToRemoveComment);
 
         string PrintVehicles();
+        IUser Clone();
+        
     }
 }

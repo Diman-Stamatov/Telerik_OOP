@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using static Dealership.UtilityMethods;
 using Dealership.Exceptions;
 using static Dealership.Validator;
+using static Dealership.PrintingHelpers;
 
 namespace Dealership.Models
 {
@@ -23,16 +24,17 @@ namespace Dealership.Models
 
         private string make;
         private string model;
-        private VehicleType type;
+        protected VehicleType type;
         private int wheels;
         private decimal price;
         private IList<IComment> comments;
-        
+
         protected Vehicle(string make, string model, decimal price)
         {
             this.Make = make;
             this.Model = model;
             this.Price = price;
+            this.comments = new List<IComment>();
         }
 
         public string Make
@@ -69,6 +71,7 @@ namespace Dealership.Models
             {
                 return this.type;
             }
+            
         }
         public int Wheels
         {
@@ -90,10 +93,18 @@ namespace Dealership.Models
                 this.price = value;
             }
         }
-
-        public IList<IComment> Comments => throw new NotImplementedException();
-       
-        //ToDo Might be the same as ValidateDecimalRange
+        public IList<IComment> Comments
+        {
+            get
+            {
+                return CloneCommentsList(this.comments);
+            }
+            private set
+            {
+                this.comments = CloneCommentsList(value);
+            }
+            
+        }
         protected void ValidateNumberPropertyValue(decimal value, string propertyName, decimal minValue, decimal maxValue)
         {
             if (value < minValue || value > maxValue)
@@ -126,7 +137,59 @@ namespace Dealership.Models
         }
         public void RemoveComment(IComment comment)
         {
-            throw new NotImplementedException();
+            this.comments.Remove(comment);
+        }        
+        public IVehicle Clone()
+        {
+            Vehicle clonedVehicle = (Vehicle)this.MemberwiseClone();
+            clonedVehicle.Comments = this.Comments;            
+            return clonedVehicle;
+        }
+        public override bool Equals(object vehicle)
+        {
+            bool areEqual = false;
+            var comparedVehicle = vehicle as IVehicle;
+            if (comparedVehicle == null)
+            {
+                return areEqual;
+            }
+            if (comparedVehicle.Make == this.Make
+                && comparedVehicle.Model == this.Model
+                && comparedVehicle.Type == this.Type
+                && comparedVehicle.Price == this.Price)
+            {
+                areEqual = true;
+            }
+            return areEqual;
+        }
+
+        public virtual string Print()
+        {
+            var vehicleInfo = new StringBuilder();
+            string identation = CreateIndentation(VehicleIndentationLevel);
+            vehicleInfo.AppendLine(identation + $"Make: {this.Make}");
+            vehicleInfo.AppendLine(identation + $"Model: {this.Model}");
+            vehicleInfo.AppendLine(identation + $"Wheels: {this.Wheels}");
+            vehicleInfo.AppendLine(identation + $"Price: ${this.Price:F0}");
+            return vehicleInfo.ToString();
+        }
+
+        public string PrintComments()
+        {
+            string indentation = CreateIndentation(CommentIndentationLevel);
+            if (this.Comments.Count == 0)
+            {
+                return indentation + NoCommentsPrintMessage;
+            }
+
+            var fullCommentHistory = new StringBuilder();
+            fullCommentHistory.AppendLine(indentation + CommentPrintHeader);
+            foreach (var comment in this.Comments)
+            {
+                fullCommentHistory.AppendLine(comment.Print());
+            }
+            fullCommentHistory.Append(indentation + CommentPrintHeader);
+            return fullCommentHistory.ToString();
         }
     }
 }

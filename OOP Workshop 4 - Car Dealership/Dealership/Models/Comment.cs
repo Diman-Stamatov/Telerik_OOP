@@ -2,6 +2,8 @@
 using Dealership.Models.Contracts;
 using static Dealership.Validator;
 using static Dealership.UtilityMethods;
+using static Dealership.PrintingHelpers;
+using System.Text;
 
 namespace Dealership.Models
 {
@@ -46,6 +48,38 @@ namespace Dealership.Models
                 ValidateStringNotNullOrEmpty(value, errorMessage);
                 this.author = value;
             }
+        }
+        public IComment Clone()
+        {
+            return (IComment)this.MemberwiseClone();
+        }
+        public override bool Equals(object comment)
+        {
+            bool areEqual = false;
+            var comparedComment = comment as IComment;
+            if (comparedComment == null)
+            {
+                return areEqual;
+            }
+            if (comparedComment.Author == this.Author
+                && comparedComment.Content == this.Content)
+            {
+                areEqual = true;
+            }
+            return areEqual;
+        }
+
+        public string Print()
+        {
+            var commentInfo = new StringBuilder();
+            string contentSeperator = CreateCommentSeperator();
+            string commentIdentation = CreateIndentation(CommentIndentationLevel);
+            commentInfo.AppendLine(commentIdentation + contentSeperator);
+            commentInfo.AppendLine(commentIdentation + $"{this.Content}");
+            string authorIdentation = CreateIndentation(CommentAuthorIndentationLevel);
+            commentInfo.AppendLine(authorIdentation + $"User: {this.Author}");
+            commentInfo.Append(commentIdentation + contentSeperator);
+            return commentInfo.ToString();
         }
     }
 }

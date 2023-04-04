@@ -1,6 +1,8 @@
 ﻿
 using Dealership.Exceptions;
 using Dealership.Models.Contracts;
+using static Dealership.PrintingHelpers;
+using System.Text;
 
 namespace Dealership.Models
 {
@@ -14,8 +16,10 @@ namespace Dealership.Models
 
         private int seats;
         
-        public Car(string make, string model, decimal price, int seats) : base(make, model, price)
+        public Car(string make, string model, decimal price, int seats) 
+            : base(make, model, price)
         {
+            this.type = VehicleType.Car;
             this.Seats = seats;
             GenerateWheels(CarWheels);
             GenerateType(CarWheels);
@@ -40,6 +44,14 @@ namespace Dealership.Models
                 string errorMessage = string.Format(InvalidSeatCountMessage, MinSeats, MaxSeats);
                 throw new InvalidUserInputException(errorMessage);
             }
+        }
+        public override string Print()
+        {
+            var carInfo = new StringBuilder();
+            carInfo.Append(base.Print());
+            string identation = CreateIndentation(VehicleIndentationLevel);
+            carInfo.Append(identation + $"Seats: {this.Seats}");
+            return carInfo.ToString();
         }
     }
 }

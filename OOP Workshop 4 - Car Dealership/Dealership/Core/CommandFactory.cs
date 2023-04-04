@@ -60,6 +60,7 @@ namespace Dealership.Core
                 case CommandType.ShowVehicles:
                     command = new ShowVehiclesCommand(commandParameters, repository);
                     break;
+                
             }
             return command;
         }

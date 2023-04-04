@@ -1,8 +1,9 @@
-﻿using Dealership.Core.Contracts;
+﻿using static Dealership.Validator;
+using Dealership.Core.Contracts;
 using Dealership.Exceptions;
 using Dealership.Models.Contracts;
 using System.Collections.Generic;
-using static Dealership.Validator;
+
 
 namespace Dealership.Commands
 {
@@ -13,12 +14,10 @@ namespace Dealership.Commands
             : base(parameters, repository)
         {
         }
-
         protected override bool RequireLogin
         {
             get { return true; }
         }
-
         protected override string ExecuteCommand()
         {
             ValidateArgumentsCount(this.CommandParameters, ExpectedArgumentsCount);
@@ -29,7 +28,6 @@ namespace Dealership.Commands
 
             return this.AddComment(content, author, vehicleIndex);
         }
-
         private string AddComment(string content, string author, int vehicleIndex)
         {
             IUser user = this.Repository.GetUser(author);
@@ -46,7 +44,7 @@ namespace Dealership.Commands
 
             this.Repository.LoggedUser.AddComment(comment, vehicle);
 
-            return $"{this.Repository.LoggedUser.Username} added a comment successfully!";
+            return $"{this.Repository.LoggedUser.Username} successfully added a comment!";
         }
     }
 }

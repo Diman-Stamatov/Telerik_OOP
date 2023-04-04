@@ -1,6 +1,6 @@
-﻿using Dealership.Core.Contracts;
+﻿using static Dealership.Validator;
+using Dealership.Core.Contracts;
 using Dealership.Exceptions;
-using static Dealership.Validator;
 using System.Collections.Generic;
 
 namespace Dealership.Commands
@@ -12,12 +12,10 @@ namespace Dealership.Commands
             : base(parameters, repository)
         {
         }
-
         protected override bool RequireLogin
         {
             get { return false; }
         }
-
         protected override string ExecuteCommand()
         {
             ValidateArgumentsCount(this.CommandParameters, ExpectedArgumentsCount);
@@ -27,7 +25,6 @@ namespace Dealership.Commands
 
             return this.Login(username, password);
         }
-
         private string Login(string username, string password)
         {
             if (this.Repository.LoggedUser != null)
@@ -42,9 +39,7 @@ namespace Dealership.Commands
             {
                 throw new AuthorizationException("Wrong username or password!");
             }
-
             this.Repository.LogUser(user);
-
             return $"User {username} successfully logged in!";
         }
     }

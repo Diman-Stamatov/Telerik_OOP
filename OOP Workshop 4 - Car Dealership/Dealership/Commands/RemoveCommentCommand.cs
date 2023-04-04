@@ -33,26 +33,25 @@ namespace Dealership.Commands
         {
             IUser user = this.Repository.GetUser(username);
 
-            Validator.ValidateIntRange(
+            ValidateIntRange(
                 vehicleIndex,
                 0,
                 user.Vehicles.Count,
-                "The vehicle does not exist!");
+                "This vehicle does not exist!");
 
             IVehicle vehicle = user.Vehicles[vehicleIndex];
 
-            Validator.ValidateIntRange(
+            ValidateIntRange(
                 commentIndex,
                 0,
                 user.Vehicles[vehicleIndex].Comments.Count,
-                "Cannot remove comment! The comment does not exist!");
-
+                "Cannot remove this comment! The comment does not exist!");
 
             var comment = user.Vehicles[vehicleIndex].Comments[commentIndex];
 
             this.Repository.LoggedUser.RemoveComment(comment, vehicle);
 
-            return $"{this.Repository.LoggedUser.Username} removed comment successfully!";
+            return $"{this.Repository.LoggedUser.Username} successfully removed a comment!";
         }
     }
 }

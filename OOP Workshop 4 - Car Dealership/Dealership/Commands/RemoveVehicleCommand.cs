@@ -21,25 +21,21 @@ namespace Dealership.Commands
         protected override string ExecuteCommand()
         {
             ValidateArgumentsCount(this.CommandParameters, ExpectedArgumentsCount);
-
             int vehicleIndex = this.ParseIntParameter(this.CommandParameters[0], "vehicleIndex") - 1;
-
             return this.RemoveVehicle(vehicleIndex);
         }
 
         private string RemoveVehicle(int vehicleIndex)
         {
-            Validator.ValidateIntRange(
+            ValidateIntRange(
                 vehicleIndex,
                 0,
                 this.Repository.LoggedUser.Vehicles.Count,
-                "Cannot remove vehicle! The vehicle does not exist!");
+                "Cannot remove this vehicle! The vehicle does not exist!");
 
             IVehicle vehicle = this.Repository.LoggedUser.Vehicles[vehicleIndex];
-
             this.Repository.LoggedUser.RemoveVehicle(vehicle);
-
-            return $"{this.Repository.LoggedUser.Username} removed vehicle successfully!";
+            return $"{this.Repository.LoggedUser.Username} successfully removed a vehicle!";
         }
     }
 }

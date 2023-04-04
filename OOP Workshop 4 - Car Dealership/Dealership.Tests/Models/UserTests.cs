@@ -1,4 +1,5 @@
-﻿using Dealership.Models;
+﻿using Dealership.Exceptions;
+using Dealership.Models;
 using Dealership.Models.Contracts;
 using Dealership.Tests.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -23,7 +24,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_UsernameLenghtIsTooShort()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                 new User(
                     "u",
                     UserData.ValidFirstName,
@@ -35,7 +36,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_UsernameLenghtIsTooLong()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                 new User(
                     "abcdefghijklmnopqrstu",
                     UserData.ValidFirstName,
@@ -47,7 +48,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_UsernameIsInvalid()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                 new User(
                     "U$$ernam3",
                     UserData.ValidFirstName,
@@ -59,7 +60,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_FirstNameLenghtIsTooShort()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                 new User(
                     UserData.ValidUsername,
                     "f",
@@ -71,7 +72,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_FirstNameLenghtIsTooLong()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                 new User(
                     UserData.ValidUsername,
                     "abcdefghijklmnopqrstu",
@@ -83,7 +84,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_LastNameLenghtIsTooShort()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                 new User(
                     UserData.ValidUsername,
                     UserData.ValidFirstName,
@@ -95,7 +96,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_LastNameLenghtIsTooLong()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                 new User(
                     UserData.ValidUsername,
                     UserData.ValidFirstName,
@@ -107,7 +108,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_PasswordLenghtIsTooShort()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                 new User(
                     UserData.ValidUsername,
                     UserData.ValidFirstName,
@@ -119,7 +120,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_PasswordLenghtIsTooLong()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                 new User(
                     UserData.ValidUsername,
                     UserData.ValidFirstName,
@@ -131,7 +132,7 @@ namespace Dealership.Tests.Models
         [TestMethod]
         public void Constructor_Should_Throw_When_PasswordIsInvalid()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsException<InvalidUserInputException>(() =>
                new User(
                    UserData.ValidUsername,
                    UserData.ValidFirstName,
@@ -207,7 +208,7 @@ namespace Dealership.Tests.Models
             }
 
             // Act, Assert
-            Assert.ThrowsException<ArgumentException>(() => user.AddVehicle(TestHelpers.InitializeTestCar()));
+            Assert.ThrowsException<AuthorizationException>(() => user.AddVehicle(TestHelpers.InitializeTestCar()));
         }
 
         [TestMethod]
@@ -222,7 +223,7 @@ namespace Dealership.Tests.Models
                         RoleType.Admin);
 
             // Act, Assert
-            Assert.ThrowsException<ArgumentException>(() => user.AddVehicle(TestHelpers.InitializeTestCar()));
+            Assert.ThrowsException<AuthorizationException>(() => user.AddVehicle(TestHelpers.InitializeTestCar()));
         }
 
         [TestMethod]
@@ -307,7 +308,7 @@ namespace Dealership.Tests.Models
             user.AddComment(comment, car);
 
             // Act, Assert
-            Assert.ThrowsException<ArgumentException>(() => user.RemoveComment(comment, car));
+            Assert.ThrowsException<AuthorizationException>(() => user.RemoveComment(comment, car));
         }
 
         [TestMethod]

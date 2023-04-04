@@ -8,7 +8,8 @@ namespace Dealership.Commands
 {
     public class RegisterUserCommand : BaseCommand
     {
-        private const int ExpectedArgumentsCount = 4;
+        private const int ExpectedArgumentsCountOne = 4;
+        private const int ExpectedArgumentsCountTwo = 5;
         public RegisterUserCommand(List<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
@@ -21,7 +22,7 @@ namespace Dealership.Commands
 
         protected override string ExecuteCommand()
         {
-            ValidateArgumentsCount(this.CommandParameters, ExpectedArgumentsCount);
+            ValidateArgumentsCount(this.CommandParameters, ExpectedArgumentsCountOne, ExpectedArgumentsCountTwo);
 
             string username = this.CommandParameters[0];
             string firstName = this.CommandParameters[1];
@@ -48,7 +49,7 @@ namespace Dealership.Commands
 
             if (this.Repository.UserExist(username))
             {
-                string errorMessage = $"User {username} already exist. Choose a different username!";
+                string errorMessage = $"User {username} already exist. Please choose a different username!";
                 throw new AuthorizationException(errorMessage);
             }
 

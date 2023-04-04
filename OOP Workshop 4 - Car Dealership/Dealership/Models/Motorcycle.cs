@@ -1,5 +1,7 @@
 ﻿
 using Dealership.Models.Contracts;
+using static Dealership.PrintingHelpers;
+using System.Text;
 using static Dealership.UtilityMethods;
 using static Dealership.Validator;
 
@@ -13,8 +15,10 @@ namespace Dealership.Models
         public const int CategoryMaxLength = 10;
 
         private string category;
-        public Motorcycle(string make, string model, decimal price, string category): base(make, model, price)
+        public Motorcycle(string make, string model, decimal price, string category)
+            : base(make, model, price)
         {
+            this.type = VehicleType.Motorcycle;
             this.Category = category;
             GenerateWheels(MotorcycleWheels);
             GenerateType(MotorcycleWheels);
@@ -33,7 +37,14 @@ namespace Dealership.Models
                 this.category = value;
             }
         }
+        public override string Print()
+        {
+            var bikeInfo = new StringBuilder();
+            bikeInfo.Append(base.Print());
+            string identation = CreateIndentation(VehicleIndentationLevel);
+            bikeInfo.Append(identation + $"Category: {this.Category}");
+            return bikeInfo.ToString();
+        }
 
-        
     }
 }
