@@ -2,7 +2,7 @@
 
 namespace Dealership.Models.Contracts
 {
-    public interface IUser
+    public interface IUser : IPrintable
     {
         string Username { get; }
 
@@ -26,6 +26,6 @@ namespace Dealership.Models.Contracts
 
         string PrintVehicles();
         IUser Clone();
-        string Print();
+        
     }
 }

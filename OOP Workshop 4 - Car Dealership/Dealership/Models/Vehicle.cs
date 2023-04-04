@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using static Dealership.UtilityMethods;
 using Dealership.Exceptions;
 using static Dealership.Validator;
+using static Dealership.PrintingHelpers;
 
 namespace Dealership.Models
 {
@@ -165,12 +166,22 @@ namespace Dealership.Models
         public virtual string Print()
         {
             var vehicleInfo = new StringBuilder();
-
+            string identation = CreateIdentation(VehicleIdentationLevel);
+            vehicleInfo.AppendLine(identation + $"Make: {this.Make}");
+            vehicleInfo.AppendLine(identation + $"Model: {this.Model}");
+            vehicleInfo.AppendLine(identation + $"Wheels: {this.Wheels}");
+            vehicleInfo.AppendLine(identation + $"Price: ${this.Price:F0}");
+            return vehicleInfo.ToString();
         }
 
         public string PrintComments()
         {
-            throw new NotImplementedException();
+            var fullCommentHistory = new StringBuilder();
+            foreach (var comment in this.Comments)
+            {
+                fullCommentHistory.AppendLine(comment.Print());
+            }
+            return fullCommentHistory.ToString();
         }
     }
 }

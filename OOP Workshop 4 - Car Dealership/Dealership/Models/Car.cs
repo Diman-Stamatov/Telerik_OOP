@@ -1,6 +1,8 @@
 ﻿
 using Dealership.Exceptions;
 using Dealership.Models.Contracts;
+using static Dealership.PrintingHelpers;
+using System.Text;
 
 namespace Dealership.Models
 {
@@ -42,6 +44,14 @@ namespace Dealership.Models
                 string errorMessage = string.Format(InvalidSeatCountMessage, MinSeats, MaxSeats);
                 throw new InvalidUserInputException(errorMessage);
             }
+        }
+        public override string Print()
+        {
+            var carInfo = new StringBuilder();
+            carInfo.AppendLine(base.Print());
+            string identation = CreateIdentation(VehicleIdentationLevel);
+            carInfo.AppendLine(identation + $"Seats: {this.Seats}");
+            return carInfo.ToString();
         }
     }
 }

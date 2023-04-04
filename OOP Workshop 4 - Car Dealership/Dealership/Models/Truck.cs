@@ -1,5 +1,7 @@
 ﻿
 using Dealership.Models.Contracts;
+using System.Text;
+using static Dealership.PrintingHelpers;
 using static Dealership.UtilityMethods;
 
 namespace Dealership.Models
@@ -32,6 +34,14 @@ namespace Dealership.Models
                 ValidateNumberPropertyValue(value, propertyName, MinCapacity, MaxCapacity);
                 this.weightCapacity = value;
             }
+        }
+        public override string Print()
+        {
+            var truckInfo = new StringBuilder();
+            truckInfo.AppendLine(base.Print());
+            string identation = CreateIdentation(VehicleIdentationLevel);
+            truckInfo.AppendLine(identation + $"Weight capacity: {this.WeightCapacity}t");
+            return truckInfo.ToString();
         }
     }
 }

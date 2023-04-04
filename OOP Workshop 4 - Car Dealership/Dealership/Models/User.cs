@@ -1,5 +1,6 @@
 ﻿using static Dealership.Validator;
 using static Dealership.UtilityMethods;
+using static Dealership.PrintingHelpers;
 using Dealership.Models.Contracts;
 using System.Collections.Generic;
 using System.Data;
@@ -137,10 +138,9 @@ namespace Dealership.Models
                 return NoSavedVehiclesMessage;
             }
             var fulLVehiclesInfo = new StringBuilder();
+            fulLVehiclesInfo.AppendLine(User)
             foreach (var vehicle in this.vehicles)
             {
-                fulLVehiclesInfo.AppendLine(vehicle.Print());
-                fulLVehiclesInfo.AppendLine(vehicle.PrintComments());
             }
             return fulLVehiclesInfo.ToString();
         }

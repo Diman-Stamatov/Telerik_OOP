@@ -1,6 +1,6 @@
 ﻿namespace Dealership.Models.Contracts
 {
-    public interface IComment
+    public interface IComment: IPrintable
     {
         string Content { get; }
 

@@ -10,9 +10,9 @@ namespace Dealership.Core
 {
     public class Repository : IRepository
     {
-        //ToDo Check if deep copying fucks the repository
+        
         private readonly IList<IUser> users = new List<IUser>();
-        //ToDo DeepCopyList
+        
         public IList<IUser> Users
         {
             get

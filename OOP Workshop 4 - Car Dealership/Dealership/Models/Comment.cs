@@ -2,6 +2,8 @@
 using Dealership.Models.Contracts;
 using static Dealership.Validator;
 using static Dealership.UtilityMethods;
+using static Dealership.PrintingHelpers;
+using System.Text;
 
 namespace Dealership.Models
 {
@@ -65,6 +67,19 @@ namespace Dealership.Models
                 areEqual = true;
             }
             return areEqual;
+        }
+
+        public string Print()
+        {
+            var commentInfo = new StringBuilder();
+            string contentSeperator = CreateCommentSeperator();
+            string commentIdentation = CreateIdentation(CommentIdentationLevel);
+            commentInfo.AppendLine(commentIdentation + contentSeperator);
+            commentInfo.AppendLine(commentIdentation + $"{this.Content}");
+            string authorIdentation = CreateIdentation(CommentAuthorIdentationLevel);
+            commentInfo.AppendLine(authorIdentation + $"User {this.Author}");
+            commentInfo.AppendLine(commentIdentation + contentSeperator);
+            return commentInfo.ToString();
         }
     }
 }

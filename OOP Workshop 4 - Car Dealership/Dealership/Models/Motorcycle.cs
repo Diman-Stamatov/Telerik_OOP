@@ -1,5 +1,7 @@
 ﻿
 using Dealership.Models.Contracts;
+using static Dealership.PrintingHelpers;
+using System.Text;
 using static Dealership.UtilityMethods;
 using static Dealership.Validator;
 
@@ -35,7 +37,14 @@ namespace Dealership.Models
                 this.category = value;
             }
         }
+        public override string Print()
+        {
+            var bikeInfo = new StringBuilder();
+            bikeInfo.AppendLine(base.Print());
+            string identation = CreateIdentation(VehicleIdentationLevel);
+            bikeInfo.AppendLine(identation + $"Category: {this.Category}");
+            return bikeInfo.ToString();
+        }
 
-        
     }
 }
