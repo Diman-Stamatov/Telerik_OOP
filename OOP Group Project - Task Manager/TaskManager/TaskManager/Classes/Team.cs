@@ -11,8 +11,8 @@ namespace TaskManager.Classes
     {
         public string Name => throw new NotImplementedException();
 
-        public IEnumerable<Member> Members => throw new NotImplementedException();
+        public ICollection<IMember> Members => throw new NotImplementedException();
 
-        public IEnumerable<Board> Boards => throw new NotImplementedException();
+        public ICollection<IBoard> Boards => throw new NotImplementedException();
     }
 }

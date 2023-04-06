@@ -8,7 +8,8 @@ namespace TaskManager.Utilities
 {
     internal class Validation
     {
-        public static void ValidateDuplicateName() => throw new NotImplementedException();
+        public static void ValidateDuplicateTeam() => throw new NotImplementedException();
+        public static void ValidateDuplicateMember() => throw new NotImplementedException();
         public static void ValidateArgumentsCount() => throw new NotImplementedException();
     }
 }

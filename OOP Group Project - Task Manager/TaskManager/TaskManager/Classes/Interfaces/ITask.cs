@@ -8,12 +8,12 @@ namespace TaskManager.Classes.Interfaces
 {
     internal interface ITask
     {
+        static int NextID = 0;
         string Title { get; }
         string Description { get; }
-
-        IEnumerable<string> Comments { get; }
-        IEnumerable<string> ChangeLog { get; }
-
+        ICollection<string> Comments { get; }
+        ICollection<string> ChangeLog { get; }
+        
 
     }
 }

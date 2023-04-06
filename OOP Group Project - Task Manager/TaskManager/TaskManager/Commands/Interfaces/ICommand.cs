@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TaskManager.Classes;
 
-namespace TaskManager
+namespace TaskManager.Commands.Interfaces
 {
-    internal class Database
+    internal interface ICommand
     {
-        private IEnumerable<Team> managedTeams;
+        string Execute();
     }
 }

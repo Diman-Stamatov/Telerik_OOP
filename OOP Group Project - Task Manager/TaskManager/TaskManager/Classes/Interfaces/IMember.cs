@@ -9,7 +9,7 @@ namespace TaskManager.Classes.Interfaces
     internal interface IMember
     {
         string Name { get; }
-        IEnumerable<Task> Tasks { get; }
-        IEnumerable<String> ActivityHistory { get; }
+        ICollection<ITask> Tasks { get; }
+        ICollection<string> ActivityLog { get; }
     }
 }

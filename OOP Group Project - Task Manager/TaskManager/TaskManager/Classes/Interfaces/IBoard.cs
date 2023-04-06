@@ -9,7 +9,7 @@ namespace TaskManager.Classes.Interfaces
     internal interface IBoard
     {
         string Name { get; }
-        IEnumerable<Task> Tasks { get; }
-        IEnumerable<string> ActivityHistory { get; }
+        ICollection<ITask> Tasks { get; }
+        ICollection<string> ActivityLog { get; }
     }
 }
