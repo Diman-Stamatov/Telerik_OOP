@@ -4,11 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManager.Classes.Interfaces;
+using TaskManager.Classes.Types;
 
 namespace TaskManager.Classes
 {
-    internal abstract class Task : ITask
+    internal class Feedback : IFeedback
     {
+        public int Rating => throw new NotImplementedException();
+
+        public FeedbackStatusType Status => throw new NotImplementedException();
+
         public string Title => throw new NotImplementedException();
 
         public string Description => throw new NotImplementedException();

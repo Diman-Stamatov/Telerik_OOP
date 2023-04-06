@@ -9,8 +9,8 @@ namespace TaskManager.Classes.Interfaces
     internal interface ITeam
     {
         string Name { get; }
-        IEnumerable<Member> Members { get; }
-        IEnumerable<Board> Boards { get; }
+        ICollection<IMember> Members { get; }
+        ICollection<IBoard> Boards { get; }
 
     }
 }
