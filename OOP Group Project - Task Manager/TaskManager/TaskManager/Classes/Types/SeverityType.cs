@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskManager.Classes.Interfaces
+namespace TaskManager.Classes.Types
 {
-    internal interface IBug :ITask
+    internal enum SeverityType
     {
-        IEnumerable<string> StepsToReproduce { get; }
-
-
-
+        Minor,
+        Major,
+        Critical
     }
 }
