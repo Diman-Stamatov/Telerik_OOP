@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BoardR.BoardItems;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static BoardR.Tests.Utilities.TestData;
 
 namespace BoardR.Tests.BoardItems.IssueTests
 
@@ -12,6 +13,16 @@ namespace BoardR.Tests.BoardItems.IssueTests
     [TestClass]
     public class IssueTests
     {
+        [ClassInitialize]
+        public static void ClassInitialize()
+        {
+            public string shorterTitle = string.Format("x", TitleMinLength - 1);
+        public string longerTitle = string.Format("x", TitleMinLength + 1);
+        public DateTime validDate = DateTime.Now.AddDays(1);
+        public DateTime invalidDate = DateTime.Now.AddDays(-1);
+        public string shorterAssigneeName = string.Format("x", AssigneeMinLength - 1);
+        public string LongerAssigneeName = string.Format("x", AssigneeMaxLength + 1);
+    }
         [TestMethod]
         public void Issue_Should_DeriveFromBoardItem()
         {
