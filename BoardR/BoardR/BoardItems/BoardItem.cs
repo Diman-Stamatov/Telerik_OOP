@@ -32,7 +32,7 @@ namespace BoardR
             {
                 return title;
             }
-            set
+            private set
             {
                 string propertyName = GetPropertyName();
                 ValidateStringProperty(value, propertyName, TitleMinLength, TitleMaxLength);
@@ -52,7 +52,7 @@ namespace BoardR
                 return dueDate;
             }
 
-            set
+            private set
             {
                 ValidateDueDate(value);
                 if (DueDate != DateTime.MinValue)

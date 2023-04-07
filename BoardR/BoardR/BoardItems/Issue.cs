@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using static BoardR.ValidationHelpers;
 using static BoardR.EventMessageGenerator;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("BoardR.Tests")]
 namespace BoardR
 {
     internal class Issue : BoardItem

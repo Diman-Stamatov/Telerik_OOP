@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using static BoardR.ValidationHelpers;
 using static BoardR.EventMessageGenerator;
+using System.Runtime.CompilerServices;
 
-
+[assembly: InternalsVisibleTo("BoardR.Tests")]
 namespace BoardR
 {
     internal class Task : BoardItem
@@ -21,7 +22,7 @@ namespace BoardR
             { 
                 return this.assignee; 
             }
-            set 
+            private set 
             {
                 string propertyName = GetPropertyName();
                 ValidateStringProperty(value, propertyName, AssigneeMinLength, AssigneeMaxLength);

@@ -15,3 +15,4 @@ namespace TaskManager.Classes
 
         public ICollection<IBoard> Boards => throw new NotImplementedException();
     }
+}
