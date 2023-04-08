@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 using BoardR.BoardItems;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
-
-
 namespace BoardR.Tests.BoardItems.IssueTests
-
 {
     [TestClass]
-    internal class IssueTests
+    public class IssueTests
     {
         
         [TestMethod]
@@ -67,10 +63,35 @@ namespace BoardR.Tests.BoardItems.IssueTests
         {
             string testTitle = GetTestString(TitleMinLength);
             string validDescription = GetTestString(1);
+
             Issue issue = new Issue(testTitle, validDescription, ValidDate);
 
             Assert.IsNotNull(issue);
         }
 
+        [TestMethod]
+        public void Issue_AdvanceStatusShouldSetToVerified()
+        {
+            string testTitle = GetTestString(TitleMinLength);
+            string validDescription = GetTestString(1);
+
+            Issue issue = new Issue(testTitle, validDescription, ValidDate);
+            issue.AdvanceStatus();
+
+            Assert.AreEqual(IssueMaxStatus, issue.Status);
+        }
+
+        [TestMethod]
+        public void Issue_RevertsShouldSetToOpen()
+        {
+            string testTitle = GetTestString(TitleMinLength);
+            string validDescription = GetTestString(1);
+
+            Issue issue = new Issue(testTitle, validDescription, ValidDate);
+            issue.AdvanceStatus();
+            issue.RevertStatus();
+
+            Assert.AreEqual(IssueMinStatus, issue.Status);
+        }
     }
 }
