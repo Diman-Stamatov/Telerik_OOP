@@ -23,7 +23,7 @@ namespace BoardR
         }
         public Issue(string title, string description, DateTime dueDate) : base(title, dueDate)
         {
-            if (description == null)
+            if (string.IsNullOrEmpty(description) == true)
             {
                 this.description = "No description";
             }

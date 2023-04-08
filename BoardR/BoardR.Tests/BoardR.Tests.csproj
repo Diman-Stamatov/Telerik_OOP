@@ -9,6 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="BoardItems\EventLogTests\**" />
+    <Compile Remove="BoardItems\issueTests\**" />
+    <Compile Remove="BoardItems\TaskTests\**" />
+    <EmbeddedResource Remove="BoardItems\EventLogTests\**" />
+    <EmbeddedResource Remove="BoardItems\issueTests\**" />
+    <EmbeddedResource Remove="BoardItems\TaskTests\**" />
+    <None Remove="BoardItems\EventLogTests\**" />
+    <None Remove="BoardItems\issueTests\**" />
+    <None Remove="BoardItems\TaskTests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.8" />
@@ -17,11 +29,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BoardR\BoardR.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="BoardItems\EventLogTests\" />
-    <Folder Include="BoardItems\TaskTests\" />
   </ItemGroup>
 
 </Project>
