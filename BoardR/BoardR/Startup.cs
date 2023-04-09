@@ -9,7 +9,7 @@ namespace BoardR
         static void Main(string[] args)
         {
             var tomorrow = DateTime.Now.AddDays(1);
-            BoardItem task = new Task("Write unit tests", "Peter", tomorrow);
+            BoardItem task = new Task("Write unit tests", "Petr", tomorrow);
             BoardItem issue = new Issue("Review tests", "Someone must review Peter's tests.", tomorrow);
 
             Console.WriteLine(task.ViewInfo());

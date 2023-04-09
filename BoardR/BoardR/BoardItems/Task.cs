@@ -22,7 +22,7 @@ namespace BoardR
             { 
                 return this.assignee; 
             }
-            private set 
+            set 
             {
                 string propertyName = GetPropertyName();
                 ValidateStringProperty(value, propertyName, AssigneeMinLength, AssigneeMaxLength);

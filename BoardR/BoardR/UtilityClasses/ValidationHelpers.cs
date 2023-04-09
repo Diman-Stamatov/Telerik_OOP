@@ -27,8 +27,8 @@ namespace BoardR
                 throw new ArgumentNullException(null, errorMessage);
             }
 
-            int newProeprtyLength = value.Length;
-            if (newProeprtyLength < minimumLength || newProeprtyLength > maximumLength)
+            int NewPropertyLength = value.Length;
+            if (NewPropertyLength < minimumLength || NewPropertyLength > maximumLength)
             {
                 throw new ArgumentException(errorMessage);
             }
