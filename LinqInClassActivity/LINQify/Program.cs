@@ -1,40 +1,99 @@
 ﻿using System;
 using System.Collections.Generic;
-using LINQify.Tasks;
+using System.Linq;
 
-namespace LINQify
+class Pokemon
 {
-    class Program
+    public string Name { get; set; }
+    public string Type { get; set; }
+    public int Power { get; set; }
+    public int Position { get; set; }
+}
+
+class Program
+{
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        List<Pokemon> pokemons = new List<Pokemon>();
+        Dictionary<string, List<Pokemon>> pokemonsByType = new Dictionary<string, List<Pokemon>>();
+
+        string input;
+        while ((input = Console.ReadLine()) != "end")
         {
-            var people = Helper.GetData();
+            string[] tokens = input.Split();
+            string command = tokens[0];
 
-            //You can test your implementations here:
-
-           var result1 = Task12.Execute(people);
-           var result2 = Task12.ExecuteWithLINQ(people);
-
-            for (int index = 0; index < result1.Count; index++)
+            if (command == "add")
             {
-                Console.WriteLine($"Name: {result1[index].FirstName} Surname: {result1[index].LastName} " +
-                    $"Age: {result1[index].Age} EyeColor: {result1[index].EyeColor}");
-                Console.WriteLine($"Name: {result2[index].FirstName} Surname: {result2[index].LastName} " +
-                    $"Age: {result2[index].Age} EyeColor: {result2[index].EyeColor}");
+                string name = tokens[1];
+                string type = tokens[2];
+                int power = int.Parse(tokens[3]);
+                int position = int.Parse(tokens[4]);
+
+                Pokemon pokemon = new Pokemon { Name = name, Type = type, Power = power, Position = position };
+                pokemons.Insert(position - 1, pokemon);
+
+                for (int i = position; i < pokemons.Count; i++)
+                {
+                    pokemons[i].Position++;
+                }
+
+                if (!pokemonsByType.ContainsKey(type))
+                {
+                    pokemonsByType[type] = new List<Pokemon>();
+                }
+                pokemonsByType[type].Add(pokemon);
+
+                Console.WriteLine($"Added pokemon {name} to position {position}");
+            }
+            else if (command == "find")
+            {
+                string type = tokens[1];
+                if (!pokemonsByType.ContainsKey(type))
+                {
+                    Console.WriteLine($"Type {type}: ");
+                }
+                else
+                {
+                    List<Pokemon> typePokemons = pokemonsByType[type];
+                    typePokemons.Sort((x, y) =>
+                    {
+                        if (x.Name != y.Name)
+                        {
+                            return string.Compare(x.Name, y.Name);
+                        }
+                        else
+                        {
+                            return y.Power.CompareTo(x.Power);
+                        }
+                    });
+                    typePokemons = typePokemons.GetRange(0, Math.Min(5, typePokemons.Count));
+
+                    Console.Write($"Type {type}: ");
+                    Console.WriteLine(string.Join("; ", typePokemons.Select(p => $"{p.Name}({p.Power})")));
+                }
+            }
+            else if (command == "ranklist")
+            {
+                int start = int.Parse(tokens[1]);
+                int end = int.Parse(tokens[2]);
+
+                for (int i = start - 1; i < end; i++)
+                {
+                    Pokemon pokemon = pokemons[i];
+                    Console.Write($"{pokemon.Position}. {pokemon.Name}({pokemon.Power})");
+                    if (i!=end-1)
+                    {
+                        Console.Write("; ");
+                    }
+                    else
+                    {
+                        Console.Write(" ");
+
+                    }
+                }
                 Console.WriteLine();
             }
-
-            /*  Console.WriteLine(result1.Count);
-              Console.WriteLine(result2.Count);*/
-
-            /* Console.WriteLine(result1.FirstName + " " + result1.LastName);
-             Console.WriteLine(result2.FirstName + " " + result2.LastName);*/
-
-            /*for (int index = 0; index < result1.Count; index++)
-            {
-                Console.WriteLine(result1[index]);
-                Console.WriteLine(result2[index]);
-            }*/
         }
     }
 }
